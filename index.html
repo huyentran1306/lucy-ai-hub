@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="vi" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Lucy AI Flow • Cẩm Nang & Thư Viện Prompt AI Cho Người Mới</title>
+  <meta name="description" content="Trang tổng hợp quy trình sử dụng AI, thư viện Prompt mẫu thực chiến và lộ trình 30 ngày cho người mới bắt đầu tiếp cận trí tuệ nhân tạo." />
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Lucy AI Flow • Cẩm Nang & Thư Viện Prompt AI" />
+  <meta property="og:description" content="Khám phá các quy trình AI thực chiến, copy prompt 1-click và lộ trình 30 ngày từ số 0 thành thạo." />
+  <meta property="og:image" content="/assets/avatar.png" />
+  <meta property="og:type" content="website" />
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              pink: '#EC4899',
+              purple: '#8B5CF6',
+              cyan: '#06B6D4',
+              emerald: '#10B981',
+              dark: '#070A12',
+              card: '#0F172A',
+            }
+          },
+          animation: {
+            'glow-pulse': 'glowPulse 3s ease-in-out infinite',
+            'float': 'float 4s ease-in-out infinite',
+          },
+          keyframes: {
+            glowPulse: {
+              '0%, 100%': { opacity: '0.4', transform: 'scale(1)' },
+              '50%': { opacity: '0.8', transform: 'scale(1.05)' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-6px)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    body {
+      background-color: #060911;
+      color: #F8FAFC;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+    }
+    
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0B0F19;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #EC4899;
+    }
+
+    .glass-card {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .glass-card:hover {
+      border-color: rgba(236, 72, 153, 0.3);
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #F472B6 0%, #C084FC 50%, #38BDF8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .tag-badge {
+      transition: all 0.2s ease;
+    }
+    .tag-badge:hover {
+      transform: translateY(-1px);
+    }
+  </style>
+</head>
+<body class="min-h-screen selection:bg-pink-500/30 selection:text-pink-200 relative pb-20">
+
+  <!-- Ambient Background Glows -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[600px] h-[500px] bg-gradient-to-b from-pink-500/20 via-purple-600/15 to-transparent rounded-full blur-[120px] animate-glow-pulse"></div>
+    <div class="absolute top-[35%] -left-40 w-[450px] h-[450px] bg-cyan-500/10 rounded-full blur-[140px]"></div>
+    <div class="absolute top-[65%] -right-40 w-[450px] h-[450px] bg-purple-500/10 rounded-full blur-[140px]"></div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2.5 px-5 py-3 rounded-2xl bg-slate-900/90 border border-pink-500/50 text-white shadow-2xl backdrop-blur-xl transition-all duration-300 opacity-0 pointer-events-none -translate-y-5">
+    <div class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></div>
+    <span id="toast-message" class="text-xs md:text-sm font-semibold tracking-wide">Đã sao chép prompt! ✨</span>
+  </div>
+
+  <!-- Main Container (Optimal for Mobile Bio & Clean on Desktop) -->
+  <main class="relative z-10 max-w-3xl mx-auto px-4 pt-8 md:pt-12 space-y-6 md:space-y-8">
+
+    <!-- 🌟 HERO PROFILE SECTION (Link in Bio Header) -->
+    <header class="glass-card rounded-[32px] p-6 md:p-8 text-center relative overflow-hidden shadow-2xl shadow-purple-950/20">
+      <!-- Glow Accent Line -->
+      <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-pink-500 to-transparent"></div>
+
+      <!-- Avatar with Glowing Ring -->
+      <div class="relative inline-block mb-4">
+        <div class="w-24 h-24 md:w-28 md:h-28 rounded-full p-1 bg-gradient-to-tr from-pink-500 via-purple-500 to-cyan-400 shadow-xl shadow-pink-500/25 animate-float mx-auto">
+          <img src="/assets/avatar.png" alt="Lucy AI Avatar" class="w-full h-full rounded-full object-cover bg-slate-950" />
+        </div>
+        <!-- Status Indicator -->
+        <div class="absolute bottom-1 right-2 flex items-center gap-1 px-2 py-0.5 rounded-full bg-slate-900/95 border border-emerald-500/50 text-[10px] font-bold text-emerald-400 shadow-lg">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>ONLINE</span>
+        </div>
+      </div>
+
+      <!-- Title & Handle -->
+      <div class="space-y-1.5">
+        <div class="flex items-center justify-center gap-2">
+          <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight text-white">Lucy AI Flow</h1>
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-blue-500 text-white text-[11px]" title="Xác minh chính chủ">✓</span>
+        </div>
+        <p class="text-xs md:text-sm font-bold uppercase tracking-widest gradient-text">
+          Cẩm Nang & Thư Viện Prompt AI Cho Người Mới
+        </p>
+      </div>
+
+      <!-- Bio Description -->
+      <p class="text-xs md:text-sm text-slate-300 max-w-lg mx-auto mt-3 leading-relaxed">
+        Chào bạn! Mình là <strong class="text-pink-300 font-bold">Lucy</strong> 🌸. Nơi đây tổng hợp các <span class="text-purple-300 font-semibold">quy trình tư duy AI thực chiến</span>, bộ prompt sao chép dùng liền và lộ trình 30 ngày giúp bạn làm chủ AI dễ dàng nhất!
+      </p>
+
+      <!-- Audio Voice Greeting Player -->
+      <div class="mt-4 inline-flex items-center gap-2.5 px-4 py-2 rounded-2xl bg-slate-900/90 border border-pink-500/30 text-xs font-semibold text-pink-200 shadow-inner">
+        <audio id="lucy-audio" src="/assets/intro_voice.mp3" preload="metadata"></audio>
+        <button id="lucy-audio-btn" onclick="toggleGreetingVoice()" class="flex items-center gap-2 text-pink-300 hover:text-white transition">
+          <span id="audio-icon" class="text-sm">▶️</span>
+          <span id="audio-text">Bật giọng Lucy chào bạn</span>
+        </button>
+        <span class="text-slate-500">|</span>
+        <span class="text-[11px] text-slate-400">Giọng nói AI tự nhiên 🎙️</span>
+      </div>
+
+      <!-- Social Links (Link-in-Bio buttons) -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mt-5">
+        <a href="https://tiktok.com/@lucyaiflow" target="_blank" rel="noopener" class="py-2.5 px-3 rounded-2xl bg-slate-900/80 hover:bg-pink-950/40 border border-slate-800 hover:border-pink-500/40 text-slate-200 text-xs font-bold flex items-center justify-center gap-2 transition group shadow">
+          <span class="text-base group-hover:scale-110 transition">🎵</span>
+          <span>TikTok AI</span>
+        </a>
+        <a href="https://youtube.com" target="_blank" rel="noopener" class="py-2.5 px-3 rounded-2xl bg-slate-900/80 hover:bg-red-950/40 border border-slate-800 hover:border-red-500/40 text-slate-200 text-xs font-bold flex items-center justify-center gap-2 transition group shadow">
+          <span class="text-base group-hover:scale-110 transition">▶️</span>
+          <span>YouTube</span>
+        </a>
+        <a href="#gift" onclick="switchTab('gift')" class="py-2.5 px-3 rounded-2xl bg-gradient-to-r from-pink-500/20 to-purple-500/20 hover:from-pink-500/30 hover:to-purple-500/30 border border-pink-500/40 text-pink-200 text-xs font-bold flex items-center justify-center gap-2 transition group shadow">
+          <span class="text-base group-hover:scale-110 transition">🎁</span>
+          <span>Ebook 0đ</span>
+        </a>
+        <a href="javascript:void(0)" onclick="copySiteLink()" class="py-2.5 px-3 rounded-2xl bg-slate-900/80 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 text-slate-200 text-xs font-bold flex items-center justify-center gap-2 transition group shadow">
+          <i data-lucide="share-2" class="w-3.5 h-3.5 text-cyan-400"></i>
+          <span>Chia Sẻ Link</span>
+        </a>
+      </div>
+
+      <!-- Quick Metrics Bar -->
+      <div class="grid grid-cols-4 gap-2 mt-6 pt-5 border-t border-slate-800/80 text-center">
+        <div>
+          <div class="text-lg md:text-xl font-black text-pink-400">100+</div>
+          <div class="text-[10px] md:text-xs text-slate-400 font-medium">Prompt Mẫu</div>
+        </div>
+        <div>
+          <div class="text-lg md:text-xl font-black text-purple-400">10+</div>
+          <div class="text-[10px] md:text-xs text-slate-400 font-medium">Sơ Đồ Flow</div>
+        </div>
+        <div>
+          <div class="text-lg md:text-xl font-black text-cyan-400">30 Ngày</div>
+          <div class="text-[10px] md:text-xs text-slate-400 font-medium">Lộ Trình Học</div>
+        </div>
+        <div>
+          <div class="text-lg md:text-xl font-black text-emerald-400">100%</div>
+          <div class="text-[10px] md:text-xs text-slate-400 font-medium">Miễn Phí</div>
+        </div>
+      </div>
+    </header>
+
+
+    <!-- 🧭 INTERACTIVE NAVIGATION TABS -->
+    <nav class="sticky top-3 z-30 p-1.5 rounded-2xl glass-card border border-slate-700/60 shadow-xl flex items-center gap-1 overflow-x-auto no-scrollbar">
+      <button onclick="switchTab('flows')" id="tab-btn-flows" class="nav-tab active-tab flex-1 min-w-[95px] py-2.5 px-3 rounded-xl text-xs font-extrabold flex items-center justify-center gap-1.5 transition">
+        <span>🧩</span>
+        <span>Flow AI</span>
+      </button>
+      <button onclick="switchTab('prompts')" id="tab-btn-prompts" class="nav-tab flex-1 min-w-[95px] py-2.5 px-3 rounded-xl text-xs font-extrabold flex items-center justify-center gap-1.5 transition">
+        <span>💡</span>
+        <span>Prompt Mẫu</span>
+      </button>
+      <button onclick="switchTab('roadmap')" id="tab-btn-roadmap" class="nav-tab flex-1 min-w-[95px] py-2.5 px-3 rounded-xl text-xs font-extrabold flex items-center justify-center gap-1.5 transition">
+        <span>🗺️</span>
+        <span>Lộ Trình</span>
+      </button>
+      <button onclick="switchTab('tools')" id="tab-btn-tools" class="nav-tab flex-1 min-w-[95px] py-2.5 px-3 rounded-xl text-xs font-extrabold flex items-center justify-center gap-1.5 transition">
+        <span>🛠️</span>
+        <span>Công Cụ</span>
+      </button>
+      <button onclick="switchTab('gift')" id="tab-btn-gift" class="nav-tab flex-1 min-w-[95px] py-2.5 px-3 rounded-xl text-xs font-extrabold flex items-center justify-center gap-1.5 transition">
+        <span>🎁</span>
+        <span>Quà Tặng</span>
+      </button>
+    </nav>
+
+
+    <!-- 🔍 SEARCH & CATEGORY FILTER BAR (Applied to Prompts & Flows) -->
+    <div class="space-y-3">
+      <div class="relative">
+        <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2"></i>
+        <input 
+          type="text" 
+          id="search-input" 
+          oninput="handleSearch()"
+          placeholder="Tìm kiếm: chatgpt, email, slide, vẽ ảnh, pdf, chốt đơn..." 
+          class="w-full pl-11 pr-10 py-3.5 rounded-2xl bg-slate-900/90 border border-slate-700/70 focus:border-pink-500 focus:ring-2 focus:ring-pink-500/20 text-xs md:text-sm text-slate-100 placeholder-slate-500 outline-none transition"
+        />
+        <button id="clear-search-btn" onclick="clearSearch()" class="hidden absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs">
+          ✕
+        </button>
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div class="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar text-[11px] font-bold">
+        <button onclick="filterCategory('all')" class="cat-pill active-cat px-3 py-1.5 rounded-xl border transition shrink-0">
+          🔥 Tất Cả
+        </button>
+        <button onclick="filterCategory('prompting')" class="cat-pill px-3 py-1.5 rounded-xl border transition shrink-0">
+          ✨ Ra Lệnh Chuẩn
+        </button>
+        <button onclick="filterCategory('office')" class="cat-pill px-3 py-1.5 rounded-xl border transition shrink-0">
+          📊 Văn Phòng & Slide
+        </button>
+        <button onclick="filterCategory('creative')" class="cat-pill px-3 py-1.5 rounded-xl border transition shrink-0">
+          🎨 Ảnh & Video 3D
+        </button>
+        <button onclick="filterCategory('business')" class="cat-pill px-3 py-1.5 rounded-xl border transition shrink-0">
+          💼 Bán Hàng & Chăm Sóc
+        </button>
+      </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- TAB 1: 🧩 CÁC FLOW AI TƯ DUY TRỰC QUAN -->
+    <!-- ========================================== -->
+    <section id="tab-content-flows" class="tab-pane space-y-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-lg md:text-xl font-black text-white flex items-center gap-2">
+            <span>🧩</span>
+            <span>Các Sơ Đồ Quy Trình AI (AI Flowcharts)</span>
+          </h2>
+          <p class="text-xs text-slate-400 mt-0.5">Sơ đồ logic 4 bước giúp người mới không bị ngợp và làm đúng ngay lần đầu</p>
+        </div>
+      </div>
+
+      <div id="flows-list" class="space-y-4">
+        <!-- Flow Cards dynamically rendered from JavaScript -->
+      </div>
+    </section>
+
+
+    <!-- ========================================== -->
+    <!-- TAB 2: 💡 THƯ VIỆN PROMPT MẪU THỰC CHIẾN -->
+    <!-- ========================================== -->
+    <section id="tab-content-prompts" class="tab-pane hidden space-y-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-lg md:text-xl font-black text-white flex items-center gap-2">
+            <span>💡</span>
+            <span>Kho Prompt Mẫu Thực Chiến (Copy 1-Click)</span>
+          </h2>
+          <p class="text-xs text-slate-400 mt-0.5">Chỉ cần bấm 'Sao Chép', dán vào ChatGPT hoặc Claude là có ngay kết quả xịn</p>
+        </div>
+      </div>
+
+      <div id="prompts-list" class="space-y-4">
+        <!-- Prompts dynamically rendered from JavaScript -->
+      </div>
+    </section>
+
+
+    <!-- ========================================== -->
+    <!-- TAB 3: 🗺️ LỘ TRÌNH 30 NGÀY CHO NGƯỜI MỚI -->
+    <!-- ========================================== -->
+    <section id="tab-content-roadmap" class="tab-pane hidden space-y-6">
+      <div class="glass-card rounded-3xl p-5 md:p-6 space-y-4 border border-purple-500/30">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <h2 class="text-lg font-black text-white flex items-center gap-2">
+              <span>🗺️</span>
+              <span>Lộ Trình 30 Ngày Từ Số 0 Thành Master AI</span>
+            </h2>
+            <p class="text-xs text-slate-400 mt-0.5">Mỗi ngày 15 phút, tích vào ô để theo dõi tiến độ học tập của bạn</p>
+          </div>
+          <!-- Live Progress Percentage -->
+          <div class="px-4 py-2 rounded-2xl bg-purple-950/60 border border-purple-500/40 text-center shrink-0">
+            <div id="roadmap-pct" class="text-base font-black text-purple-300">0%</div>
+            <div class="text-[9px] uppercase tracking-wider text-slate-400 font-bold">Hoàn Thành</div>
+          </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="w-full bg-slate-950 h-2.5 rounded-full overflow-hidden border border-slate-800">
+          <div id="roadmap-bar" class="h-full bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-400 rounded-full transition-all duration-500 w-0"></div>
+        </div>
+      </div>
+
+      <!-- Roadmap Weeks -->
+      <div id="roadmap-weeks" class="space-y-4">
+        <!-- Week sections injected by JS -->
+      </div>
+    </section>
+
+
+    <!-- ========================================== -->
+    <!-- TAB 4: 🛠️ DANH BẠ CÔNG CỤ AI TUYỂN CHỌN -->
+    <!-- ========================================== -->
+    <section id="tab-content-tools" class="tab-pane hidden space-y-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-lg md:text-xl font-black text-white flex items-center gap-2">
+            <span>🛠️</span>
+            <span>Bản Đồ Công Cụ AI Tuyển Chọn Cho Người Mới</span>
+          </h2>
+          <p class="text-xs text-slate-400 mt-0.5">Top các công cụ tốt nhất, dễ dùng và có bản miễn phí chất lượng</p>
+        </div>
+      </div>
+
+      <div id="tools-list" class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+        <!-- Tools injected by JS -->
+      </div>
+    </section>
+
+
+    <!-- ========================================== -->
+    <!-- TAB 5: 🎁 QUÀ TẶNG & EBOOK LINK IN BIO -->
+    <!-- ========================================== -->
+    <section id="tab-content-gift" class="tab-pane hidden space-y-6">
+      <div class="glass-card rounded-[32px] p-6 md:p-8 text-center space-y-5 border border-pink-500/40 relative overflow-hidden">
+        <div class="w-16 h-16 rounded-3xl bg-gradient-to-tr from-pink-500 to-purple-600 flex items-center justify-center text-3xl mx-auto shadow-xl shadow-pink-500/30">
+          🎁
+        </div>
+        <div class="space-y-2">
+          <h2 class="text-xl md:text-2xl font-black text-white">Quà Tặng Dành Riêng Cho Bạn</h2>
+          <p class="text-xs md:text-sm text-slate-300 max-w-md mx-auto leading-relaxed">
+            Nhận trọn bộ <strong class="text-pink-300">Ebook 50 Thuật Ngữ AI Dễ Hiểu</strong> và kho <strong class="text-purple-300">100+ Prompt ChatGPT Thực Chiến</strong> hoàn toàn 0đ!
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-lg mx-auto text-left">
+          <div class="p-4 rounded-2xl bg-slate-900/80 border border-pink-500/30 space-y-1.5">
+            <div class="text-xs font-bold text-pink-300 flex items-center gap-1.5">
+              <span>📘</span>
+              <span>Ebook Nhập Môn AI (PDF)</span>
+            </div>
+            <p class="text-[11px] text-slate-400">Giải thích dễ hiểu các khái niệm LLM, Prompt, Context Window, Token mà không dùng từ ngữ cao siêu.</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-900/80 border border-purple-500/30 space-y-1.5">
+            <div class="text-xs font-bold text-purple-300 flex items-center gap-1.5">
+              <span>🗂️</span>
+              <span>100+ Prompt Excel / Sheets</span>
+            </div>
+            <p class="text-[11px] text-slate-400">Bảng phân loại Prompt cho nhân viên văn phòng, marketing, lập trình viên và giáo viên.</p>
+          </div>
+        </div>
+
+        <div class="pt-2">
+          <button onclick="downloadGiftPack()" class="w-full sm:w-auto px-8 py-3.5 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-600 to-cyan-500 hover:from-pink-600 hover:to-cyan-600 text-white font-extrabold text-xs md:text-sm shadow-xl shadow-pink-500/30 transition transform hover:-translate-y-0.5">
+            ⚡ Tải Trọn Bộ Tài Liệu Miễn Phí (0đ)
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 📌 FOOTER -->
+    <footer class="pt-8 border-t border-slate-800/80 text-center space-y-3">
+      <div class="flex items-center justify-center gap-2 text-xs font-bold text-slate-400">
+        <span>Made with 💖 by</span>
+        <span class="text-pink-400 font-extrabold">Lucy AI Flow</span>
+        <span>•</span>
+        <span>Tài Liệu Mở 2026</span>
+      </div>
+      <p class="text-[11px] text-slate-500 max-w-md mx-auto">
+        Tất cả nội dung được biên soạn chuẩn logic cho người mới tiếp cận AI. Nhấn lưu link này vào trình duyệt hoặc Bio để tra cứu mỗi ngày nha!
+      </p>
+    </footer>
+
+  </main>
+
+  <!-- ========================================== -->
+  <!-- JAVASCRIPT LOGIC & INTERACTIVE DATA -->
+  <!-- ========================================== -->
+  <script>
+    // --- 1. DATA: 5 VISUAL AI FLOWS ---
+    const AI_FLOWS = [
+      {
+        id: 'flow-01',
+        category: 'prompting',
+        title: 'Quy Tắc 4 Khối Prompt Chuẩn Senior',
+        badge: '🌸 Nền Tảng Cốt Lõi',
+        desc: 'Cách ra lệnh chuẩn xác giúp ChatGPT & Claude trả lời thông minh gấp 10 lần, bỏ sạch văn mẫu dài dòng.',
+        steps: [
+          { num: '01', title: 'Định Danh Vai Trò', detail: 'Chỉ định chuyên môn cao nhất cho AI (VD: Chuyên gia Marketing 10 năm kinh nghiệm).', color: '#EC4899' },
+          { num: '02', title: 'Cung Cấp Bối Cảnh', detail: 'Nói rõ khách hàng mục tiêu, vấn đề đang gặp và lý do cần giải quyết.', color: '#8B5CF6' },
+          { num: '03', title: 'Nhiệm Vụ Cụ Thể', detail: 'Giao việc dứt khoát: Soạn thảo bài viết, phân tích dữ liệu, hoặc lên dàn ý.', color: '#06B6D4' },
+          { num: '04', title: 'Giới Hạn Định Dạng', detail: 'Yêu cầu: Bảng so sánh 3 cột, gạch đầu dòng ngắn gọn, không văn mẫu mở đầu.', color: '#10B981' }
+        ],
+        samplePrompt: "Hãy đóng vai một chuyên gia tư vấn chiến lược kinh doanh 10 năm kinh nghiệm.\nBối cảnh: Tôi đang muốn mở một quán cà phê nhỏ tại khu vực đông sinh viên ở Hà Nội.\nNhiệm vụ: Hãy phân tích cho tôi 3 rủi ro lớn nhất và 3 giải pháp giảm thiểu chi phí ban đầu.\nĐịnh dạng trả lời: Trình bày dạng gạch đầu dòng ngắn gọn, có số liệu ước tính, không viết lời chào rườm rà."
+      },
+      {
+        id: 'flow-02',
+        category: 'office',
+        title: 'Tóm Tắt Báo Cáo & File PDF 50 Trang Trong 5 Giây',
+        badge: '⚡ Siêu Tốc Văn Phòng',
+        desc: 'Kéo thả file tài liệu dài ngoằng vào Claude hoặc ChatGPT để trích xuất ngay các Action Items cốt lõi.',
+        steps: [
+          { num: '01', title: 'Chuẩn Bị File', detail: 'Tải file PDF, Word hoặc ảnh báo cáo cần xử lý.', color: '#EC4899' },
+          { num: '02', title: 'Đính Kèm Vào AI', detail: 'Kéo thả file trực tiếp vào ô chat của Claude 3.5 Sonnet hoặc ChatGPT 4o.', color: '#8B5CF6' },
+          { num: '03', title: 'Lệnh Lọc Thông Tin', detail: 'Yêu cầu AI trích xuất: 3 vấn đề nổi cộm nhất và các số liệu then chốt.', color: '#06B6D4' },
+          { num: '04', title: 'Bảng Hành Động', detail: 'Ép AI xuất ra bảng: Việc cần làm (Task) - Người chịu trách nhiệm - Thời hạn.', color: '#10B981' }
+        ],
+        samplePrompt: "Đọc toàn bộ file tài liệu đính kèm này và thực hiện 2 yêu cầu:\n1. Tóm tắt 3 kết luận quan trọng nhất bằng 3 câu tiếng Việt súc tích.\n2. Tạo bảng Action Items gồm: [Hạng mục công việc | Mức độ ưu tiên (Cao/Vừa) | Khuyến nghị hành động].\nKhông cần giải thích lại những gì đã quá rõ ràng."
+      },
+      {
+        id: 'flow-03',
+        category: 'office',
+        title: 'Tạo Bài Thuyết Trình Slide Đẹp Mê Ly Bằng 1 Câu Lệnh',
+        badge: '📊 Gamma AI & Claude',
+        desc: 'Dùng AI viết toàn bộ dàn ý nội dung, tự phối màu và dàn trang slide chuyên nghiệp trong 30 giây.',
+        steps: [
+          { num: '01', title: 'Xác Định Chủ Đề', detail: 'Nghĩ ra một câu mô tả mục tiêu bài thuyết trình (VD: Kế hoạch bán hàng Q4).', color: '#EC4899' },
+          { num: '02', title: 'Tạo Dàn Ý Với Claude', detail: 'Bảo AI lên khung 8 slide với tiêu đề và 3 gạch đầu dòng mỗi trang.', color: '#8B5CF6' },
+          { num: '03', title: 'Nhập Vào Gamma.app', detail: 'Dán dàn ý vào Gamma, chọn chế độ Presentation và chọn tone màu Pastel.', color: '#06B6D4' },
+          { num: '04', title: 'Xuất File Hoàn Chỉnh', detail: 'Gamma tự chèn ảnh, biểu đồ và xuất ra file PowerPoint hoặc PDF đẹp mắt.', color: '#10B981' }
+        ],
+        samplePrompt: "Viết cho tôi dàn ý bài thuyết trình 7 slide về chủ đề: 'Tối ưu chi phí vận hành doanh nghiệp vừa và nhỏ năm 2026'.\nMỗi slide cần có: Tiêu đề slide hấp dẫn, 1 câu tóm tắt ý chính và 3 gạch đầu dòng dẫn chứng cụ thể.\nĐịnh dạng text sẵn sàng để copy vào Gamma.app."
+      },
+      {
+        id: 'flow-04',
+        category: 'creative',
+        title: 'Tự Vẽ Avatar Chibi 3D Pixar Đẹp Độc Bản',
+        badge: '🎨 Midjourney & Bing AI',
+        desc: 'Công thức prompt tạo ảnh đại diện 3D phong cách phim hoạt hình Pixar triệu view hoàn toàn miễn phí.',
+        steps: [
+          { num: '01', title: 'Chọn Nền Tảng', detail: 'Dùng Bing Image Creator (miễn phí) hoặc Midjourney.', color: '#EC4899' },
+          { num: '02', title: 'Khung Phong Cách', detail: 'Khai báo: 3D Pixar Disney style chibi, cute expression, soft studio lighting.', color: '#8B5CF6' },
+          { num: '03', title: 'Chi Tiết Cá Nhân Hóa', detail: 'Thêm trang phục: Áo hoodie pastel, tai nghe headphone, bàn làm việc laptop.', color: '#06B6D4' },
+          { num: '04', title: 'Xuất Ảnh Chất Lượng Cao', detail: 'Thêm hậu tố: 8k, octane render, vivid colors để ảnh nét căng đét.', color: '#10B981' }
+        ],
+        samplePrompt: "A cute 3D Pixar Disney style chibi girl, wearing pink oversized hoodie and modern headphone, sitting at a cozy tech desk with laptop and cute cat figurine, cheerful smile, pastel aesthetic room background, soft studio lighting, ultra detailed, 8k resolution, octane render --ar 1:1"
+      },
+      {
+        id: 'flow-05',
+        category: 'business',
+        title: 'Tự Động Hóa Chatbot Trả Lời & Chốt Đơn Khi Đi Ngủ',
+        badge: '💼 Make & AI Chatbot',
+        desc: 'Quy trình kết nối AI với Zalo/Fanpage để tư vấn và tự lưu khách hàng vào Google Sheets 24/7.',
+        steps: [
+          { num: '01', title: 'Cẩm Nang Sản Phẩm', detail: 'Soạn file tài liệu hỏi - đáp (FAQ) chi tiết về giá cả, ưu đãi và chính sách.', color: '#EC4899' },
+          { num: '02', title: 'Cài Đặt System Prompt', detail: 'Dạy AI phong cách xưng hô: Lịch sự, niềm nở, chỉ trả lời dựa trên file FAQ.', color: '#8B5CF6' },
+          { num: '03', title: 'Bắt Nhịp Khách Hàng', detail: 'Khi khách hỏi lúc nửa đêm, AI tự động phản hồi ngay sau 2 giây chuẩn xác.', color: '#06B6D4' },
+          { num: '04', title: 'Ghi Nhận Đơn Hàng', detail: 'Khi khách để lại SĐT và địa chỉ, tự động đẩy dữ liệu sang Google Sheets và Zalo.', color: '#10B981' }
+        ],
+        samplePrompt: "Bạn là trợ lý tư vấn bán hàng tận tâm của shop. Nhiệm vụ của bạn:\n1. Luôn chào khách hàng thân thiện và trả lời đúng trọng tâm dựa trên cẩm nang sản phẩm.\n2. Nếu khách hỏi giá, báo giá chính xác và giới thiệu ưu đãi hôm nay.\n3. Khi khách đồng ý mua, khéo léo xin Tên, Số điện thoại và Địa chỉ nhận hàng.\nKhông được bịa đặt chính sách ngoài cẩm nang."
+      }
+    ];
+
+    // --- 2. DATA: 8 PROMPTS THỰC CHIẾN ---
+    const AI_PROMPTS = [
+      {
+        id: 'p-01',
+        category: 'prompting',
+        title: 'Prompt Phá Bỏ Văn Mẫu Sáo Rỗng (Anti-Robot)',
+        badge: '🔥 Siêu Hot',
+        tool: 'ChatGPT / Claude',
+        desc: 'Ép AI viết giọng văn tự nhiên như con người, không mở đầu bằng các câu sáo rỗng.',
+        content: `Hãy viết lại nội dung sau đây theo phong cách của một người có 10 năm kinh nghiệm trong ngành, văn phong sắc sảo, thực tế và đi thẳng vào vấn đề.
+Quy tắc bắt buộc:
+1. Tuyệt đối không dùng các câu mở đầu sáo rỗng như 'Trong thời đại ngày nay', 'Không thể phủ nhận rằng'.
+2. Sử dụng câu văn ngắn gọn, có dẫn chứng và lời khuyên có thể áp dụng được ngay.
+3. Trình bày dạng gạch đầu dòng rõ ràng.
+Nội dung cần viết lại: [Dán nội dung của bạn vào đây]`
+      },
+      {
+        id: 'p-02',
+        category: 'office',
+        title: 'Soạn Thảo Email Từ Chối Khéo Léo EQ Cao',
+        badge: '🌸 Văn Phòng',
+        tool: 'Claude 3.5 Sonnet',
+        desc: 'Từ chối đề nghị của sếp hoặc đồng nghiệp lịch sự, giữ hòa khí mà không bị bóc lột.',
+        content: `Tôi vừa nhận được đề nghị làm thêm việc này từ [Đồng nghiệp/Khách hàng]: '[Nêu tóm tắt việc họ nhờ]'.
+Hãy viết cho tôi 3 phiên bản email từ chối lịch sự với giọng văn khéo léo, đồng cảm nhưng giữ nguyên lập trường không nhận việc:
+- Bản 1: Thân thiện, ấm áp (dành cho đồng nghiệp thân thiết).
+- Bản 2: Chuyên nghiệp, trang trọng (dành cho đối tác hoặc sếp lớn).
+- Bản 3: Gợi ý giải pháp thay thế (giới thiệu người khác hoặc dời lịch).`
+      },
+      {
+        id: 'p-03',
+        category: 'office',
+        title: 'Tóm Tắt Biên Bản Cuộc Họp & Trích Xuất Action Items',
+        badge: '📊 Quản Lý',
+        tool: 'ChatGPT / Claude',
+        desc: 'Biến đoạn ghi chép cuộc họp lộn xộn thành biên bản chuyên nghiệp sếp khen ngợi.',
+        content: `Dưới đây là nội dung thô ghi chép từ cuộc họp vừa diễn ra:
+[Dán nội dung thảo luận cuộc họp vào đây]
+
+Hãy sắp xếp lại thành biên bản cuộc họp chuẩn mực gồm 3 phần:
+1. Mục tiêu và các quyết định chính đã được thống nhất.
+2. Bảng phân công công việc (Action Items) gồm các cột: [Hạng mục việc | Người phụ trách | Thời hạn hoàn thành | Kết quả mong đợi].
+3. Các vấn đề còn tồn đọng cần bàn thêm ở buổi họp sau.`
+      },
+      {
+        id: 'p-04',
+        category: 'business',
+        title: 'Viết Kịch Bản Video Ngắn TikTok Viral 30 Giây',
+        badge: '📱 Sáng Tạo Nội Dung',
+        tool: 'ChatGPT 4o',
+        desc: 'Cấu trúc Hook 3s đầu giữ chân người xem + 3 bước hành động + Call to action.',
+        content: `Hãy viết cho tôi một kịch bản video ngắn TikTok thời lượng 30 giây về chủ đề: '[Chủ đề video của bạn]'.
+Yêu cầu kịch bản chuẩn cấu trúc triệu view:
+- 0s - 3s (Câu Hook): Một câu mở đầu gây tò mò, đánh trúng nỗi đau người xem.
+- 3s - 20s (Giá trị cốt lõi): 3 bước giải quyết nhanh vấn đề, ngắn gọn, dễ nhớ.
+- 20s - 30s (Call To Action): Kêu gọi lưu video và nhấn link bio nhận quà.
+Chia kịch bản làm 2 cột: [Hình ảnh/Hành động trên màn hình] và [Lời thoại nói].`
+      },
+      {
+        id: 'p-05',
+        category: 'creative',
+        title: 'Prompt Vẽ Avatar Chibi 3D Pixar Nét Căng',
+        badge: '🎨 Hình Ảnh',
+        tool: 'Midjourney / Bing Image',
+        desc: 'Công thức tạo ảnh đại diện hoạt hình 3D Pixar dễ thương độc quyền.',
+        content: `A gorgeous 3D Pixar style chibi character, cute expression, wearing modern stylish casual clothes, soft pastel lighting, standing in front of aesthetic cozy room background, highly detailed textures, vibrant colors, 8k resolution, cinematic render, trending on artstation --ar 1:1`
+      },
+      {
+        id: 'p-06',
+        category: 'business',
+        title: 'Xử Lý Khiếu Nại Khách Hàng Khó Tính Cực Êm',
+        badge: '💼 Bán Hàng',
+        tool: 'ChatGPT',
+        desc: 'Xoa dịu khách hàng đang bực tức, biến sự cố thành cơ hội tạo thiện cảm.',
+        content: `Khách hàng vừa nhắn tin phàn nàn: '[Nội dung khách phàn nàn về sản phẩm/dịch vụ]'.
+Hãy viết phản hồi cho khách hàng theo nguyên tắc 'Lắng nghe - Xin lỗi chân thành - Đưa ra giải pháp đền bù':
+- Thể hiện sự đồng cảm sâu sắc với trải nghiệm không tốt của khách.
+- Đưa ra giải pháp xử lý ngay lập tức trong vòng 24 giờ.
+- Giọng văn nhã nhặn, tôn trọng và làm khách hàng cảm thấy được lắng nghe.`
+      },
+      {
+        id: 'p-07',
+        category: 'prompting',
+        title: 'Luyện Phỏng Vấn Tuyển Dụng Mock Interview',
+        badge: '🎯 Phát Triển Bản Thân',
+        tool: 'ChatGPT / Claude',
+        desc: 'Đóng vai người phỏng vấn khó tính của tập đoàn lớn để bạn rèn luyện trả lời.',
+        content: `Hãy đóng vai một nhà tuyển dụng khó tính và giàu kinh nghiệm tại một tập đoàn công nghệ lớn.
+Tôi đang ứng tuyển vào vị trí: '[Tên vị trí bạn ứng tuyển, ví dụ: Product Manager / Data Analyst]'.
+Quy tắc:
+1. Hỏi tôi từng câu một, đợi tôi trả lời xong mới hỏi tiếp câu tiếp theo.
+2. Sau mỗi câu trả lời của tôi, hãy nhận xét trung thực điểm tốt và điểm cần cải thiện trước khi hỏi câu tiếp theo.
+Bắt đầu bằng câu hỏi đầu tiên!`
+      },
+      {
+        id: 'p-08',
+        category: 'office',
+        title: 'Viết Công Thức Excel / Google Sheets Phức Tạp',
+        badge: '⚡ Tiện Ích',
+        tool: 'ChatGPT',
+        desc: 'Chỉ cần mô tả bằng tiếng Việt, AI tự viết công thức VLOOKUP, INDEX MATCH, REGEX chuẩn xác.',
+        content: `Tôi đang có một bảng tính Excel/Google Sheets.
+- Cột A chứa: [Dữ liệu cột A, ví dụ: Tên khách hàng].
+- Cột B chứa: [Dữ liệu cột B, ví dụ: Ngày mua hàng].
+- Cột C chứa: [Dữ liệu cột C, ví dụ: Doanh số].
+Tôi muốn: [Mô tả bằng tiếng Việt kết quả bạn muốn tính toán].
+Hãy viết cho tôi công thức chính xác nhất để dán vào ô, và giải thích ngắn gọn cách hoạt động của công thức.`
+      }
+    ];
+
+    // --- 3. DATA: 30-DAY AI ROADMAP ---
+    const ROADMAP_DATA = [
+      {
+        week: 'Tuần 1: Tư Duy Nền Tảng & Khai Phá AI',
+        desc: 'Làm quen với ChatGPT, Claude và nắm vững quy tắc ra lệnh không bị văn mẫu.',
+        days: [
+          { day: 'Ngày 01', title: 'Tạo tài khoản ChatGPT & Claude 3.5 Sonnet', desc: 'Cài đặt ứng dụng trên điện thoại và làm quen giao diện.' },
+          { day: 'Ngày 02', title: 'Thực hành quy tắc 4 khối Prompt', desc: 'Thử nghiệm so sánh câu lệnh cộc lốc vs câu lệnh có bối cảnh.' },
+          { day: 'Ngày 03', title: 'Dạy AI đóng vai chuyên gia', desc: 'Thử nghiệm vai trò: Luật sư, Cố vấn marketing, Bác sĩ tâm lý.' },
+          { day: 'Ngày 04', title: 'Khai thác tính năng Memory & Custom Instructions', desc: 'Cài đặt sẵn thông tin cá nhân để AI nhớ vĩnh viễn.' },
+          { day: 'Ngày 05', title: 'Luyện Voice Chat tiếng Anh', desc: 'Nói chuyện 15 phút với AI bằng giọng nói trên ứng dụng điện thoại.' },
+          { day: 'Ngày 06', title: 'Thực hành tóm tắt bài báo 3.000 từ', desc: 'Yêu cầu trích xuất 5 luận điểm chính trong 10 giây.' },
+          { day: 'Ngày 07', title: 'Ôn tập & Tổng kết tuần 1', desc: 'Tạo một ghi chú các prompt tâm đắc nhất bạn đã học.' }
+        ]
+      },
+      {
+        week: 'Tuần 2: Nâng Cấp Năng Suất Văn Phòng X3',
+        desc: 'Áp dụng AI vào công việc hàng ngày: Soạn email, xử lý báo cáo, làm slide.',
+        days: [
+          { day: 'Ngày 08', title: 'Xử lý file PDF & Báo cáo dày cộp', desc: 'Kéo thả tài liệu vào Claude để trích xuất Action Items.' },
+          { day: 'Ngày 09', title: 'Viết email khó xử lý bằng AI', desc: 'Soạn thảo thư từ chối, thư đòi nợ, thư giải trình lỗi với sếp.' },
+          { day: 'Ngày 10', title: 'Làm bài thuyết trình slide với Gamma.app', desc: 'Nhập một dòng chủ đề và tạo slide 10 trang hoàn chỉnh.' },
+          { day: 'Ngày 11', title: 'Biến văn bản thành sơ đồ với Napkin AI', desc: 'Dán một đoạn chữ, AI tự vẽ biểu đồ trực quan.' },
+          { day: 'Ngày 12', title: 'Dùng AI viết công thức Excel khó', desc: 'Mô tả bài toán bằng tiếng Việt và nhận công thức chuẩn.' },
+          { day: 'Ngày 13', title: 'Tự động dịch thuật văn phong chuyên nghiệp', desc: 'Dịch tài liệu tiếng Anh mượt như biên dịch viên cao cấp.' },
+          { day: 'Ngày 14', title: 'Đánh giá lại 1 tuần làm việc', desc: 'Đo lường bạn đã tiết kiệm được bao nhiêu giờ nhờ AI.' }
+        ]
+      },
+      {
+        week: 'Tuần 3: Sáng Tạo Nội Dung & Hình Ảnh AI',
+        desc: 'Học cách tạo ảnh, avatar 3D và viết kịch bản video triệu view.',
+        days: [
+          { day: 'Ngày 15', title: 'Vẽ ảnh với Bing Image Creator / Midjourney', desc: 'Thực hành tạo phong cách 3D Pixar và Cyberpunk.' },
+          { day: 'Ngày 16', title: 'Tự tạo bộ Avatar thương hiệu cá nhân', desc: 'Áp dụng công thức prompt Chibi kute chuẩn chỉnh.' },
+          { day: 'Ngày 17', title: 'Lên ý tưởng 30 video ngắn cho kênh', desc: 'Bảo AI nghiên cứu thị trường và đưa ra 30 góc nhìn độc lạ.' },
+          { day: 'Ngày 18', title: 'Viết kịch bản video TikTok 30 giây', desc: 'Áp dụng cấu trúc Hook 3 giây + Call to action.' },
+          { day: 'Ngày 19', title: 'Lồng tiếng AI bằng giọng tự nhiên', desc: 'Trải nghiệm các công cụ Text-to-Speech hiện đại.' },
+          { day: 'Ngày 20', title: 'Ghép ảnh và video motion tự động', desc: 'Thực hành tạo video dọc 9:16 đầu tiên của bạn.' },
+          { day: 'Ngày 21', title: 'Đăng tải video đầu tiên lên mạng xã hội', desc: 'Theo dõi phản hồi và tinh chỉnh nội dung.' }
+        ]
+      },
+      {
+        week: 'Tuần 4: Tự Động Hóa & Kiếm Tiền Online',
+        desc: 'Xây dựng hệ thống tự vận hành và kiếm thêm thu nhập từ kỹ năng AI.',
+        days: [
+          { day: 'Ngày 22', title: 'Tìm hiểu về No-Code Automation với Make.com', desc: 'Hiểu cách kết nối AI với Google Sheets và Email.' },
+          { day: 'Ngày 23', title: 'Xây dựng kịch bản Chatbot tư vấn bán hàng', desc: 'Cung cấp cẩm nang FAQ để bot tự trả lời khách.' },
+          { day: 'Ngày 24', title: 'Đóng gói tài liệu thành Ebook số', desc: 'Dùng AI thiết kế và trình bày cẩm nang giá trị.' },
+          { day: 'Ngày 25', title: 'Xây dựng trang Link-in-Bio cá nhân', desc: 'Gắn link tài liệu lên Bio mạng xã hội như trang này.' },
+          { day: 'Ngày 26', title: 'Cung cấp dịch vụ Prompting cho doanh nghiệp', desc: 'Giúp người khác tối ưu hóa thời gian bằng kỹ năng AI của bạn.' },
+          { day: 'Ngày 27', title: 'Học hỏi các mô hình AI mới nhất', desc: 'Cập nhật công nghệ mới, tư duy không ngừng đổi mới.' },
+          { day: 'Ngày 28', title: 'Hoàn thành bài kiểm tra năng lực cá nhân', desc: 'Tự tạo một sản phẩm AI hoàn chỉnh từ A đến Z.' },
+          { day: 'Ngày 29', title: 'Chia sẻ kinh nghiệm với cộng đồng', desc: 'Lan tỏa kiến thức AI giúp đỡ người mới khác.' },
+          { day: 'Ngày 30', title: 'Chúc mừng! Bạn đã tốt nghiệp Master AI', desc: 'Nhận chứng nhận hoàn thành và bước vào hành trình mới!' }
+        ]
+      }
+    ];
+
+    // --- 4. DATA: CURATED AI TOOLS DIRECTORY ---
+    const AI_TOOLS = [
+      {
+        name: 'ChatGPT (OpenAI)',
+        tag: 'Toàn Năng Nhất',
+        desc: 'Trợ lý thông minh phổ biến nhất thế giới. Hỗ trợ tìm kiếm, phân tích dữ liệu, viết lách và Voice Chat.',
+        url: 'https://chatgpt.com',
+        icon: '🤖',
+        color: '#10A37F'
+      },
+      {
+        name: 'Claude 3.5 Sonnet',
+        tag: 'Viết Tiếng Việt Mượt Nhất',
+        desc: 'Mô hình AI viết văn phong tiếng Việt tự nhiên nhất hiện nay. Rất mạnh về phân tích code và file tài liệu dài.',
+        url: 'https://claude.ai',
+        icon: '🧠',
+        color: '#D97706'
+      },
+      {
+        name: 'Gamma.app',
+        tag: 'Làm Slide 30 Giây',
+        desc: 'Chỉ cần gõ 1 dòng ý tưởng, AI tự động thiết kế cả bài thuyết trình PowerPoint/Web đẹp mắt.',
+        url: 'https://gamma.app',
+        icon: '📊',
+        color: '#EC4899'
+      },
+      {
+        name: 'Napkin AI',
+        tag: 'Vẽ Sơ Đồ Từ Chữ',
+        desc: 'Dán một đoạn văn bản thô, AI tự động phân tích và vẽ ra sơ đồ logic, biểu đồ trực quan trong 5 giây.',
+        url: 'https://napkin.one',
+        icon: '📐',
+        color: '#8B5CF6'
+      },
+      {
+        name: 'Bing Image Creator',
+        tag: 'Tạo Ảnh DALL-E 3 Miễn Phí',
+        desc: 'Công cụ tạo ảnh 3D, Chibi chất lượng cao của Microsoft hoàn toàn miễn phí không giới hạn.',
+        url: 'https://www.bing.com/create',
+        icon: '🎨',
+        color: '#06B6D4'
+      },
+      {
+        name: 'Notion AI',
+        tag: 'Quản Lý & Tóm Tắt Họp',
+        desc: 'Không gian làm việc kết hợp AI giúp tự động tóm tắt ghi chú, lên kế hoạch dự án và viết tài liệu.',
+        url: 'https://notion.so',
+        icon: '📝',
+        color: '#64748B'
+      },
+      {
+        name: 'Perplexity AI',
+        tag: 'Tìm Kiếm Có Trích Dẫn',
+        desc: 'Công cụ tìm kiếm thông minh thay thế Google, tổng hợp thông tin mới nhất và trích dẫn nguồn uy tín.',
+        url: 'https://perplexity.ai',
+        icon: '🔍',
+        color: '#2563EB'
+      },
+      {
+        name: 'Make.com',
+        tag: 'Tự Động Hóa Quy Trình',
+        desc: 'Kết nối AI với Google Sheets, Email, Facebook và Zalo để tự động hóa công việc kinh doanh không cần code.',
+        url: 'https://make.com',
+        icon: '⚡',
+        color: '#9333EA'
+      }
+    ];
+
+    // --- 5. RENDER FUNCTIONS ---
+    let currentCategory = 'all';
+    let searchQuery = '';
+
+    function renderFlows() {
+      const container = document.getElementById('flows-list');
+      if (!container) return;
+
+      const filtered = AI_FLOWS.filter(flow => {
+        const matchCat = (currentCategory === 'all' || flow.category === currentCategory);
+        const matchSearch = (!searchQuery || 
+          flow.title.toLowerCase().includes(searchQuery) || 
+          flow.desc.toLowerCase().includes(searchQuery) ||
+          flow.samplePrompt.toLowerCase().includes(searchQuery)
+        );
+        return matchCat && matchSearch;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = '<div class="p-8 text-center text-slate-400 glass-card rounded-3xl text-xs">Không tìm thấy Flow phù hợp với từ khóa "' + searchQuery + '". Thử từ khóa khác nha!</div>';
+        return;
+      }
+
+      container.innerHTML = filtered.map(flow => `
+        <article class="glass-card rounded-[28px] p-5 md:p-6 space-y-4 border border-slate-700/60 hover:border-pink-500/40 transition">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div class="space-y-1">
+              <span class="inline-block px-2.5 py-0.5 rounded-full bg-pink-500/20 text-pink-300 text-[10px] font-extrabold uppercase tracking-wider border border-pink-500/30">
+                \${flow.badge}
+              </span>
+              <h3 class="text-base md:text-lg font-extrabold text-white">\${flow.title}</h3>
+            </div>
+            <button onclick="copyText('\${escapeJs(flow.samplePrompt)}', 'Đã sao chép Prompt mẫu của Flow!')" class="py-2 px-3.5 rounded-xl bg-pink-500/20 hover:bg-pink-500/30 text-pink-200 border border-pink-400/40 text-xs font-bold flex items-center gap-1.5 transition self-start sm:self-auto shrink-0 shadow">
+              <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+              <span>Copy Prompt Flow</span>
+            </button>
+          </div>
+
+          <p class="text-xs text-slate-300 leading-relaxed">\${flow.desc}</p>
+
+          <!-- 4 Steps Visual Flow -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2.5 pt-2">
+            \${flow.steps.map(s => `
+              <div class="p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-1.5 relative overflow-hidden">
+                <div class="flex items-center justify-between">
+                  <span class="w-6 h-6 rounded-lg flex items-center justify-center text-[11px] font-black" style="background-color: \${s.color}25; color: \${s.color}; border: 1px solid \${s.color}40;">
+                    \${s.num}
+                  </span>
+                  <span class="text-[9px] uppercase tracking-wider font-bold text-slate-500">Bước \${s.num}</span>
+                </div>
+                <h4 class="text-xs font-bold text-slate-100">\${s.title}</h4>
+                <p class="text-[11px] text-slate-400 leading-relaxed">\${s.detail}</p>
+              </div>
+            `).join('')}
+          </div>
+
+          <!-- Prompt Preview Box -->
+          <div class="p-3.5 rounded-2xl bg-[#090D18] border border-slate-800/80 space-y-1.5 text-xs">
+            <div class="flex items-center justify-between text-[11px] text-slate-400 font-bold">
+              <span class="flex items-center gap-1.5 text-pink-300">
+                <i data-lucide="terminal" class="w-3.5 h-3.5"></i>
+                <span>Prompt Mẫu Áp Dụng:</span>
+              </span>
+              <span class="text-[10px] text-slate-500">Sẵn sàng copy</span>
+            </div>
+            <pre class="font-mono text-[11px] text-slate-300 whitespace-pre-wrap leading-relaxed line-clamp-3 select-all">\${flow.samplePrompt}</pre>
+          </div>
+        </article>
+      `).join('');
+
+      lucide.createIcons();
+    }
+
+    function renderPrompts() {
+      const container = document.getElementById('prompts-list');
+      if (!container) return;
+
+      const filtered = AI_PROMPTS.filter(p => {
+        const matchCat = (currentCategory === 'all' || p.category === currentCategory);
+        const matchSearch = (!searchQuery || 
+          p.title.toLowerCase().includes(searchQuery) || 
+          p.desc.toLowerCase().includes(searchQuery) ||
+          p.content.toLowerCase().includes(searchQuery)
+        );
+        return matchCat && matchSearch;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = '<div class="p-8 text-center text-slate-400 glass-card rounded-3xl text-xs">Không tìm thấy Prompt phù hợp với từ khóa "' + searchQuery + '".</div>';
+        return;
+      }
+
+      container.innerHTML = filtered.map(p => `
+        <article class="glass-card rounded-[28px] p-5 md:p-6 space-y-3.5 border border-slate-700/60 hover:border-purple-500/40 transition">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 text-[10px] font-extrabold uppercase border border-purple-500/30">
+                  \${p.badge}
+                </span>
+                <span class="text-[11px] text-slate-400 font-bold flex items-center gap-1">
+                  <i data-lucide="cpu" class="w-3 h-3 text-cyan-400"></i>
+                  <span>\${p.tool}</span>
+                </span>
+              </div>
+              <h3 class="text-base font-extrabold text-white">\${p.title}</h3>
+            </div>
+
+            <button onclick="copyText('\${escapeJs(p.content)}', 'Đã sao chép Prompt!')" class="py-2 px-4 rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white text-xs font-bold flex items-center gap-1.5 transition self-start sm:self-auto shrink-0 shadow-lg shadow-pink-500/20">
+              <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+              <span>Sao Chép Prompt</span>
+            </button>
+          </div>
+
+          <p class="text-xs text-slate-300">\${p.desc}</p>
+
+          <!-- Prompt Box -->
+          <div class="p-4 rounded-2xl bg-[#090D18] border border-slate-800 text-xs relative group">
+            <pre class="font-mono text-[11px] text-pink-100 whitespace-pre-wrap leading-relaxed max-h-48 overflow-y-auto pr-2 select-all">\${p.content}</pre>
+          </div>
+        </article>
+      `).join('');
+
+      lucide.createIcons();
+    }
+
+    function renderRoadmap() {
+      const container = document.getElementById('roadmap-weeks');
+      if (!container) return;
+
+      const savedProgress = JSON.parse(localStorage.getItem('lucy_roadmap_checked') || '{}');
+
+      container.innerHTML = ROADMAP_DATA.map((w, wIdx) => `
+        <div class="glass-card rounded-[28px] p-5 md:p-6 space-y-4 border border-slate-700/60">
+          <div>
+            <h3 class="text-base font-extrabold text-white flex items-center gap-2">
+              <span class="w-6 h-6 rounded-lg bg-purple-500/20 text-purple-300 flex items-center justify-center text-xs font-black">W\${wIdx+1}</span>
+              <span>\${w.week}</span>
+            </h3>
+            <p class="text-xs text-slate-400 mt-1">\${w.desc}</p>
+          </div>
+
+          <div class="space-y-2">
+            ${[0,1,2,3].map(dummy => '').join('')}
+            \${w.days.map((d, dIdx) => {
+              const itemKey = 'w' + wIdx + '_d' + dIdx;
+              const isChecked = !!savedProgress[itemKey];
+              return `
+                <label class="flex items-start gap-3 p-3 rounded-2xl bg-slate-900/70 hover:bg-slate-900 border border-slate-800 cursor-pointer transition select-none group">
+                  <input 
+                    type="checkbox" 
+                    onchange="toggleDayCheck('\${itemKey}')" 
+                    \${isChecked ? 'checked' : ''} 
+                    class="mt-1 w-4 h-4 rounded text-pink-500 focus:ring-pink-500 border-slate-700 bg-slate-950 cursor-pointer"
+                  />
+                  <div class="flex-1 text-xs">
+                    <div class="flex items-center gap-2">
+                      <span class="font-mono text-[10px] font-bold text-pink-400">\${d.day}</span>
+                      <strong class="font-bold text-slate-200 group-hover:text-white transition \${isChecked ? 'line-through text-slate-500' : ''}">\${d.title}</strong>
+                    </div>
+                    <p class="text-[11px] text-slate-400 mt-0.5 leading-relaxed">\${d.desc}</p>
+                  </div>
+                </label>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      `).join('');
+
+      updateRoadmapProgress();
+    }
+
+    function renderTools() {
+      const container = document.getElementById('tools-list');
+      if (!container) return;
+
+      container.innerHTML = AI_TOOLS.map(t => `
+        <div class="glass-card rounded-2xl p-4.5 md:p-5 space-y-3 border border-slate-800 hover:border-cyan-500/40 transition flex flex-col justify-between">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-2xl">\${t.icon}</span>
+              <span class="px-2 py-0.5 rounded-full bg-slate-800 text-[10px] font-bold text-cyan-300 border border-cyan-500/20">
+                \${t.tag}
+              </span>
+            </div>
+            <h3 class="text-sm font-extrabold text-white">\${t.name}</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">\${t.desc}</p>
+          </div>
+
+          <a href="\${t.url}" target="_blank" rel="noopener" class="mt-2 py-2 px-3.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-cyan-200 hover:text-white border border-cyan-500/30 text-xs font-bold flex items-center justify-center gap-1.5 transition">
+            <span>Truy Cập Ngay</span>
+            <i data-lucide="external-link" class="w-3 h-3"></i>
+          </a>
+        </div>
+      `).join('');
+
+      lucide.createIcons();
+    }
+
+    // --- 6. ROADMAP PROGRESS CALCULATION ---
+    function toggleDayCheck(itemKey) {
+      const saved = JSON.parse(localStorage.getItem('lucy_roadmap_checked') || '{}');
+      saved[itemKey] = !saved[itemKey];
+      localStorage.setItem('lucy_roadmap_checked', JSON.stringify(saved));
+      renderRoadmap();
+    }
+
+    function updateRoadmapProgress() {
+      const saved = JSON.parse(localStorage.getItem('lucy_roadmap_checked') || '{}');
+      let totalDays = 0;
+      ROADMAP_DATA.forEach(w => totalDays += w.days.length);
+
+      let checkedDays = 0;
+      Object.keys(saved).forEach(k => {
+        if (saved[k]) checkedDays++;
+      });
+
+      const pct = Math.round((checkedDays / totalDays) * 100);
+      const pctEl = document.getElementById('roadmap-pct');
+      const barEl = document.getElementById('roadmap-bar');
+
+      if (pctEl) pctEl.innerText = pct + '%';
+      if (barEl) barEl.style.width = pct + '%';
+    }
+
+    // --- 7. TAB SWITCHING ---
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-pane').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.nav-tab').forEach(el => {
+        el.classList.remove('bg-gradient-to-r', 'from-pink-500', 'to-purple-600', 'text-white', 'shadow-lg', 'shadow-pink-500/25');
+        el.classList.add('text-slate-400', 'hover:text-white');
+      });
+
+      const pane = document.getElementById('tab-content-' + tabId);
+      const btn = document.getElementById('tab-btn-' + tabId);
+      if (pane) pane.classList.remove('hidden');
+      if (btn) {
+        btn.classList.add('bg-gradient-to-r', 'from-pink-500', 'to-purple-600', 'text-white', 'shadow-lg', 'shadow-pink-500/25');
+        btn.classList.remove('text-slate-400');
+      }
+
+      window.scrollTo({ top: 320, behavior: 'smooth' });
+    }
+
+    // --- 8. SEARCH & FILTER ---
+    function handleSearch() {
+      const input = document.getElementById('search-input');
+      const clearBtn = document.getElementById('clear-search-btn');
+      searchQuery = input.value.trim().toLowerCase();
+
+      if (clearBtn) {
+        if (searchQuery) clearBtn.classList.remove('hidden');
+        else clearBtn.classList.add('hidden');
+      }
+
+      renderFlows();
+      renderPrompts();
+    }
+
+    function clearSearch() {
+      const input = document.getElementById('search-input');
+      if (input) input.value = '';
+      searchQuery = '';
+      handleSearch();
+    }
+
+    function filterCategory(cat) {
+      currentCategory = cat;
+      document.querySelectorAll('.cat-pill').forEach(btn => {
+        btn.classList.remove('bg-pink-500/20', 'text-pink-300', 'border-pink-500/40');
+        btn.classList.add('border-slate-800', 'text-slate-400');
+      });
+
+      const activeBtn = event?.currentTarget;
+      if (activeBtn) {
+        activeBtn.classList.add('bg-pink-500/20', 'text-pink-300', 'border-pink-500/40');
+        activeBtn.classList.remove('border-slate-800', 'text-slate-400');
+      }
+
+      renderFlows();
+      renderPrompts();
+    }
+
+    // --- 9. AUDIO GREETING ---
+    let isPlaying = false;
+    function toggleGreetingVoice() {
+      const audio = document.getElementById('lucy-audio');
+      const icon = document.getElementById('audio-icon');
+      const text = document.getElementById('audio-text');
+
+      if (!audio) return;
+
+      if (!isPlaying) {
+        audio.play().then(() => {
+          isPlaying = true;
+          if (icon) icon.innerText = '⏸️';
+          if (text) text.innerText = 'Đang nói: Nghe Lucy chào...';
+        }).catch(e => {
+          console.warn('Audio autoplay blocked:', e);
+        });
+      } else {
+        audio.pause();
+        audio.currentTime = 0;
+        isPlaying = false;
+        if (icon) icon.innerText = '▶️';
+        if (text) text.innerText = 'Bật giọng Lucy chào bạn';
+      }
+
+      audio.onended = () => {
+        isPlaying = false;
+        if (icon) icon.innerText = '▶️';
+        if (text) text.innerText = 'Bật lại giọng Lucy';
+      };
+    }
+
+    // --- 10. TOAST & COPY HELPERS ---
+    function showToast(msg = 'Đã sao chép!') {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-message');
+      if (!toast || !toastMsg) return;
+
+      toastMsg.innerText = msg;
+      toast.classList.remove('opacity-0', '-translate-y-5', 'pointer-events-none');
+      toast.classList.add('opacity-100', 'translate-y-0');
+
+      setTimeout(() => {
+        toast.classList.add('opacity-0', '-translate-y-5', 'pointer-events-none');
+        toast.classList.remove('opacity-100', 'translate-y-0');
+      }, 2500);
+    }
+
+    function copyText(text, successMsg = 'Đã sao chép vào bộ nhớ tạm! ✨') {
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(successMsg);
+      }).catch(() => {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        showToast(successMsg);
+      });
+    }
+
+    function copySiteLink() {
+      copyText(window.location.href, 'Đã sao chép Link Bio của Lucy! Hãy chia sẻ cho bạn bè nha! 💖');
+    }
+
+    function downloadGiftPack() {
+      copyText('https://tiktok-shadow-studio.pages.dev', 'Đã nhận bộ Ebook & Tài Liệu! Link tài liệu đã sao chép! 🎁');
+      alert('🎉 Cảm ơn bạn! Trọn bộ Ebook & 100+ Prompt đã sẵn sàng. Hãy lưu lại trang này trên trình duyệt để học mỗi ngày nhé!');
+    }
+
+    function escapeJs(str) {
+      return str.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '&quot;').replace(/\n/g, '\\n');
+    }
+
+    // Initialize Page
+    document.addEventListener('DOMContentLoaded', () => {
+      renderFlows();
+      renderPrompts();
+      renderRoadmap();
+      renderTools();
+      switchTab('flows');
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>

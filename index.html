@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi" class="dark scroll-smooth">
+<html lang="vi" class="scroll-smooth">
 <head>
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -62,11 +62,18 @@
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
+    /* Default Light Mode Styles */
     body {
-      background-color: #060911;
-      color: #F8FAFC;
+      background-color: #F8FAFC;
+      color: #0F172A;
       font-family: 'Plus Jakarta Sans', sans-serif;
       overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .dark body {
+      background-color: #060911;
+      color: #F8FAFC;
     }
     
     /* Custom scrollbar */
@@ -75,257 +82,356 @@
       height: 6px;
     }
     ::-webkit-scrollbar-track {
+      background: #F1F5F9;
+    }
+    .dark ::-webkit-scrollbar-track {
       background: #0B0F19;
     }
     ::-webkit-scrollbar-thumb {
-      background: #334155;
+      background: #CBD5E1;
       border-radius: 999px;
+    }
+    .dark ::-webkit-scrollbar-thumb {
+      background: #334155;
     }
     ::-webkit-scrollbar-thumb:hover {
       background: #EC4899;
     }
 
+    /* Card styling */
     .glass-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .glass-card:hover {
+      border-color: rgba(236, 72, 153, 0.4);
+      box-shadow: 0 12px 30px -4px rgba(236, 72, 153, 0.12), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
+    }
+
+    .dark .glass-card {
       background: rgba(15, 23, 42, 0.75);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.3);
     }
 
-    .glass-card:hover {
+    .dark .glass-card:hover {
       border-color: rgba(236, 72, 153, 0.3);
+      box-shadow: 0 12px 30px -4px rgba(236, 72, 153, 0.2);
     }
 
     .gradient-text {
+      background: linear-gradient(135deg, #EC4899 0%, #8B5CF6 50%, #0284C7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .dark .gradient-text {
       background: linear-gradient(135deg, #F472B6 0%, #C084FC 50%, #38BDF8 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .tag-badge {
-      transition: all 0.2s ease;
+    /* Code & Pre Box */
+    .prompt-box {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      color: #1E293B;
     }
-    .tag-badge:hover {
-      transform: translateY(-1px);
+    .dark .prompt-box {
+      background: #090D18;
+      border: 1px solid rgba(51, 65, 85, 0.6);
+      color: #FCE7F3;
+    }
+
+    /* Safe padding for bottom mobile bar */
+    .pb-safe {
+      padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
     }
   </style>
 </head>
-<body class="min-h-screen selection:bg-pink-500/30 selection:text-pink-200 relative pb-20">
+<body class="min-h-screen selection:bg-pink-500/20 selection:text-pink-600 dark:selection:bg-pink-500/30 dark:selection:text-pink-200 relative pb-28 md:pb-16">
 
   <!-- Ambient Background Glows -->
   <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
-    <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[600px] h-[500px] bg-gradient-to-b from-pink-500/20 via-purple-600/15 to-transparent rounded-full blur-[120px] animate-glow-pulse"></div>
-    <div class="absolute top-[35%] -left-40 w-[450px] h-[450px] bg-cyan-500/10 rounded-full blur-[140px]"></div>
-    <div class="absolute top-[65%] -right-40 w-[450px] h-[450px] bg-purple-500/10 rounded-full blur-[140px]"></div>
+    <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[550px] bg-gradient-to-b from-pink-300/30 via-purple-300/20 to-transparent dark:from-pink-500/20 dark:via-purple-600/15 dark:to-transparent rounded-full blur-[140px] animate-glow-pulse"></div>
+    <div class="absolute top-[35%] -left-40 w-[550px] h-[550px] bg-cyan-200/30 dark:bg-cyan-500/10 rounded-full blur-[150px]"></div>
+    <div class="absolute top-[65%] -right-40 w-[550px] h-[550px] bg-purple-200/25 dark:bg-purple-500/10 rounded-full blur-[150px]"></div>
   </div>
 
   <!-- Toast Notification -->
-  <div id="toast" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2.5 px-5 py-3 rounded-2xl bg-slate-900/90 border border-pink-500/50 text-white shadow-2xl backdrop-blur-xl transition-all duration-300 opacity-0 pointer-events-none -translate-y-5">
-    <div class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></div>
-    <span id="toast-message" class="text-xs md:text-sm font-semibold tracking-wide">Đã sao chép prompt! ✨</span>
+  <div id="toast" class="fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 transform -translate-y-5 opacity-0 pointer-events-none">
+    <div class="px-5 py-3 rounded-2xl bg-slate-900/95 dark:bg-white/95 text-white dark:text-slate-900 text-xs md:text-sm font-bold shadow-2xl flex items-center gap-2 border border-pink-500/40">
+      <span class="text-pink-400">✨</span>
+      <span id="toast-message">Đã sao chép!</span>
+    </div>
   </div>
 
-  <!-- Main Container (Optimal for Mobile Bio & Clean on Desktop) -->
-  <main class="relative z-10 max-w-3xl mx-auto px-4 pt-8 md:pt-12 space-y-6 md:space-y-8">
+  <!-- MAIN WIDESCREEN CONTAINER -->
+  <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 md:pt-10 space-y-6 md:space-y-8">
 
-    <!-- 🌟 HERO PROFILE SECTION (Link in Bio Header) -->
-    <header class="glass-card rounded-[32px] p-6 md:p-8 text-center relative overflow-hidden shadow-2xl shadow-purple-950/20">
-      <!-- Glow Accent Line -->
-      <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-pink-500 to-transparent"></div>
+    <!-- 🌸 WIDESCREEN HERO HEADER -->
+    <header class="glass-card rounded-[32px] p-6 md:p-8 relative overflow-hidden">
+      <!-- Background subtle gradient accent -->
+      <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-pink-500/10 via-purple-500/5 to-transparent rounded-full blur-3xl pointer-events-none"></div>
 
-      <!-- Avatar with Glowing Ring -->
-      <div class="relative inline-block mb-4">
-        <div class="w-24 h-24 md:w-28 md:h-28 rounded-full p-1 bg-gradient-to-tr from-pink-500 via-purple-500 to-cyan-400 shadow-xl shadow-pink-500/25 animate-float mx-auto">
-          <img src="/assets/avatar.png" alt="Lucy AI Avatar" class="w-full h-full rounded-full object-cover bg-slate-950" />
+      <!-- Theme Switcher & Actions Top Bar -->
+      <div class="flex items-center justify-between gap-3 mb-6 pb-4 border-b border-slate-100 dark:border-slate-800">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Lucy AI Studio Live Hub</span>
         </div>
-        <!-- Status Indicator -->
-        <div class="absolute bottom-1 right-2 flex items-center gap-1 px-2 py-0.5 rounded-full bg-slate-900/95 border border-emerald-500/50 text-[10px] font-bold text-emerald-400 shadow-lg">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span>ONLINE</span>
+        
+        <div class="flex items-center gap-2">
+          <!-- Light / Dark Mode Toggle -->
+          <button onclick="toggleTheme()" id="theme-btn" class="px-3.5 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-xs font-bold flex items-center gap-2 text-slate-700 dark:text-slate-200 transition shadow-sm">
+            <span id="theme-btn-icon">🌞</span>
+            <span id="theme-btn-text" class="hidden sm:inline">Chế độ sáng</span>
+          </button>
+          
+          <button onclick="copySiteLink()" class="px-3.5 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-xs font-bold flex items-center gap-1.5 text-slate-700 dark:text-slate-200 transition shadow-sm">
+            <i data-lucide="share-2" class="w-3.5 h-3.5 text-cyan-500"></i>
+            <span class="hidden sm:inline">Chia Sẻ</span>
+          </button>
         </div>
       </div>
 
-      <!-- Title & Handle -->
-      <div class="space-y-1.5">
-        <div class="flex items-center justify-center gap-2">
-          <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight text-white">Lucy AI Flow</h1>
-          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-blue-500 text-white text-[11px]" title="Xác minh chính chủ">✓</span>
-        </div>
-        <p class="text-xs md:text-sm font-bold uppercase tracking-widest gradient-text">
-          Cẩm Nang & Thư Viện Prompt AI Cho Người Mới
-        </p>
-      </div>
+      <!-- Main Hero 2-Column Responsive Layout -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        
+        <!-- Left: Profile, Avatar & Story (Col 7) -->
+        <div class="lg:col-span-7 space-y-4 text-center lg:text-left">
+          <div class="flex flex-col sm:flex-row items-center gap-5">
+            <!-- Avatar with Glowing Neon Ring -->
+            <div class="relative shrink-0">
+              <div class="w-24 h-24 md:w-28 md:h-28 rounded-full p-1 bg-gradient-to-tr from-pink-500 via-purple-500 to-cyan-400 shadow-xl shadow-pink-500/20 animate-float">
+                <img src="/assets/avatar.png" alt="Lucy AI Avatar" class="w-full h-full rounded-full object-cover bg-slate-900" />
+              </div>
+              <!-- Status Indicator -->
+              <div class="absolute bottom-1 right-1 flex items-center gap-1 px-2 py-0.5 rounded-full bg-white dark:bg-slate-900 border border-emerald-500/50 text-[10px] font-bold text-emerald-600 dark:text-emerald-400 shadow-md">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>ONLINE</span>
+              </div>
+            </div>
 
-      <!-- Bio Description -->
-      <p class="text-xs md:text-sm text-slate-300 max-w-lg mx-auto mt-3 leading-relaxed">
-        Chào bạn! Mình là <strong class="text-pink-300 font-bold">Lucy</strong> 🌸. Nơi đây tổng hợp các <span class="text-purple-300 font-semibold">quy trình tư duy AI thực chiến</span>, bộ prompt sao chép dùng liền và lộ trình 30 ngày giúp bạn làm chủ AI dễ dàng nhất!
-      </p>
+            <!-- Title & Handle -->
+            <div class="space-y-1">
+              <div class="flex items-center justify-center lg:justify-start gap-2">
+                <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">Lucy AI Flow</h1>
+                <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-blue-500 text-white text-[11px]" title="Xác minh chính chủ">✓</span>
+              </div>
+              <p class="text-xs md:text-sm font-bold uppercase tracking-widest gradient-text">
+                Cẩm Nang & Thư Viện Prompt AI Cho Người Mới
+              </p>
+              
+              <!-- Audio Voice Greeting Player -->
+              <div class="pt-1">
+                <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-xl bg-pink-50/80 dark:bg-slate-900/90 border border-pink-200 dark:border-pink-500/30 text-xs font-semibold text-pink-700 dark:text-pink-200 shadow-sm">
+                  <audio id="lucy-audio" src="/assets/intro_voice.mp3" preload="metadata"></audio>
+                  <button id="lucy-audio-btn" onclick="toggleGreetingVoice()" class="flex items-center gap-2 text-pink-600 dark:text-pink-300 hover:text-pink-800 dark:hover:text-white transition">
+                    <span id="audio-icon" class="text-sm">▶️</span>
+                    <span id="audio-text">Bật giọng Lucy chào bạn</span>
+                  </button>
+                  <span class="text-slate-300 dark:text-slate-600">|</span>
+                  <span class="text-[11px] text-slate-500 dark:text-slate-400">Giọng nói tự nhiên 🎙️</span>
+                </div>
+              </div>
+            </div>
+          </div>
 
-      <!-- Audio Voice Greeting Player -->
-      <div class="mt-4 inline-flex items-center gap-2.5 px-4 py-2 rounded-2xl bg-slate-900/90 border border-pink-500/30 text-xs font-semibold text-pink-200 shadow-inner">
-        <audio id="lucy-audio" src="/assets/intro_voice.mp3" preload="metadata"></audio>
-        <button id="lucy-audio-btn" onclick="toggleGreetingVoice()" class="flex items-center gap-2 text-pink-300 hover:text-white transition">
-          <span id="audio-icon" class="text-sm">▶️</span>
-          <span id="audio-text">Bật giọng Lucy chào bạn</span>
-        </button>
-        <span class="text-slate-500">|</span>
-        <span class="text-[11px] text-slate-400">Giọng nói AI tự nhiên 🎙️</span>
-      </div>
+          <!-- Bio Description -->
+          <p class="text-xs md:text-sm text-slate-600 dark:text-slate-300 leading-relaxed max-w-xl mx-auto lg:mx-0">
+            Chào bạn! Mình là <strong class="text-pink-600 dark:text-pink-300 font-bold">Lucy</strong> 🌸. Nơi đây tổng hợp các <span class="text-purple-600 dark:text-purple-300 font-semibold">quy trình tư duy AI thực chiến</span>, bộ prompt sao chép dùng liền và lộ trình 30 ngày giúp bạn làm chủ AI dễ dàng nhất!
+          </p>
 
-      <!-- Social Links (Link-in-Bio buttons) -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mt-5">
-        <a href="https://tiktok.com/@lucyaiflow" target="_blank" rel="noopener" class="py-2.5 px-3 rounded-2xl bg-slate-900/80 hover:bg-pink-950/40 border border-slate-800 hover:border-pink-500/40 text-slate-200 text-xs font-bold flex items-center justify-center gap-2 transition group shadow">
-          <span class="text-base group-hover:scale-110 transition">🎵</span>
-          <span>TikTok AI</span>
-        </a>
-        <a href="https://youtube.com" target="_blank" rel="noopener" class="py-2.5 px-3 rounded-2xl bg-slate-900/80 hover:bg-red-950/40 border border-slate-800 hover:border-red-500/40 text-slate-200 text-xs font-bold flex items-center justify-center gap-2 transition group shadow">
-          <span class="text-base group-hover:scale-110 transition">▶️</span>
-          <span>YouTube</span>
-        </a>
-        <a href="#gift" onclick="switchTab('gift')" class="py-2.5 px-3 rounded-2xl bg-gradient-to-r from-pink-500/20 to-purple-500/20 hover:from-pink-500/30 hover:to-purple-500/30 border border-pink-500/40 text-pink-200 text-xs font-bold flex items-center justify-center gap-2 transition group shadow">
-          <span class="text-base group-hover:scale-110 transition">🎁</span>
-          <span>Ebook 0đ</span>
-        </a>
-        <a href="javascript:void(0)" onclick="copySiteLink()" class="py-2.5 px-3 rounded-2xl bg-slate-900/80 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 text-slate-200 text-xs font-bold flex items-center justify-center gap-2 transition group shadow">
-          <i data-lucide="share-2" class="w-3.5 h-3.5 text-cyan-400"></i>
-          <span>Chia Sẻ Link</span>
-        </a>
-      </div>
+          <!-- Social Links Buttons -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-1">
+            <a href="https://tiktok.com/@lucyaiflow" target="_blank" rel="noopener" class="py-2.5 px-3 rounded-xl bg-slate-50 dark:bg-slate-900/80 hover:bg-pink-50 dark:hover:bg-pink-950/40 border border-slate-200 dark:border-slate-800 hover:border-pink-400 dark:hover:border-pink-500/40 text-slate-800 dark:text-slate-200 text-xs font-bold flex items-center justify-center gap-2 transition group shadow-sm">
+              <span class="text-base group-hover:scale-110 transition">🎵</span>
+              <span>TikTok AI</span>
+            </a>
+            <a href="https://youtube.com" target="_blank" rel="noopener" class="py-2.5 px-3 rounded-xl bg-slate-50 dark:bg-slate-900/80 hover:bg-red-50 dark:hover:bg-red-950/40 border border-slate-200 dark:border-slate-800 hover:border-red-400 dark:hover:border-red-500/40 text-slate-800 dark:text-slate-200 text-xs font-bold flex items-center justify-center gap-2 transition group shadow-sm">
+              <span class="text-base group-hover:scale-110 transition">▶️</span>
+              <span>YouTube</span>
+            </a>
+            <a href="#gift" onclick="switchTab('gift')" class="py-2.5 px-3 rounded-xl bg-gradient-to-r from-pink-500/10 to-purple-500/10 hover:from-pink-500/20 hover:to-purple-500/20 border border-pink-300 dark:border-pink-500/40 text-pink-600 dark:text-pink-200 text-xs font-bold flex items-center justify-center gap-2 transition group shadow-sm">
+              <span class="text-base group-hover:scale-110 transition">🎁</span>
+              <span>Ebook 0đ</span>
+            </a>
+            <a href="https://tiktok-shadow-studio.pages.dev" target="_blank" rel="noopener" class="py-2.5 px-3 rounded-xl bg-slate-50 dark:bg-slate-900/80 hover:bg-cyan-50 dark:hover:bg-cyan-950/40 border border-slate-200 dark:border-slate-800 hover:border-cyan-400 dark:hover:border-cyan-500/40 text-slate-800 dark:text-slate-200 text-xs font-bold flex items-center justify-center gap-2 transition group shadow-sm">
+              <span class="text-base group-hover:scale-110 transition">🎬</span>
+              <span>Studio Video</span>
+            </a>
+          </div>
+        </div>
 
-      <!-- Quick Metrics Bar -->
-      <div class="grid grid-cols-4 gap-2 mt-6 pt-5 border-t border-slate-800/80 text-center">
-        <div>
-          <div class="text-lg md:text-xl font-black text-pink-400">100+</div>
-          <div class="text-[10px] md:text-xs text-slate-400 font-medium">Prompt Mẫu</div>
+        <!-- Right: Metrics Dashboard Card (Col 5) -->
+        <div class="lg:col-span-5 space-y-4">
+          <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 space-y-4">
+            <div class="flex items-center justify-between">
+              <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Chỉ Số Tài Nguyên Hub</h2>
+              <span class="px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 text-[10px] font-extrabold border border-emerald-300 dark:border-emerald-600/30">Cập nhật 2026</span>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div class="p-3.5 rounded-xl bg-white dark:bg-slate-950 border border-slate-200/80 dark:border-slate-800 text-center shadow-sm">
+                <div class="text-2xl font-black text-pink-600 dark:text-pink-400">100+</div>
+                <div class="text-[11px] text-slate-500 dark:text-slate-400 font-bold mt-0.5">Prompt Mẫu Dùng Liền</div>
+              </div>
+              <div class="p-3.5 rounded-xl bg-white dark:bg-slate-950 border border-slate-200/80 dark:border-slate-800 text-center shadow-sm">
+                <div class="text-2xl font-black text-purple-600 dark:text-purple-400">20+</div>
+                <div class="text-[11px] text-slate-500 dark:text-slate-400 font-bold mt-0.5">Sơ Đồ Flow & Tool UI</div>
+              </div>
+              <div class="p-3.5 rounded-xl bg-white dark:bg-slate-950 border border-slate-200/80 dark:border-slate-800 text-center shadow-sm">
+                <div class="text-2xl font-black text-cyan-600 dark:text-cyan-400">30 Ngày</div>
+                <div class="text-[11px] text-slate-500 dark:text-slate-400 font-bold mt-0.5">Lộ Trình Học Chi Tiết</div>
+              </div>
+              <div class="p-3.5 rounded-xl bg-white dark:bg-slate-950 border border-slate-200/80 dark:border-slate-800 text-center shadow-sm">
+                <div class="text-2xl font-black text-emerald-600 dark:text-emerald-400">100%</div>
+                <div class="text-[11px] text-slate-500 dark:text-slate-400 font-bold mt-0.5">Miễn Phí Cộng Đồng</div>
+              </div>
+            </div>
+
+            <!-- Spotlight Card -->
+            <div class="p-3 rounded-xl bg-gradient-to-r from-pink-500/10 via-purple-500/10 to-cyan-500/10 border border-pink-200 dark:border-pink-500/30 flex items-center justify-between gap-3">
+              <div class="text-xs">
+                <span class="font-extrabold text-slate-900 dark:text-white">🌟 Bắt Đầu Ngay:</span>
+                <span class="text-slate-600 dark:text-slate-300 ml-1">Xem video lộ trình 30 ngày</span>
+              </div>
+              <button onclick="switchTab('roadmap')" class="px-3 py-1.5 rounded-lg bg-pink-600 hover:bg-pink-700 text-white text-[11px] font-bold shrink-0 transition shadow">
+                Khám phá →
+              </button>
+            </div>
+          </div>
         </div>
-        <div>
-          <div class="text-lg md:text-xl font-black text-purple-400">10+</div>
-          <div class="text-[10px] md:text-xs text-slate-400 font-medium">Sơ Đồ Flow</div>
-        </div>
-        <div>
-          <div class="text-lg md:text-xl font-black text-cyan-400">30 Ngày</div>
-          <div class="text-[10px] md:text-xs text-slate-400 font-medium">Lộ Trình Học</div>
-        </div>
-        <div>
-          <div class="text-lg md:text-xl font-black text-emerald-400">100%</div>
-          <div class="text-[10px] md:text-xs text-slate-400 font-medium">Miễn Phí</div>
-        </div>
+
       </div>
     </header>
 
 
-    <!-- 🧭 INTERACTIVE NAVIGATION TABS -->
-    <nav class="sticky top-3 z-30 p-1.5 rounded-2xl glass-card border border-slate-700/60 shadow-xl flex items-center gap-1 overflow-x-auto no-scrollbar">
-      <button onclick="switchTab('flows')" id="tab-btn-flows" class="nav-tab active-tab flex-1 min-w-[95px] py-2.5 px-3 rounded-xl text-xs font-extrabold flex items-center justify-center gap-1.5 transition">
-        <span>🧩</span>
-        <span>Flow AI</span>
-      </button>
-      <button onclick="switchTab('prompts')" id="tab-btn-prompts" class="nav-tab flex-1 min-w-[95px] py-2.5 px-3 rounded-xl text-xs font-extrabold flex items-center justify-center gap-1.5 transition">
-        <span>💡</span>
-        <span>Prompt Mẫu</span>
-      </button>
-      <button onclick="switchTab('roadmap')" id="tab-btn-roadmap" class="nav-tab flex-1 min-w-[95px] py-2.5 px-3 rounded-xl text-xs font-extrabold flex items-center justify-center gap-1.5 transition">
-        <span>🗺️</span>
-        <span>Lộ Trình</span>
-      </button>
-      <button onclick="switchTab('tools')" id="tab-btn-tools" class="nav-tab flex-1 min-w-[95px] py-2.5 px-3 rounded-xl text-xs font-extrabold flex items-center justify-center gap-1.5 transition">
-        <span>🛠️</span>
-        <span>Công Cụ</span>
-      </button>
-      <button onclick="switchTab('gift')" id="tab-btn-gift" class="nav-tab flex-1 min-w-[95px] py-2.5 px-3 rounded-xl text-xs font-extrabold flex items-center justify-center gap-1.5 transition">
-        <span>🎁</span>
-        <span>Quà Tặng</span>
-      </button>
+    <!-- 🧭 DESKTOP STICKY NAVIGATION TABS (Hidden on Mobile) -->
+    <nav class="hidden md:flex sticky top-4 z-30 p-2 rounded-2xl glass-card border border-slate-200 dark:border-slate-700/60 shadow-xl items-center justify-between gap-2">
+      <div class="flex items-center gap-1.5 flex-1">
+        <button onclick="switchTab('flows')" id="tab-btn-flows" class="nav-tab active-tab py-2.5 px-4 rounded-xl text-xs font-extrabold flex items-center gap-2 transition">
+          <span class="text-sm">🧩</span>
+          <span>Flow AI</span>
+        </button>
+        <button onclick="switchTab('prompts')" id="tab-btn-prompts" class="nav-tab py-2.5 px-4 rounded-xl text-xs font-extrabold flex items-center gap-2 transition text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">
+          <span class="text-sm">💡</span>
+          <span>Prompt Mẫu</span>
+        </button>
+        <button onclick="switchTab('roadmap')" id="tab-btn-roadmap" class="nav-tab py-2.5 px-4 rounded-xl text-xs font-extrabold flex items-center gap-2 transition text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">
+          <span class="text-sm">🗺️</span>
+          <span>Lộ Trình 30 Ngày</span>
+        </button>
+        <button onclick="switchTab('tools')" id="tab-btn-tools" class="nav-tab py-2.5 px-4 rounded-xl text-xs font-extrabold flex items-center gap-2 transition text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">
+          <span class="text-sm">🛠️</span>
+          <span>Bảng Công Cụ AI</span>
+        </button>
+        <button onclick="switchTab('gift')" id="tab-btn-gift" class="nav-tab py-2.5 px-4 rounded-xl text-xs font-extrabold flex items-center gap-2 transition text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">
+          <span class="text-sm">🎁</span>
+          <span>Quà Tặng Ebook</span>
+        </button>
+      </div>
+      
+      <div class="hidden lg:flex items-center gap-2 text-xs font-bold text-slate-500 dark:text-slate-400 px-3">
+        <span>Kênh Lucy AI</span>
+      </div>
     </nav>
 
 
-    <!-- 🔍 SEARCH & CATEGORY FILTER BAR (Applied to Prompts & Flows) -->
-    <div class="space-y-3">
+    <!-- 🔍 SEARCH & CATEGORY FILTER BAR -->
+    <div class="glass-card rounded-2xl p-4 md:p-5 space-y-3">
       <div class="relative">
         <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2"></i>
         <input 
           type="text" 
           id="search-input" 
           oninput="handleSearch()"
-          placeholder="Tìm kiếm: chatgpt, email, slide, vẽ ảnh, pdf, chốt đơn..." 
-          class="w-full pl-11 pr-10 py-3.5 rounded-2xl bg-slate-900/90 border border-slate-700/70 focus:border-pink-500 focus:ring-2 focus:ring-pink-500/20 text-xs md:text-sm text-slate-100 placeholder-slate-500 outline-none transition"
+          placeholder="Tìm kiếm nhanh: claude 5.5, canva bulk, gamma, midjourney, chatgpt, email, slide, vẽ ảnh, pdf, chốt đơn..." 
+          class="w-full pl-11 pr-10 py-3 rounded-xl bg-slate-50 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-700 focus:border-pink-500 focus:bg-white dark:focus:bg-slate-900 focus:ring-2 focus:ring-pink-500/20 text-xs md:text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 outline-none transition"
         />
-        <button id="clear-search-btn" onclick="clearSearch()" class="hidden absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs">
+        <button id="clear-search-btn" onclick="clearSearch()" class="hidden absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-800 dark:hover:text-white text-xs">
           ✕
         </button>
       </div>
 
       <!-- Category Filter Pills -->
       <div class="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar text-[11px] font-bold">
-        <button onclick="filterCategory('all')" class="cat-pill active-cat px-3 py-1.5 rounded-xl border transition shrink-0">
-          🔥 Tất Cả
+        <button onclick="filterCategory('all')" class="cat-pill active-cat px-3.5 py-1.5 rounded-xl border border-pink-400 bg-pink-50 dark:bg-pink-500/20 text-pink-700 dark:text-pink-300 transition shrink-0 shadow-sm">
+          🌟 Tất Cả
         </button>
-        <button onclick="filterCategory('prompting')" class="cat-pill px-3 py-1.5 rounded-xl border transition shrink-0">
-          ✨ Ra Lệnh Chuẩn
+        <button onclick="filterCategory('prompting')" class="cat-pill px-3.5 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:border-pink-400 transition shrink-0">
+          💡 Viết Prompt Chuẩn
         </button>
-        <button onclick="filterCategory('office')" class="cat-pill px-3 py-1.5 rounded-xl border transition shrink-0">
-          📊 Văn Phòng & Slide
+        <button onclick="filterCategory('office')" class="cat-pill px-3.5 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:border-pink-400 transition shrink-0">
+          📑 Văn Phòng & Slide
         </button>
-        <button onclick="filterCategory('creative')" class="cat-pill px-3 py-1.5 rounded-xl border transition shrink-0">
-          🎨 Ảnh & Video 3D
+        <button onclick="filterCategory('media')" class="cat-pill px-3.5 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:border-pink-400 transition shrink-0">
+          🎨 Ảnh & Video Triệu View
         </button>
-        <button onclick="filterCategory('business')" class="cat-pill px-3 py-1.5 rounded-xl border transition shrink-0">
-          💼 Bán Hàng & Chăm Sóc
+        <button onclick="filterCategory('automation')" class="cat-pill px-3.5 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:border-pink-400 transition shrink-0">
+          🤖 Tự Động Hóa 24/7
         </button>
       </div>
     </div>
 
 
-    <!-- ========================================== -->
-    <!-- TAB 1: 🧩 CÁC FLOW AI TƯ DUY TRỰC QUAN -->
-    <!-- ========================================== -->
+    <!-- 🗂️ TAB CONTENTS CONTAINER -->
+
+    <!-- TAB 1: FLOWS AI (2 COLUMNS ON LAPTOP) -->
     <section id="tab-content-flows" class="tab-pane space-y-6">
       <div class="flex items-center justify-between">
         <div>
-          <h2 class="text-lg md:text-xl font-black text-white flex items-center gap-2">
+          <h2 class="text-xl md:text-2xl font-black text-slate-900 dark:text-white flex items-center gap-2">
             <span>🧩</span>
-            <span>Các Sơ Đồ Quy Trình AI (AI Flowcharts)</span>
+            <span>Quy Trình Flow AI & Thao Tác Thực Chiến</span>
           </h2>
-          <p class="text-xs text-slate-400 mt-0.5">Sơ đồ logic 4 bước giúp người mới không bị ngợp và làm đúng ngay lần đầu</p>
+          <p class="text-xs md:text-sm text-slate-500 dark:text-slate-400 mt-1">Các sơ đồ 4 bước chi tiết kèm lệnh Prompt và hướng dẫn giao diện từng công cụ.</p>
         </div>
+        <span class="text-xs font-bold px-3 py-1 rounded-full bg-pink-100 dark:bg-pink-950/60 text-pink-700 dark:text-pink-300 border border-pink-300 dark:border-pink-600/30 shrink-0">
+          Bản quyền Lucy AI
+        </span>
       </div>
 
-      <div id="flows-list" class="space-y-4">
-        <!-- Flow Cards dynamically rendered from JavaScript -->
+      <!-- Flows Grid: 2 Columns on Laptop/Desktop -->
+      <div id="flows-list" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Rendered by JS -->
       </div>
     </section>
 
 
-    <!-- ========================================== -->
-    <!-- TAB 2: 💡 THƯ VIỆN PROMPT MẪU THỰC CHIẾN -->
-    <!-- ========================================== -->
+    <!-- TAB 2: PROMPTS MẪU (3 COLUMNS ON LAPTOP) -->
     <section id="tab-content-prompts" class="tab-pane hidden space-y-6">
       <div class="flex items-center justify-between">
         <div>
-          <h2 class="text-lg md:text-xl font-black text-white flex items-center gap-2">
+          <h2 class="text-xl md:text-2xl font-black text-slate-900 dark:text-white flex items-center gap-2">
             <span>💡</span>
-            <span>Kho Prompt Mẫu Thực Chiến (Copy 1-Click)</span>
+            <span>Thư Viện Prompt Mẫu Thực Chiến 1-Click</span>
           </h2>
-          <p class="text-xs text-slate-400 mt-0.5">Chỉ cần bấm 'Sao Chép', dán vào ChatGPT hoặc Claude là có ngay kết quả xịn</p>
+          <p class="text-xs md:text-sm text-slate-500 dark:text-slate-400 mt-1">Chỉ cần bấm nút "Sao Chép" là có ngay prompt chuẩn dùng cho ChatGPT 4o, Claude 5.5, Gemini 2.5.</p>
         </div>
       </div>
 
-      <div id="prompts-list" class="space-y-4">
-        <!-- Prompts dynamically rendered from JavaScript -->
+      <!-- Prompts Grid: 3 Columns on Laptop/Desktop -->
+      <div id="prompts-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Rendered by JS -->
       </div>
     </section>
 
 
-    <!-- ========================================== -->
-    <!-- TAB 3: 🗺️ LỘ TRÌNH 30 NGÀY CHO NGƯỜI MỚI -->
-    <!-- ========================================== -->
-        <section id="tab-content-roadmap" class="tab-pane hidden space-y-6">
+    <!-- TAB 3: LỘ TRÌNH 30 NGÀY -->
+    <section id="tab-content-roadmap" class="tab-pane hidden space-y-6">
       <!-- FEATURED VIDEO SHOWCASE: LỘ TRÌNH 30 NGÀY MASTER AI -->
-      <div class="glass-card rounded-3xl p-5 md:p-6 border border-pink-500/40 bg-gradient-to-br from-pink-950/40 via-purple-950/30 to-slate-950/80 shadow-2xl space-y-5">
-        <div class="flex flex-col lg:flex-row gap-6 items-center">
+      <div class="glass-card rounded-[32px] p-6 md:p-8 border-2 border-pink-400/40 bg-gradient-to-br from-pink-50/60 via-purple-50/40 to-white dark:from-pink-950/40 dark:via-purple-950/30 dark:to-slate-950/80 shadow-xl space-y-6">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           
-          <!-- Video Preview Player (Vertical 9:16) -->
-          <div class="w-full sm:w-[260px] shrink-0 mx-auto">
+          <!-- Video Preview Player (Vertical 9:16) (Col 4) -->
+          <div class="lg:col-span-4 w-full sm:w-[260px] lg:w-full shrink-0 mx-auto">
             <div class="relative rounded-2xl overflow-hidden border-2 border-pink-500/50 shadow-2xl bg-black aspect-[9/16] group">
               <video 
                 id="roadmap-video-player"
@@ -335,187 +441,248 @@
                 controls
                 class="w-full h-full object-cover">
               </video>
-              <div class="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-full bg-pink-500/80 backdrop-blur-md text-[10px] font-black text-white pointer-events-none">
-                🎬 Video TikTok Độc Quyền
+              <div class="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full bg-pink-600/90 backdrop-blur-md text-[10px] font-black text-white pointer-events-none">
+                🎬 Video Lộ Trình Độc Quyền
               </div>
             </div>
             <!-- Download Button -->
-            <a href="assets/video_roadmap_30days.mp4" download="lucy_ai_lo_trinh_30_ngay.mp4" class="mt-3 w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-400 hover:to-purple-500 text-white text-xs font-bold flex items-center justify-center gap-2 transition shadow-lg">
+            <a href="assets/video_roadmap_30days.mp4" download="lucy_ai_lo_trinh_30_ngay.mp4" class="mt-3 w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white text-xs font-bold flex items-center justify-center gap-2 transition shadow-md">
               <span>📥</span>
-              <span>Tải Video Lộ Trình MP4 (589KB)</span>
+              <span>Tải Video MP4 Về Máy (589KB)</span>
             </a>
           </div>
 
-          <!-- Video Details & Audio Voiceover Box -->
-          <div class="flex-1 space-y-4">
+          <!-- Video Details & Audio Voiceover Box (Col 8) -->
+          <div class="lg:col-span-8 space-y-4">
             <div class="flex flex-wrap items-center gap-2">
-              <span class="px-3 py-1 rounded-full bg-pink-500/20 text-pink-300 border border-pink-500/40 text-xs font-bold">🌸 Tập 10 Kênh Lucy</span>
-              <span class="px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/40 text-xs font-bold">🗺️ 4 Tuần Thực Chiến</span>
-              <span class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-xs font-bold">✓ Miễn Phí 100%</span>
+              <span class="px-3 py-1 rounded-full bg-pink-100 dark:bg-pink-500/20 text-pink-700 dark:text-pink-300 border border-pink-300 dark:border-pink-500/40 text-xs font-bold">🌸 Tập 10 Kênh Lucy</span>
+              <span class="px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 border border-purple-300 dark:border-purple-500/40 text-xs font-bold">🗺️ 4 Tuần Thực Chiến</span>
+              <span class="px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-500/40 text-xs font-bold">✓ Miễn Phí 100%</span>
             </div>
 
             <div>
-              <h3 class="text-lg md:text-xl font-black text-white">
-                Video Hướng Dẫn: Lộ Trình 30 Ngày Từ Người Mù Công Nghệ Thành Master AI
+              <h3 class="text-xl md:text-2xl font-black text-slate-900 dark:text-white leading-tight">
+                Video Hướng Dẫn: Lộ Trình 30 Ngày Từ Người Mới Thành Thạo AI
               </h3>
-              <p class="text-xs text-slate-300 mt-1 leading-relaxed">
+              <p class="text-xs md:text-sm text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">
                 Xem clip giải thích ngắn 30s của Lucy để nắm ngay tư duy 4 tuần học đúng trọng tâm, không bị lan man và bắt đầu ứng dụng tạo ra thu nhập thực tế.
               </p>
             </div>
 
             <!-- Dialogue Quote Box -->
-            <div class="p-3.5 rounded-2xl bg-slate-900/80 border border-pink-500/30 text-xs text-pink-100 italic leading-relaxed">
+            <div class="p-4 rounded-2xl bg-white/90 dark:bg-slate-900/80 border border-pink-200 dark:border-pink-500/30 text-xs md:text-sm text-slate-700 dark:text-pink-100 italic leading-relaxed shadow-sm">
               "Đừng học AI lan man nữa! Lưu ngay lộ trình 4 tuần chuẩn đét này cho người mới nè: Tuần 1 học viết prompt đúng cách với ChatGPT và Claude; Tuần 2 ứng dụng làm nhanh công việc văn phòng; Tuần 3 học tạo hình ảnh & video ngắn; Tuần 4 tự động hóa quy trình để bắt đầu kiếm tiền online..."
             </div>
 
             <!-- Voiceover Audio Player -->
-            <div class="p-3 rounded-2xl bg-slate-950/80 border border-purple-500/40 flex items-center justify-between gap-3">
+            <div class="p-3.5 rounded-2xl bg-white dark:bg-slate-950/80 border border-purple-200 dark:border-purple-500/40 flex items-center justify-between gap-3 shadow-sm">
               <div class="flex items-center gap-3">
                 <button onclick="toggleRoadmapAudio()" id="btn-play-roadmap-audio" class="w-10 h-10 rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 hover:scale-105 transition flex items-center justify-center text-white text-base shadow">
                   ▶️
                 </button>
                 <div>
-                  <div class="text-xs font-bold text-white flex items-center gap-1.5">
-                    <span>Giọng Đọc Lucy Tự Nhiên</span>
-                    <span id="roadmap-audio-wave" class="hidden text-[10px] text-amber-300 font-normal">🎙️ Đang phát... ılıll</span>
-                  </div>
-                  <div class="text-[10px] text-slate-400">Audio lồng tiếng 30 giây Hoài My chuẩn TikTok</div>
+                  <div class="text-xs font-extrabold text-slate-900 dark:text-white">Nghe Giọng Lồng Tiếng Lucy (Hoài My Neural)</div>
+                  <div class="text-[11px] text-slate-500 dark:text-slate-400">Thời lượng: 00:30 • Tốc độ giọng: +8% tự nhiên</div>
                 </div>
               </div>
               <audio id="roadmap-audio-player" src="assets/audio_roadmap_30days.mp3" preload="metadata"></audio>
+              <div id="roadmap-audio-wave" class="hidden text-pink-500 text-xs font-mono animate-pulse">
+                ılılılllılı
+              </div>
             </div>
 
-            <!-- 4 Quick Highlight Cards -->
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1 text-[11px]">
-              <div class="p-2.5 rounded-xl bg-pink-950/40 border border-pink-500/30 text-center">
-                <div class="font-extrabold text-pink-300">Tuần 1</div>
-                <div class="text-[10px] text-slate-300 mt-0.5">Master Prompting</div>
+            <!-- Key Takeaways 4 Weeks Checklist Summary -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1 text-center">
+              <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                <div class="text-[10px] uppercase font-bold text-pink-600 dark:text-pink-400">Tuần 1</div>
+                <div class="text-xs font-black text-slate-800 dark:text-slate-200 mt-0.5">Prompt Cốt Lõi</div>
               </div>
-              <div class="p-2.5 rounded-xl bg-purple-950/40 border border-purple-500/30 text-center">
-                <div class="font-extrabold text-purple-300">Tuần 2</div>
-                <div class="text-[10px] text-slate-300 mt-0.5">Việc Văn Phòng</div>
+              <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                <div class="text-[10px] uppercase font-bold text-purple-600 dark:text-purple-400">Tuần 2</div>
+                <div class="text-xs font-black text-slate-800 dark:text-slate-200 mt-0.5">Văn Phòng & Slide</div>
               </div>
-              <div class="p-2.5 rounded-xl bg-sky-950/40 border border-sky-500/30 text-center">
-                <div class="font-extrabold text-sky-300">Tuần 3</div>
-                <div class="text-[10px] text-slate-300 mt-0.5">Tạo Ảnh & Video</div>
+              <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                <div class="text-[10px] uppercase font-bold text-cyan-600 dark:text-cyan-400">Tuần 3</div>
+                <div class="text-xs font-black text-slate-800 dark:text-slate-200 mt-0.5">Ảnh & Clip 9:16</div>
               </div>
-              <div class="p-2.5 rounded-xl bg-emerald-950/40 border border-emerald-500/30 text-center">
-                <div class="font-extrabold text-emerald-300">Tuần 4</div>
-                <div class="text-[10px] text-slate-300 mt-0.5">Kiếm Tiền Online</div>
+              <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                <div class="text-[10px] uppercase font-bold text-emerald-600 dark:text-emerald-400">Tuần 4</div>
+                <div class="text-xs font-black text-slate-800 dark:text-slate-200 mt-0.5">Tự Động Hóa 24/7</div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="glass-card rounded-3xl p-5 md:p-6 space-y-4 border border-purple-500/30">
+
+      <!-- Roadmap Header & Progress Bar -->
+      <div class="glass-card rounded-2xl p-5 md:p-6 space-y-4">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
-            <h2 class="text-lg font-black text-white flex items-center gap-2">
+            <h3 class="text-lg md:text-xl font-black text-slate-900 dark:text-white flex items-center gap-2">
               <span>🗺️</span>
-              <span>Lộ Trình 30 Ngày Từ Số 0 Thành Master AI</span>
-            </h2>
-            <p class="text-xs text-slate-400 mt-0.5">Mỗi ngày 15 phút, tích vào ô để theo dõi tiến độ học tập của bạn</p>
+              <span>Chi Tiết 30 Ngày Học AI Từng Bước</span>
+            </h3>
+            <p class="text-xs md:text-sm text-slate-500 dark:text-slate-400 mt-1">Đánh dấu tích vào từng ngày khi bạn hoàn thành bài học để theo dõi tiến độ!</p>
           </div>
-          <!-- Live Progress Percentage -->
-          <div class="px-4 py-2 rounded-2xl bg-purple-950/60 border border-purple-500/40 text-center shrink-0">
-            <div id="roadmap-pct" class="text-base font-black text-purple-300">0%</div>
-            <div class="text-[9px] uppercase tracking-wider text-slate-400 font-bold">Hoàn Thành</div>
+          <div class="text-right">
+            <span id="roadmap-progress-text" class="text-xs font-extrabold text-pink-600 dark:text-pink-400">0/30 Ngày (0%)</span>
           </div>
         </div>
 
-        <!-- Progress Bar -->
-        <div class="w-full bg-slate-950 h-2.5 rounded-full overflow-hidden border border-slate-800">
-          <div id="roadmap-bar" class="h-full bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-400 rounded-full transition-all duration-500 w-0"></div>
+        <div class="w-full h-3 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
+          <div id="roadmap-progress-bar" class="h-full bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-400 transition-all duration-500" style="width: 0%;"></div>
         </div>
       </div>
 
-      <!-- Roadmap Weeks -->
-      <div id="roadmap-weeks" class="space-y-4">
-        <!-- Week sections injected by JS -->
+      <!-- 4 Weeks Accordion / Grid: 2 Columns on Laptop -->
+      <div id="roadmap-weeks" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Rendered by JS -->
       </div>
     </section>
 
 
-    <!-- ========================================== -->
-    <!-- TAB 4: 🛠️ DANH BẠ CÔNG CỤ AI TUYỂN CHỌN -->
-    <!-- ========================================== -->
+    <!-- TAB 4: BẢNG CÔNG CỤ AI (6 COLUMNS ON LAPTOP) -->
     <section id="tab-content-tools" class="tab-pane hidden space-y-6">
       <div class="flex items-center justify-between">
         <div>
-          <h2 class="text-lg md:text-xl font-black text-white flex items-center gap-2">
+          <h2 class="text-xl md:text-2xl font-black text-slate-900 dark:text-white flex items-center gap-2">
             <span>🛠️</span>
-            <span>Bản Đồ Công Cụ AI Tuyển Chọn Cho Người Mới</span>
+            <span>Bảng Công Cụ AI Tuyển Chọn Cho Người Mới</span>
           </h2>
-          <p class="text-xs text-slate-400 mt-0.5">Top các công cụ tốt nhất, dễ dùng và có bản miễn phí chất lượng</p>
+          <p class="text-xs md:text-sm text-slate-500 dark:text-slate-400 mt-1">Các công cụ AI tốt nhất hiện nay, dễ dùng và có bản miễn phí chất lượng cao.</p>
         </div>
       </div>
 
-      <div id="tools-list" class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-        <!-- Tools injected by JS -->
+      <!-- Tools Grid: 6 Columns on Laptop -->
+      <div id="tools-list" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        <!-- Rendered by JS -->
       </div>
     </section>
 
 
-    <!-- ========================================== -->
-    <!-- TAB 5: 🎁 QUÀ TẶNG & EBOOK LINK IN BIO -->
-    <!-- ========================================== -->
+    <!-- TAB 5: QUÀ TẶNG & TÀI LIỆU 0Đ -->
     <section id="tab-content-gift" class="tab-pane hidden space-y-6">
-      <div class="glass-card rounded-[32px] p-6 md:p-8 text-center space-y-5 border border-pink-500/40 relative overflow-hidden">
-        <div class="w-16 h-16 rounded-3xl bg-gradient-to-tr from-pink-500 to-purple-600 flex items-center justify-center text-3xl mx-auto shadow-xl shadow-pink-500/30">
+      <div class="glass-card rounded-[32px] p-6 md:p-10 border-2 border-pink-400/40 text-center space-y-6 relative overflow-hidden bg-gradient-to-b from-pink-50/50 via-white to-white dark:from-pink-950/20 dark:via-slate-900 dark:to-slate-900">
+        <div class="w-20 h-20 rounded-3xl p-1 bg-gradient-to-tr from-pink-500 to-purple-600 shadow-xl shadow-pink-500/25 mx-auto flex items-center justify-center text-4xl">
           🎁
         </div>
+
         <div class="space-y-2">
-          <h2 class="text-xl md:text-2xl font-black text-white">Quà Tặng Dành Riêng Cho Bạn</h2>
-          <p class="text-xs md:text-sm text-slate-300 max-w-md mx-auto leading-relaxed">
-            Nhận trọn bộ <strong class="text-pink-300">Ebook 50 Thuật Ngữ AI Dễ Hiểu</strong> và kho <strong class="text-purple-300">100+ Prompt ChatGPT Thực Chiến</strong> hoàn toàn 0đ!
+          <span class="inline-block px-3 py-1 rounded-full bg-pink-100 dark:bg-pink-500/20 text-pink-700 dark:text-pink-300 text-xs font-black uppercase tracking-wider border border-pink-300 dark:border-pink-500/30">
+            Quà Tặng Tri Ân Độc Quyền
+          </span>
+          <h2 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white">Trọn Bộ Ebook & 100+ Prompt Mẫu Thực Chiến</h2>
+          <p class="text-xs md:text-sm text-slate-600 dark:text-slate-300 max-w-lg mx-auto leading-relaxed">
+            Dành riêng cho bạn theo dõi kênh <strong class="text-pink-600 dark:text-pink-300 font-bold">Lucy AI Flow</strong>. Giúp bạn tiết kiệm ít nhất 2 giờ làm việc mỗi ngày ngay từ tuần đầu tiên!
           </p>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-lg mx-auto text-left">
-          <div class="p-4 rounded-2xl bg-slate-900/80 border border-pink-500/30 space-y-1.5">
-            <div class="text-xs font-bold text-pink-300 flex items-center gap-1.5">
+        <!-- Gift Perks Grid: 2 Columns on Laptop -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 max-w-2xl mx-auto text-left">
+          <div class="p-4 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 space-y-1 shadow-sm">
+            <div class="flex items-center gap-2 text-pink-600 dark:text-pink-400 font-bold text-xs">
               <span>📘</span>
-              <span>Ebook Nhập Môn AI (PDF)</span>
+              <span>Ebook: Cẩm Nang AI Cho Người Mới</span>
             </div>
-            <p class="text-[11px] text-slate-400">Giải thích dễ hiểu các khái niệm LLM, Prompt, Context Window, Token mà không dùng từ ngữ cao siêu.</p>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">50 trang PDF trình bày dạng infographic sinh động, dễ hiểu, đọc 30 phút là nắm vững.</p>
           </div>
-          <div class="p-4 rounded-2xl bg-slate-900/80 border border-purple-500/30 space-y-1.5">
-            <div class="text-xs font-bold text-purple-300 flex items-center gap-1.5">
-              <span>🗂️</span>
-              <span>100+ Prompt Excel / Sheets</span>
+
+          <div class="p-4 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 space-y-1 shadow-sm">
+            <div class="flex items-center gap-2 text-purple-600 dark:text-purple-400 font-bold text-xs">
+              <span>💎</span>
+              <span>100+ Câu Prompt Mẫu Tuyển Chọn</span>
             </div>
-            <p class="text-[11px] text-slate-400">Bảng phân loại Prompt cho nhân viên văn phòng, marketing, lập trình viên và giáo viên.</p>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">Chia theo 8 ngành nghề: Marketing, Bán hàng, Nhân sự, IT, Dịch thuật, Học tập...</p>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 space-y-1 shadow-sm">
+            <div class="flex items-center gap-2 text-cyan-600 dark:text-cyan-400 font-bold text-xs">
+              <span>🗺️</span>
+              <span>Mindmap Lộ Trình 30 Ngày</span>
+            </div>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">Sơ đồ tư duy trực quan file ảnh 4K để in ra bàn làm việc nhắc nhở mỗi ngày.</p>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 space-y-1 shadow-sm">
+            <div class="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold text-xs">
+              <span>⚡</span>
+              <span>Checklist 10 Tiện Ích Trình Duyệt AI</span>
+            </div>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">Cài vào Chrome để tự động tóm tắt video YouTube, dịch tài liệu, viết email siêu tốc.</p>
           </div>
         </div>
 
+        <!-- Big Download Button -->
         <div class="pt-2">
-          <button onclick="downloadGiftPack()" class="w-full sm:w-auto px-8 py-3.5 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-600 to-cyan-500 hover:from-pink-600 hover:to-cyan-600 text-white font-extrabold text-xs md:text-sm shadow-xl shadow-pink-500/30 transition transform hover:-translate-y-0.5">
-            ⚡ Tải Trọn Bộ Tài Liệu Miễn Phí (0đ)
+          <button onclick="downloadGiftPack()" class="py-3.5 px-8 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-600 to-cyan-500 hover:opacity-95 text-white font-extrabold text-sm md:text-base shadow-xl shadow-pink-500/25 transition transform active:scale-95 inline-flex items-center gap-2.5">
+            <span>🎁</span>
+            <span>Nhận Trọn Bộ Quà Tặng 0Đ (Click Để Tải)</span>
           </button>
         </div>
       </div>
     </section>
 
-    <!-- 📌 FOOTER -->
-    <footer class="pt-8 border-t border-slate-800/80 text-center space-y-3">
-      <div class="flex items-center justify-center gap-2 text-xs font-bold text-slate-400">
-        <span>Made with 💖 by</span>
-        <span class="text-pink-400 font-extrabold">Lucy AI Flow</span>
-        <span>•</span>
-        <span>Tài Liệu Mở 2026</span>
+    <!-- Footer -->
+    <footer class="pt-8 border-t border-slate-200 dark:border-slate-800/80 text-center space-y-2">
+      <div class="flex items-center justify-center gap-2 text-xs font-bold text-slate-600 dark:text-slate-400">
+        <span>Made with</span>
+        <span class="text-pink-500">💖</span>
+        <span>by Lucy AI Flow • Đồng hành cùng bạn trên hành trình AI</span>
       </div>
-      <p class="text-[11px] text-slate-500 max-w-md mx-auto">
-        Tất cả nội dung được biên soạn chuẩn logic cho người mới tiếp cận AI. Nhấn lưu link này vào trình duyệt hoặc Bio để tra cứu mỗi ngày nha!
+      <p class="text-[11px] text-slate-400 dark:text-slate-500">
+        © 2026 Lucy AI Hub. Toàn bộ tài liệu chia sẻ miễn phí vì cộng đồng người học AI tại Việt Nam.
       </p>
     </footer>
 
   </main>
 
-  <!-- ========================================== -->
-  <!-- JAVASCRIPT LOGIC & INTERACTIVE DATA -->
-  <!-- ========================================== -->
+
+  <!-- 📱 MOBILE APP NATIVE BOTTOM NAVIGATION DOCK (Hidden on Desktop) -->
+  <nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl border-t border-slate-200/90 dark:border-slate-800/80 px-2 py-1.5 pb-safe shadow-[0_-8px_30px_rgba(0,0,0,0.08)]">
+    <div class="grid grid-cols-5 gap-1 items-center max-w-md mx-auto">
+      
+      <!-- Tab 1: Flow AI -->
+      <button onclick="switchTab('flows')" id="mobile-tab-flows" class="mobile-nav-btn flex flex-col items-center justify-center py-1 px-1 rounded-xl transition text-pink-600 dark:text-pink-400 bg-pink-50/80 dark:bg-pink-950/40">
+        <span class="text-lg">🧩</span>
+        <span class="text-[10px] font-black tracking-tight mt-0.5">Flow AI</span>
+        <span class="mobile-dot w-1 h-1 rounded-full bg-pink-500 mt-0.5"></span>
+      </button>
+
+      <!-- Tab 2: Prompts -->
+      <button onclick="switchTab('prompts')" id="mobile-tab-prompts" class="mobile-nav-btn flex flex-col items-center justify-center py-1 px-1 rounded-xl transition text-slate-500 dark:text-slate-400">
+        <span class="text-lg">💡</span>
+        <span class="text-[10px] font-bold tracking-tight mt-0.5">Prompt</span>
+        <span class="mobile-dot w-1 h-1 rounded-full bg-pink-500 mt-0.5 hidden"></span>
+      </button>
+
+      <!-- Tab 3: Roadmap -->
+      <button onclick="switchTab('roadmap')" id="mobile-tab-roadmap" class="mobile-nav-btn flex flex-col items-center justify-center py-1 px-1 rounded-xl transition text-slate-500 dark:text-slate-400">
+        <span class="text-lg">🗺️</span>
+        <span class="text-[10px] font-bold tracking-tight mt-0.5">Lộ Trình</span>
+        <span class="mobile-dot w-1 h-1 rounded-full bg-pink-500 mt-0.5 hidden"></span>
+      </button>
+
+      <!-- Tab 4: Tools -->
+      <button onclick="switchTab('tools')" id="mobile-tab-tools" class="mobile-nav-btn flex flex-col items-center justify-center py-1 px-1 rounded-xl transition text-slate-500 dark:text-slate-400">
+        <span class="text-lg">🛠️</span>
+        <span class="text-[10px] font-bold tracking-tight mt-0.5">Công Cụ</span>
+        <span class="mobile-dot w-1 h-1 rounded-full bg-pink-500 mt-0.5 hidden"></span>
+      </button>
+
+      <!-- Tab 5: Gift -->
+      <button onclick="switchTab('gift')" id="mobile-tab-gift" class="mobile-nav-btn flex flex-col items-center justify-center py-1 px-1 rounded-xl transition text-slate-500 dark:text-slate-400">
+        <span class="text-lg">🎁</span>
+        <span class="text-[10px] font-bold tracking-tight mt-0.5">Quà 0đ</span>
+        <span class="mobile-dot w-1 h-1 rounded-full bg-pink-500 mt-0.5 hidden"></span>
+      </button>
+
+    </div>
+  </nav>
+
+
+  <!-- JAVASCRIPT APPLICATION LOGIC -->
   <script>
-    // --- 1. DATA: 5 VISUAL AI FLOWS ---
+    // --- 1. DATA: FLOWS AI ---
     const AI_FLOWS = [
       {
         id: 'flow-01',
@@ -827,7 +994,7 @@
 }
     ];
 
-    // --- 2. DATA: 8 PROMPTS THỰC CHIẾN ---
+    // --- 2. DATA: PROMPTS THỰC CHIẾN ---
     const AI_PROMPTS = [
       {
         id: 'p-01',
@@ -937,7 +1104,7 @@ Hãy viết cho tôi công thức chính xác nhất để dán vào ô, và gi�
       }
     ];
 
-    // --- 3. DATA: 30-DAY AI ROADMAP ---
+    // --- 3. DATA: LỘ TRÌNH 30 NGÀY ---
     const ROADMAP_DATA = [
       {
         week: 'Tuần 1: Tư Duy Nền Tảng & Khai Phá AI',
@@ -995,7 +1162,7 @@ Hãy viết cho tôi công thức chính xác nhất để dán vào ô, và gi�
       }
     ];
 
-    // --- 4. DATA: CURATED AI TOOLS DIRECTORY ---
+    // --- 4. DATA: BẢNG CÔNG CỤ AI ---
     const AI_TOOLS = [
       {
         name: 'ChatGPT (OpenAI)',
@@ -1063,10 +1230,136 @@ Hãy viết cho tôi công thức chính xác nhất để dán vào ô, và gi�
       }
     ];
 
-    // --- 5. RENDER FUNCTIONS ---
+    // --- 5. UI STATE ---
     let currentCategory = 'all';
     let searchQuery = '';
+    let currentTab = 'flows';
 
+    // --- 6. THEME SWITCHER (Default: Light Mode) ---
+    function initTheme() {
+      const savedTheme = localStorage.getItem('lucy_theme');
+      // Default is light mode! Only enable dark if user explicitly chose it
+      if (savedTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+        updateThemeUI(true);
+      } else {
+        document.documentElement.classList.remove('dark');
+        updateThemeUI(false);
+      }
+    }
+
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('lucy_theme', isDark ? 'dark' : 'light');
+      updateThemeUI(isDark);
+    }
+
+    function updateThemeUI(isDark) {
+      const icon = document.getElementById('theme-btn-icon');
+      const text = document.getElementById('theme-btn-text');
+      if (icon) icon.innerText = isDark ? '🌙' : '🌞';
+      if (text) text.innerText = isDark ? 'Chế độ tối' : 'Chế độ sáng';
+    }
+
+    // --- 7. NAVIGATION LOGIC (Syncs Desktop Tabs & Mobile Bottom Bar) ---
+    function switchTab(tabId) {
+      currentTab = tabId;
+
+      // 1. Hide all tab panes
+      document.querySelectorAll('.tab-pane').forEach(el => el.classList.add('hidden'));
+
+      // 2. Show active tab pane
+      const pane = document.getElementById('tab-content-' + tabId);
+      if (pane) pane.classList.remove('hidden');
+
+      // 3. Update Desktop Navigation Tabs
+      document.querySelectorAll('.nav-tab').forEach(el => {
+        el.classList.remove('bg-gradient-to-r', 'from-pink-500', 'to-purple-600', 'text-white', 'shadow-md');
+        el.classList.add('text-slate-500', 'dark:text-slate-400');
+      });
+
+      const desktopBtn = document.getElementById('tab-btn-' + tabId);
+      if (desktopBtn) {
+        desktopBtn.classList.add('bg-gradient-to-r', 'from-pink-500', 'to-purple-600', 'text-white', 'shadow-md');
+        desktopBtn.classList.remove('text-slate-500', 'dark:text-slate-400');
+      }
+
+      // 4. Update Mobile Bottom Navigation Dock
+      document.querySelectorAll('.mobile-nav-btn').forEach(btn => {
+        btn.classList.remove('text-pink-600', 'dark:text-pink-400', 'bg-pink-50/80', 'dark:bg-pink-950/40');
+        btn.classList.add('text-slate-500', 'dark:text-slate-400');
+        const dot = btn.querySelector('.mobile-dot');
+        if (dot) dot.classList.add('hidden');
+      });
+
+      const mobileBtn = document.getElementById('mobile-tab-' + tabId);
+      if (mobileBtn) {
+        mobileBtn.classList.add('text-pink-600', 'dark:text-pink-400', 'bg-pink-50/80', 'dark:bg-pink-950/40');
+        mobileBtn.classList.remove('text-slate-500', 'dark:text-slate-400');
+        const dot = mobileBtn.querySelector('.mobile-dot');
+        if (dot) dot.classList.remove('hidden');
+      }
+
+      // Smooth scroll back to top of content
+      if (window.scrollY > 400) {
+        window.scrollTo({ top: 320, behavior: 'smooth' });
+      }
+    }
+
+    // --- 8. AUDIO & ROADMAP PLAYERS ---
+    function toggleRoadmapAudio() {
+      const audio = document.getElementById('roadmap-audio-player');
+      const btn = document.getElementById('btn-play-roadmap-audio');
+      const wave = document.getElementById('roadmap-audio-wave');
+      if (!audio || !btn) return;
+
+      if (audio.paused) {
+        audio.play();
+        btn.textContent = '⏸️';
+        if (wave) wave.classList.remove('hidden');
+      } else {
+        audio.pause();
+        btn.textContent = '▶️';
+        if (wave) wave.classList.add('hidden');
+      }
+      audio.onended = () => {
+        btn.textContent = '▶️';
+        if (wave) wave.classList.add('hidden');
+      };
+    }
+
+    let isGreetingPlaying = false;
+    function toggleGreetingVoice() {
+      const audio = document.getElementById('lucy-audio');
+      const icon = document.getElementById('audio-icon');
+      const text = document.getElementById('audio-text');
+
+      if (!audio) return;
+
+      if (!isGreetingPlaying) {
+        audio.play().then(() => {
+          isGreetingPlaying = true;
+          if (icon) icon.innerText = '⏸️';
+          if (text) text.innerText = 'Đang nói: Nghe Lucy chào...';
+        }).catch(e => {
+          console.warn('Audio autoplay blocked:', e);
+        });
+      } else {
+        audio.pause();
+        audio.currentTime = 0;
+        isGreetingPlaying = false;
+        if (icon) icon.innerText = '▶️';
+        if (text) text.innerText = 'Bật giọng Lucy chào bạn';
+      }
+
+      audio.onended = () => {
+        isGreetingPlaying = false;
+        if (icon) icon.innerText = '▶️';
+        if (text) text.innerText = 'Bật lại giọng Lucy';
+      };
+    }
+
+    // --- 9. RENDER FUNCTIONS ---
     function renderFlows() {
       const container = document.getElementById('flows-list');
       if (!container) return;
@@ -1082,53 +1375,55 @@ Hãy viết cho tôi công thức chính xác nhất để dán vào ô, và gi�
       });
 
       if (filtered.length === 0) {
-        container.innerHTML = '<div class="p-8 text-center text-slate-400 glass-card rounded-3xl text-xs">Không tìm thấy Flow phù hợp với từ khóa "' + searchQuery + '". Thử từ khóa khác nha!</div>';
+        container.innerHTML = '<div class="col-span-full p-8 text-center text-slate-500 dark:text-slate-400 glass-card rounded-3xl text-xs">Không tìm thấy Flow phù hợp với từ khóa "' + searchQuery + '". Thử từ khóa khác nha!</div>';
         return;
       }
 
       container.innerHTML = filtered.map(flow => `
-        <article class="glass-card rounded-[28px] p-5 md:p-6 space-y-4 border border-slate-700/60 hover:border-pink-500/40 transition">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-            <div class="space-y-1">
-              <span class="inline-block px-2.5 py-0.5 rounded-full bg-pink-500/20 text-pink-300 text-[10px] font-extrabold uppercase tracking-wider border border-pink-500/30">
-                ${flow.badge}
-              </span>
-              <h3 class="text-base md:text-lg font-extrabold text-white">${flow.title}</h3>
-            </div>
-            <button onclick="copyText('${escapeJs(flow.samplePrompt)}', 'Đã sao chép Prompt mẫu của Flow!')" class="py-2 px-3.5 rounded-xl bg-pink-500/20 hover:bg-pink-500/30 text-pink-200 border border-pink-400/40 text-xs font-bold flex items-center gap-1.5 transition self-start sm:self-auto shrink-0 shadow">
-              <i data-lucide="copy" class="w-3.5 h-3.5"></i>
-              <span>Copy Prompt Flow</span>
-            </button>
-          </div>
-
-          <p class="text-xs text-slate-300 leading-relaxed">${flow.desc}</p>
-
-          <!-- 4 Steps Visual Flow -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2.5 pt-2">
-            ${flow.steps.map(s => `
-              <div class="p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-1.5 relative overflow-hidden">
-                <div class="flex items-center justify-between">
-                  <span class="w-6 h-6 rounded-lg flex items-center justify-center text-[11px] font-black" style="background-color: ${s.color}25; color: ${s.color}; border: 1px solid ${s.color}40;">
-                    ${s.num}
-                  </span>
-                  <span class="text-[9px] uppercase tracking-wider font-bold text-slate-500">Bước ${s.num}</span>
-                </div>
-                <h4 class="text-xs font-bold text-slate-100">${s.title}</h4>
-                <p class="text-[11px] text-slate-400 leading-relaxed">${s.detail}</p>
+        <article class="glass-card rounded-[28px] p-5 md:p-6 space-y-4 flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div class="space-y-1">
+                <span class="inline-block px-2.5 py-0.5 rounded-full bg-pink-100 dark:bg-pink-500/20 text-pink-700 dark:text-pink-300 text-[10px] font-extrabold uppercase tracking-wider border border-pink-200 dark:border-pink-500/30">
+                  ${flow.badge}
+                </span>
+                <h3 class="text-base md:text-lg font-extrabold text-slate-900 dark:text-white">${flow.title}</h3>
               </div>
-            `).join('')}
+              <button onclick="copyText('${escapeJs(flow.samplePrompt)}', 'Đã sao chép Prompt mẫu của Flow!')" class="py-2 px-3.5 rounded-xl bg-pink-50 dark:bg-pink-500/20 hover:bg-pink-100 dark:hover:bg-pink-500/30 text-pink-700 dark:text-pink-200 border border-pink-300 dark:border-pink-400/40 text-xs font-bold flex items-center gap-1.5 transition self-start sm:self-auto shrink-0 shadow-sm">
+                <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                <span>Copy Prompt Flow</span>
+              </button>
+            </div>
+
+            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">${flow.desc}</p>
+
+            <!-- 4 Steps Visual Flow -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-2 pt-1">
+              ${flow.steps.map(s => `
+                <div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800 space-y-1 relative overflow-hidden">
+                  <div class="flex items-center justify-between">
+                    <span class="w-6 h-6 rounded-lg flex items-center justify-center text-[11px] font-black" style="background-color: ${s.color}20; color: ${s.color}; border: 1px solid ${s.color}40;">
+                      ${s.num}
+                    </span>
+                    <span class="text-[9px] uppercase tracking-wider font-bold text-slate-400 dark:text-slate-500">Bước ${s.num}</span>
+                  </div>
+                  <h4 class="text-xs font-bold text-slate-800 dark:text-slate-100">${s.title}</h4>
+                  <p class="text-[10px] text-slate-500 dark:text-slate-400 leading-snug line-clamp-2">${s.detail}</p>
+                </div>
+              `).join('')}
+            </div>
           </div>
 
           <!-- Prompt Preview Box -->
-          <div class="p-3.5 rounded-2xl bg-[#090D18] border border-slate-800/80 space-y-1.5 text-xs">
-            <div class="flex items-center justify-between text-[11px] text-slate-400 font-bold">
-              <span class="flex items-center gap-1.5 text-pink-300">
+          <div class="p-3.5 rounded-2xl prompt-box space-y-1.5 text-xs mt-2">
+            <div class="flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 font-bold">
+              <span class="flex items-center gap-1.5 text-pink-600 dark:text-pink-300">
                 <i data-lucide="terminal" class="w-3.5 h-3.5"></i>
                 <span>Prompt Mẫu Áp Dụng:</span>
               </span>
-              <span class="text-[10px] text-slate-500">Sẵn sàng copy</span>
+              <span class="text-[10px]">1-click copy</span>
             </div>
-            <pre class="font-mono text-[11px] text-slate-300 whitespace-pre-wrap leading-relaxed line-clamp-3 select-all">${flow.samplePrompt}</pre>
+            <pre class="font-mono text-[11px] whitespace-pre-wrap leading-relaxed line-clamp-3 select-all">${flow.samplePrompt}</pre>
           </div>
         </article>
       `).join('');
@@ -1151,37 +1446,41 @@ Hãy viết cho tôi công thức chính xác nhất để dán vào ô, và gi�
       });
 
       if (filtered.length === 0) {
-        container.innerHTML = '<div class="p-8 text-center text-slate-400 glass-card rounded-3xl text-xs">Không tìm thấy Prompt phù hợp với từ khóa "' + searchQuery + '".</div>';
+        container.innerHTML = '<div class="col-span-full p-8 text-center text-slate-500 dark:text-slate-400 glass-card rounded-3xl text-xs">Không tìm thấy Prompt phù hợp với từ khóa "' + searchQuery + '".</div>';
         return;
       }
 
       container.innerHTML = filtered.map(p => `
-        <article class="glass-card rounded-[28px] p-5 md:p-6 space-y-3.5 border border-slate-700/60 hover:border-purple-500/40 transition">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-            <div class="space-y-1">
-              <div class="flex items-center gap-2">
-                <span class="px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 text-[10px] font-extrabold uppercase border border-purple-500/30">
-                  ${p.badge}
-                </span>
-                <span class="text-[11px] text-slate-400 font-bold flex items-center gap-1">
-                  <i data-lucide="cpu" class="w-3 h-3 text-cyan-400"></i>
-                  <span>${p.tool}</span>
-                </span>
+        <article class="glass-card rounded-[28px] p-5 md:p-6 space-y-3.5 flex flex-col justify-between">
+          <div class="space-y-2.5">
+            <div class="flex items-start justify-between gap-2">
+              <div class="space-y-1">
+                <div class="flex items-center gap-2">
+                  <span class="px-2.5 py-0.5 rounded-full bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 text-[10px] font-extrabold uppercase border border-purple-200 dark:border-purple-500/30">
+                    ${p.badge}
+                  </span>
+                  <span class="text-[11px] text-slate-500 dark:text-slate-400 font-bold flex items-center gap-1">
+                    <i data-lucide="cpu" class="w-3 h-3 text-cyan-500"></i>
+                    <span>${p.tool}</span>
+                  </span>
+                </div>
+                <h3 class="text-base font-extrabold text-slate-900 dark:text-white leading-tight">${p.title}</h3>
               </div>
-              <h3 class="text-base font-extrabold text-white">${p.title}</h3>
             </div>
 
-            <button onclick="copyText('${escapeJs(p.content)}', 'Đã sao chép Prompt!')" class="py-2 px-4 rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white text-xs font-bold flex items-center gap-1.5 transition self-start sm:self-auto shrink-0 shadow-lg shadow-pink-500/20">
+            <p class="text-xs text-slate-600 dark:text-slate-300">${p.desc}</p>
+          </div>
+
+          <div class="space-y-2.5 pt-2">
+            <!-- Prompt Box -->
+            <div class="p-3.5 rounded-2xl prompt-box text-xs relative group">
+              <pre class="font-mono text-[11px] whitespace-pre-wrap leading-relaxed max-h-40 overflow-y-auto pr-2 select-all">${p.content}</pre>
+            </div>
+
+            <button onclick="copyText('${escapeJs(p.content)}', 'Đã sao chép Prompt!')" class="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-md shadow-pink-500/20">
               <i data-lucide="copy" class="w-3.5 h-3.5"></i>
               <span>Sao Chép Prompt</span>
             </button>
-          </div>
-
-          <p class="text-xs text-slate-300">${p.desc}</p>
-
-          <!-- Prompt Box -->
-          <div class="p-4 rounded-2xl bg-[#090D18] border border-slate-800 text-xs relative group">
-            <pre class="font-mono text-[11px] text-pink-100 whitespace-pre-wrap leading-relaxed max-h-48 overflow-y-auto pr-2 select-all">${p.content}</pre>
           </div>
         </article>
       `).join('');
@@ -1196,34 +1495,33 @@ Hãy viết cho tôi công thức chính xác nhất để dán vào ô, và gi�
       const savedProgress = JSON.parse(localStorage.getItem('lucy_roadmap_checked') || '{}');
 
       container.innerHTML = ROADMAP_DATA.map((w, wIdx) => `
-        <div class="glass-card rounded-[28px] p-5 md:p-6 space-y-4 border border-slate-700/60">
+        <div class="glass-card rounded-[28px] p-5 md:p-6 space-y-4">
           <div>
-            <h3 class="text-base font-extrabold text-white flex items-center gap-2">
-              <span class="w-6 h-6 rounded-lg bg-purple-500/20 text-purple-300 flex items-center justify-center text-xs font-black">W${wIdx+1}</span>
+            <h3 class="text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+              <span class="w-6 h-6 rounded-lg bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 flex items-center justify-center text-xs font-black">W${wIdx+1}</span>
               <span>${w.week}</span>
             </h3>
-            <p class="text-xs text-slate-400 mt-1">${w.desc}</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">${w.desc}</p>
           </div>
 
           <div class="space-y-2">
-            ${[0,1,2,3].map(dummy => '').join('')}
             ${w.days.map((d, dIdx) => {
               const itemKey = 'w' + wIdx + '_d' + dIdx;
               const isChecked = !!savedProgress[itemKey];
               return `
-                <label class="flex items-start gap-3 p-3 rounded-2xl bg-slate-900/70 hover:bg-slate-900 border border-slate-800 cursor-pointer transition select-none group">
+                <label class="flex items-start gap-3 p-3 rounded-2xl bg-slate-50 dark:bg-slate-900/70 hover:bg-slate-100 dark:hover:bg-slate-900 border border-slate-200 dark:border-slate-800 cursor-pointer transition select-none group">
                   <input 
                     type="checkbox" 
                     onchange="toggleDayCheck('${itemKey}')" 
                     ${isChecked ? 'checked' : ''} 
-                    class="mt-1 w-4 h-4 rounded text-pink-500 focus:ring-pink-500 border-slate-700 bg-slate-950 cursor-pointer"
+                    class="mt-1 w-4 h-4 rounded text-pink-500 focus:ring-pink-500 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 cursor-pointer"
                   />
                   <div class="flex-1 text-xs">
                     <div class="flex items-center gap-2">
-                      <span class="font-mono text-[10px] font-bold text-pink-400">${d.day}</span>
-                      <strong class="font-bold text-slate-200 group-hover:text-white transition ${isChecked ? 'line-through text-slate-500' : ''}">${d.title}</strong>
+                      <span class="font-mono text-[10px] font-bold text-pink-600 dark:text-pink-400">${d.day}</span>
+                      <strong class="font-bold text-slate-800 dark:text-slate-200 group-hover:text-pink-600 dark:group-hover:text-white transition ${isChecked ? 'line-through text-slate-400 dark:text-slate-500' : ''}">${d.title}</strong>
                     </div>
-                    <p class="text-[11px] text-slate-400 mt-0.5 leading-relaxed">${d.desc}</p>
+                    <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 leading-relaxed">${d.desc}</p>
                   </div>
                 </label>
               `;
@@ -1235,25 +1533,51 @@ Hãy viết cho tôi công thức chính xác nhất để dán vào ô, và gi�
       updateRoadmapProgress();
     }
 
+    function toggleDayCheck(key) {
+      const saved = JSON.parse(localStorage.getItem('lucy_roadmap_checked') || '{}');
+      saved[key] = !saved[key];
+      localStorage.setItem('lucy_roadmap_checked', JSON.stringify(saved));
+      renderRoadmap();
+    }
+
+    function updateRoadmapProgress() {
+      const saved = JSON.parse(localStorage.getItem('lucy_roadmap_checked') || '{}');
+      let total = 0;
+      let checked = 0;
+      ROADMAP_DATA.forEach((w, wIdx) => {
+        w.days.forEach((d, dIdx) => {
+          total++;
+          if (saved['w' + wIdx + '_d' + dIdx]) checked++;
+        });
+      });
+
+      const pct = total > 0 ? Math.round((checked / total) * 100) : 0;
+      const bar = document.getElementById('roadmap-progress-bar');
+      const text = document.getElementById('roadmap-progress-text');
+      if (bar) bar.style.width = pct + '%';
+      if (text) text.innerText = checked + '/' + total + ' Ngày (' + pct + '%)';
+    }
+
     function renderTools() {
       const container = document.getElementById('tools-list');
       if (!container) return;
 
       container.innerHTML = AI_TOOLS.map(t => `
-        <div class="glass-card rounded-2xl p-4.5 md:p-5 space-y-3 border border-slate-800 hover:border-cyan-500/40 transition flex flex-col justify-between">
+        <div class="glass-card rounded-2xl p-4 space-y-3 flex flex-col justify-between">
           <div class="space-y-2">
             <div class="flex items-center justify-between">
               <span class="text-2xl">${t.icon}</span>
-              <span class="px-2 py-0.5 rounded-full bg-slate-800 text-[10px] font-bold text-cyan-300 border border-cyan-500/20">
+              <span class="px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-[10px] font-bold text-cyan-600 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-500/20">
                 ${t.tag}
               </span>
             </div>
-            <h3 class="text-sm font-extrabold text-white">${t.name}</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">${t.desc}</p>
+            <div>
+              <h4 class="text-xs font-bold text-slate-900 dark:text-white">${t.name}</h4>
+              <p class="text-[10px] text-slate-500 dark:text-slate-400 mt-1 leading-snug">${t.desc}</p>
+            </div>
           </div>
-
-          <a href="${t.url}" target="_blank" rel="noopener" class="mt-2 py-2 px-3.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-cyan-200 hover:text-white border border-cyan-500/30 text-xs font-bold flex items-center justify-center gap-1.5 transition">
-            <span>Truy Cập Ngay</span>
+          <a href="${t.link}" target="_blank" rel="noopener" class="w-full py-2 px-3 rounded-xl bg-slate-50 dark:bg-slate-800 hover:bg-pink-50 dark:hover:bg-pink-900/30 border border-slate-200 dark:border-slate-700 hover:border-pink-300 dark:hover:border-pink-500/30 text-slate-700 dark:text-slate-200 hover:text-pink-600 dark:hover:text-pink-300 text-[11px] font-bold flex items-center justify-center gap-1 transition">
+            <span>Dùng Ngay</span>
             <i data-lucide="external-link" class="w-3 h-3"></i>
           </a>
         </div>
@@ -1262,72 +1586,7 @@ Hãy viết cho tôi công thức chính xác nhất để dán vào ô, và gi�
       lucide.createIcons();
     }
 
-    // --- 6. ROADMAP PROGRESS CALCULATION ---
-    function toggleDayCheck(itemKey) {
-      const saved = JSON.parse(localStorage.getItem('lucy_roadmap_checked') || '{}');
-      saved[itemKey] = !saved[itemKey];
-      localStorage.setItem('lucy_roadmap_checked', JSON.stringify(saved));
-      renderRoadmap();
-    }
-
-    function updateRoadmapProgress() {
-      const saved = JSON.parse(localStorage.getItem('lucy_roadmap_checked') || '{}');
-      let totalDays = 0;
-      ROADMAP_DATA.forEach(w => totalDays += w.days.length);
-
-      let checkedDays = 0;
-      Object.keys(saved).forEach(k => {
-        if (saved[k]) checkedDays++;
-      });
-
-      const pct = Math.round((checkedDays / totalDays) * 100);
-      const pctEl = document.getElementById('roadmap-pct');
-      const barEl = document.getElementById('roadmap-bar');
-
-      if (pctEl) pctEl.innerText = pct + '%';
-      if (barEl) barEl.style.width = pct + '%';
-    }
-
-    // --- 7. TAB SWITCHING ---
-    function toggleRoadmapAudio() {
-      const audio = document.getElementById('roadmap-audio-player');
-      const btn = document.getElementById('btn-play-roadmap-audio');
-      const wave = document.getElementById('roadmap-audio-wave');
-      if (!audio) return;
-      if (audio.paused) {
-        audio.play();
-        btn.textContent = '⏸️';
-        if (wave) wave.classList.remove('hidden');
-      } else {
-        audio.pause();
-        btn.textContent = '▶️';
-        if (wave) wave.classList.add('hidden');
-      }
-      audio.onended = () => {
-        btn.textContent = '▶️';
-        if (wave) wave.classList.add('hidden');
-      };
-    }
-
-    function switchTab(tabId) {
-      document.querySelectorAll('.tab-pane').forEach(el => el.classList.add('hidden'));
-      document.querySelectorAll('.nav-tab').forEach(el => {
-        el.classList.remove('bg-gradient-to-r', 'from-pink-500', 'to-purple-600', 'text-white', 'shadow-lg', 'shadow-pink-500/25');
-        el.classList.add('text-slate-400', 'hover:text-white');
-      });
-
-      const pane = document.getElementById('tab-content-' + tabId);
-      const btn = document.getElementById('tab-btn-' + tabId);
-      if (pane) pane.classList.remove('hidden');
-      if (btn) {
-        btn.classList.add('bg-gradient-to-r', 'from-pink-500', 'to-purple-600', 'text-white', 'shadow-lg', 'shadow-pink-500/25');
-        btn.classList.remove('text-slate-400');
-      }
-
-      window.scrollTo({ top: 320, behavior: 'smooth' });
-    }
-
-    // --- 8. SEARCH & FILTER ---
+    // --- 10. SEARCH & FILTER ---
     function handleSearch() {
       const input = document.getElementById('search-input');
       const clearBtn = document.getElementById('clear-search-btn');
@@ -1352,53 +1611,21 @@ Hãy viết cho tôi công thức chính xác nhất để dán vào ô, và gi�
     function filterCategory(cat) {
       currentCategory = cat;
       document.querySelectorAll('.cat-pill').forEach(btn => {
-        btn.classList.remove('bg-pink-500/20', 'text-pink-300', 'border-pink-500/40');
-        btn.classList.add('border-slate-800', 'text-slate-400');
+        btn.classList.remove('border-pink-400', 'bg-pink-50', 'dark:bg-pink-500/20', 'text-pink-700', 'dark:text-pink-300', 'shadow-sm');
+        btn.classList.add('border-slate-200', 'dark:border-slate-800', 'text-slate-600', 'dark:text-slate-400');
       });
 
       const activeBtn = event?.currentTarget;
       if (activeBtn) {
-        activeBtn.classList.add('bg-pink-500/20', 'text-pink-300', 'border-pink-500/40');
-        activeBtn.classList.remove('border-slate-800', 'text-slate-400');
+        activeBtn.classList.add('border-pink-400', 'bg-pink-50', 'dark:bg-pink-500/20', 'text-pink-700', 'dark:text-pink-300', 'shadow-sm');
+        activeBtn.classList.remove('border-slate-200', 'dark:border-slate-800', 'text-slate-600', 'dark:text-slate-400');
       }
 
       renderFlows();
       renderPrompts();
     }
 
-    // --- 9. AUDIO GREETING ---
-    let isPlaying = false;
-    function toggleGreetingVoice() {
-      const audio = document.getElementById('lucy-audio');
-      const icon = document.getElementById('audio-icon');
-      const text = document.getElementById('audio-text');
-
-      if (!audio) return;
-
-      if (!isPlaying) {
-        audio.play().then(() => {
-          isPlaying = true;
-          if (icon) icon.innerText = '⏸️';
-          if (text) text.innerText = 'Đang nói: Nghe Lucy chào...';
-        }).catch(e => {
-          console.warn('Audio autoplay blocked:', e);
-        });
-      } else {
-        audio.pause();
-        audio.currentTime = 0;
-        isPlaying = false;
-        if (icon) icon.innerText = '▶️';
-        if (text) text.innerText = 'Bật giọng Lucy chào bạn';
-      }
-
-      audio.onended = () => {
-        isPlaying = false;
-        if (icon) icon.innerText = '▶️';
-        if (text) text.innerText = 'Bật lại giọng Lucy';
-      };
-    }
-
-    // --- 10. TOAST & COPY HELPERS ---
+    // --- 11. TOAST & COPY HELPERS ---
     function showToast(msg = 'Đã sao chép!') {
       const toast = document.getElementById('toast');
       const toastMsg = document.getElementById('toast-message');
@@ -1443,6 +1670,7 @@ Hãy viết cho tôi công thức chính xác nhất để dán vào ô, và gi�
 
     // Initialize Page
     document.addEventListener('DOMContentLoaded', () => {
+      initTheme();
       renderFlows();
       renderPrompts();
       renderRoadmap();

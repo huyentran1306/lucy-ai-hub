@@ -497,7 +497,211 @@
           { num: '04', title: 'Ghi Nhận Đơn Hàng', detail: 'Khi khách để lại SĐT và địa chỉ, tự động đẩy dữ liệu sang Google Sheets và Zalo.', color: '#10B981' }
         ],
         samplePrompt: "Bạn là trợ lý tư vấn bán hàng tận tâm của shop. Nhiệm vụ của bạn:\n1. Luôn chào khách hàng thân thiện và trả lời đúng trọng tâm dựa trên cẩm nang sản phẩm.\n2. Nếu khách hỏi giá, báo giá chính xác và giới thiệu ưu đãi hôm nay.\n3. Khi khách đồng ý mua, khéo léo xin Tên, Số điện thoại và Địa chỉ nhận hàng.\nKhông được bịa đặt chính sách ngoài cẩm nang."
-      }
+      },
+{
+      "id": "flow-07",
+      "category": "prompting",
+      "title": "Reverse Prompting: Bắt AI Phỏng Vấn Ngược Lại Bạn",
+      "badge": "🌸 Kỹ Thuật Bí Truyền",
+      "desc": "Thay vì tự vắt óc viết prompt dài ngoằng, hãy để AI tự phỏng vấn ngược lại bạn để khai thác bối cảnh chuẩn 100%.",
+      "steps": [
+            {
+                  "num": "01",
+                  "title": "Đưa Mục Tiêu Lớn",
+                  "detail": "Nêu bài toán tổng quan bạn muốn giải quyết.",
+                  "color": "#EC4899"
+            },
+            {
+                  "num": "02",
+                  "title": "Lệnh Phỏng Vấn",
+                  "detail": "Bảo AI đặt 5 câu hỏi trọng tâm để hiểu rõ bối cảnh.",
+                  "color": "#8B5CF6"
+            },
+            {
+                  "num": "03",
+                  "title": "Trả Lời Từng Câu",
+                  "detail": "Cung cấp câu trả lời thực tế theo từng gạch đầu dòng.",
+                  "color": "#06B6D4"
+            },
+            {
+                  "num": "04",
+                  "title": "Nhận Kết Quả",
+                  "detail": "Đáp án sắc bén, chuẩn bối cảnh 100% không cần sửa lại.",
+                  "color": "#10B981"
+            }
+      ],
+      "samplePrompt": "Tôi muốn xây dựng chiến lược nội dung TikTok thu hút người mới bắt đầu học AI.\nHãy đóng vai chuyên gia xây kênh triệu view và đặt cho tôi 5 câu hỏi trọng tâm nhất về kênh của tôi trước khi lập kế hoạch.\nSau khi tôi trả lời, hãy tổng hợp lại thành bản kế hoạch hoàn chỉnh."
+},
+{
+      "id": "flow-08",
+      "category": "creative",
+      "title": "Tone Cloning: Dạy AI Viết Chuẩn Giọng Của Riêng Bạn",
+      "badge": "✍️ Nhân Bản Văn Phong",
+      "desc": "Xóa bỏ hoàn toàn mùi robot cứng nhắc, giúp AI viết tự nhiên, gần gũi đúng như chính con người bạn.",
+      "steps": [
+            {
+                  "num": "01",
+                  "title": "Chuẩn Bị 2 Bài Mẫu",
+                  "detail": "Chọn 2 bài viết cũ bạn tâm đắc nhất về giọng điệu.",
+                  "color": "#EC4899"
+            },
+            {
+                  "num": "02",
+                  "title": "Phân Tích Tone",
+                  "detail": "Yêu cầu AI trích xuất đại từ, nhịp câu và cảm xúc.",
+                  "color": "#8B5CF6"
+            },
+            {
+                  "num": "03",
+                  "title": "Lưu Làm Bộ Lọc",
+                  "detail": "Cố định phong cách viết cho mọi bài viết sau này.",
+                  "color": "#06B6D4"
+            },
+            {
+                  "num": "04",
+                  "title": "Bài Viết Chuẩn Gu",
+                  "detail": "Nội dung mượt mà, ấm áp, hoàn toàn tự nhiên.",
+                  "color": "#10B981"
+            }
+      ],
+      "samplePrompt": "Dưới đây là 2 bài viết mẫu của tôi: [Dán bài 1 và bài 2]\nHãy phân tích văn phong, nhịp điệu câu và cách xưng hô của tôi.\nSau đó, hãy viết một bài mới về chủ đề: '3 sai lầm người mới hay mắc khi dùng AI' chuẩn theo đúng giọng văn đó."
+},
+{
+      "id": "flow-09",
+      "category": "career",
+      "title": "Decision Matrix: Ma Trận Ra Quyết Định Đa Chiều",
+      "badge": "🎯 Cố Vấn Chiến Lược",
+      "desc": "Biến AI thành hội đồng cố vấn giúp so sánh đa chiều chi phí, thời gian và rủi ro khi bạn đang phân vân.",
+      "steps": [
+            {
+                  "num": "01",
+                  "title": "Nêu 2 Phương Án",
+                  "detail": "Mô tả chi tiết 2 giải pháp bạn đang đắn đo.",
+                  "color": "#EC4899"
+            },
+            {
+                  "num": "02",
+                  "title": "Chọn 3 Tiêu Chí",
+                  "detail": "Đặt thước đo: Chi phí ban đầu, thời gian triển khai, rủi ro.",
+                  "color": "#8B5CF6"
+            },
+            {
+                  "num": "03",
+                  "title": "Bảng Chấm Điểm",
+                  "detail": "Ép AI chấm điểm thang 10 và nêu lý do phân tích.",
+                  "color": "#06B6D4"
+            },
+            {
+                  "num": "04",
+                  "title": "Chốt Quyết Định",
+                  "detail": "Nhìn rõ được mất để tự tin ra quyết định không hối tiếc.",
+                  "color": "#10B981"
+            }
+      ],
+      "samplePrompt": "Tôi đang phân vân giữa 2 phương án: Phương án A là [mô tả A], Phương án B là [mô tả B].\nHãy lập bảng ma trận so sánh theo 3 tiêu chí: Chi phí, Thời gian và Rủi ro thất bại.\nChấm điểm thang 10 cho mỗi tiêu chí và đưa ra khuyến nghị phương án tối ưu nhất kèm lý do."
+},
+{
+      "id": "flow-10",
+      "category": "office",
+      "title": "Devil's Advocate: Biến AI Kẻ Phản Biện Tìm Lỗ Hổng",
+      "badge": "🛡️ Bịt Kín Rủi Ro",
+      "desc": "Bắt AI 'vạch lá tìm sâu' để phát hiện 5 lỗ hổng chí mạng trước khi nộp kế hoạch cho sếp hoặc đối tác.",
+      "steps": [
+            {
+                  "num": "01",
+                  "title": "Dán Kế Hoạch",
+                  "detail": "Cung cấp toàn bộ dự thảo bản kế hoạch công việc.",
+                  "color": "#EC4899"
+            },
+            {
+                  "num": "02",
+                  "title": "Đóng Vai Đối Thủ",
+                  "detail": "Bảo AI đóng vai người phản biện khó tính nhất.",
+                  "color": "#8B5CF6"
+            },
+            {
+                  "num": "03",
+                  "title": "Vạch 5 Điểm Yếu",
+                  "detail": "Chỉ ra nguy cơ tài chính, rủi ro thị trường và nhân sự.",
+                  "color": "#06B6D4"
+            },
+            {
+                  "num": "04",
+                  "title": "Bịt Kín Lỗ Hổng",
+                  "detail": "Bổ sung giải pháp dự phòng trước giờ G.",
+                  "color": "#10B981"
+            }
+      ],
+      "samplePrompt": "Đây là bản kế hoạch của tôi: [Dán kế hoạch].\nHãy đóng vai đối thủ cạnh tranh khó tính và sắc sảo nhất của tôi, chỉ ra 5 lỗ hổng chí mạng có thể khiến kế hoạch này phá sản.\nVới mỗi lỗ hổng, hãy đề xuất 1 giải pháp khắc phục ngay."
+},
+{
+      "id": "flow-11",
+      "category": "automation",
+      "title": "Canva Bulk Create: Xuất 50 Ảnh Visual Trong 1 Phút",
+      "badge": "⚡ Tự Động Hóa",
+      "desc": "Kết hợp ChatGPT tạo bảng dữ liệu và Canva Tạo hàng loạt (Bulk) để nhân bản visual siêu tốc.",
+      "steps": [
+            {
+                  "num": "01",
+                  "title": "AI Tạo Bảng 50 Ý",
+                  "detail": "Bảo ChatGPT lập bảng 50 câu danh ngôn hoặc mẹo ngắn.",
+                  "color": "#EC4899"
+            },
+            {
+                  "num": "02",
+                  "title": "Tạo Mẫu Canva",
+                  "detail": "Thiết kế 1 template chuẩn đẹp với logo và ô chữ.",
+                  "color": "#8B5CF6"
+            },
+            {
+                  "num": "03",
+                  "title": "Bulk Create",
+                  "detail": "Dán dữ liệu chữ vào và kết nối với hộp văn bản.",
+                  "color": "#06B6D4"
+            },
+            {
+                  "num": "04",
+                  "title": "Xuất 50 Ảnh",
+                  "detail": "Nhận ngay 50 ảnh đăng tải mạng xã hội trong 1 giây.",
+                  "color": "#10B981"
+            }
+      ],
+      "samplePrompt": "Tạo cho tôi một bảng gồm 50 câu mẹo ngắn ứng dụng AI trong công việc văn phòng, chia làm 2 cột:\nCột 1: Tiêu đề mẹo (ngắn dưới 6 từ)\nCột 2: Nội dung hành động (ngắn dưới 25 từ)\nĐịnh dạng bảng để copy trực tiếp vào Google Sheets / Canva."
+},
+{
+      "id": "flow-12",
+      "category": "office",
+      "title": "Perplexity Sourcing: Tra Cứu Số Liệu Có Nguồn Chuẩn Xác",
+      "badge": "🔍 Không Lo Bịa Đặt",
+      "desc": "Sử dụng Perplexity AI để tra cứu thông tin học thuật, báo cáo thị trường có đường dẫn trích dẫn gốc 100%.",
+      "steps": [
+            {
+                  "num": "01",
+                  "title": "Mở Perplexity",
+                  "detail": "Vào perplexity.ai miễn phí.",
+                  "color": "#EC4899"
+            },
+            {
+                  "num": "02",
+                  "title": "Đặt Câu Hỏi",
+                  "detail": "Yêu cầu số liệu, năm nghiên cứu hoặc thị trường cụ thể.",
+                  "color": "#8B5CF6"
+            },
+            {
+                  "num": "03",
+                  "title": "Kiểm Tra Link",
+                  "detail": "Click vào các link trích dẫn uy tín để đối chiếu số liệu.",
+                  "color": "#06B6D4"
+            },
+            {
+                  "num": "04",
+                  "title": "Trích Dẫn Tự Tin",
+                  "detail": "Đưa số liệu vào báo cáo trình sếp uy tín vững chắc.",
+                  "color": "#10B981"
+            }
+      ],
+      "samplePrompt": "Tình hình áp dụng GenAI trong ngành tài chính ngân hàng tại Đông Nam Á giai đoạn 2024-2026 như thế nào?\nHãy đưa ra 3 số liệu thống kê tiêu biểu nhất kèm theo nguồn gốc báo cáo từ Gartner, McKinsey hoặc PwC."
+}
     ];
 
     // --- 2. DATA: 8 PROMPTS THỰC CHIẾN ---

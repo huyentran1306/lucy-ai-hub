@@ -1,0 +1,106 @@
+================================================================================
+💎 TRỌN BỘ 100+ CÂU PROMPT MẪU TUYỂN CHỌN THỰC CHIẾN - KÊNH LUCY AI FLOW
+Dành riêng cho bạn theo dõi kênh Lucy AI. Tiết kiệm 2-3 giờ làm việc mỗi ngày!
+Bản quyền: © 2026 Lucy AI Hub (lucy-ai-hub.pages.dev)
+================================================================================
+
+MỤC LỤC 8 NGÀNH NGHỀ & LĨNH VỰC:
+1. Marketing & Sáng Tạo Nội Dung (Content Creation)
+2. Bán Hàng & Chăm Sóc Khách Hàng (Sales & Customer Support)
+3. Nhân Sự, Tuyển Dụng & Quản Trị Nhóm (HR & Team Management)
+4. Lập Trình, Công Nghệ & Tối Ưu Code (IT & Software Development)
+5. Ngoại Ngữ, Dịch Thuật & Luyện Nói (Language Learning & Translation)
+6. Kinh Doanh, Khởi Nghiệp & Nghiên Cứu Thị Trường (Business & Startups)
+7. Học Tập, Đọc Sách & Phát Triển Bản Thân (Learning & Self Growth)
+8. Quản Lý Thời Gian & Năng Suất Làm Việc (Productivity & Automation)
+
+--------------------------------------------------------------------------------
+PHẦN 1: MARKETING & SÁNG TẠO NỘI DUNG (CONTENT CREATION)
+--------------------------------------------------------------------------------
+[Prompt 01] Công thức viết bài Social Media chuẩn AIDA:
+"Đóng vai một chuyên gia Content Marketing 10 năm kinh nghiệm. Hãy viết một bài đăng Facebook/LinkedIn giới thiệu sản phẩm/dịch vụ [TÊN SẢN PHẨM] theo cấu trúc AIDA:
+- Attention: Mở đầu bằng một câu hỏi gây sốc hoặc số liệu bất ngờ khiến người đọc dừng lướt.
+- Interest: Nêu rõ 3 nỗi đau lớn nhất mà khách hàng mục tiêu [ĐỐI TƯỢNG] đang gặp phải.
+- Desire: Giới thiệu giải pháp và kết quả vượt trội sau khi áp dụng.
+- Action: Lời kêu gọi hành động (CTA) ngắn gọn, thôi thúc comment/nhắn tin ngay.
+Giọng văn: Trẻ trung, chân thành, dùng icon hợp lý, ngắt dòng thoáng mắt."
+
+[Prompt 02] Tạo 10 ý tưởng Video TikTok / Reels viral:
+"Tôi đang xây dựng kênh TikTok về chủ đề [CHỦ ĐỀ/NGÀNH]. Khách hàng mục tiêu là [ĐỐI TƯỢNG]. Hãy gợi ý cho tôi 10 ý tưởng video ngắn dưới 60 giây, mỗi ý tưởng gồm:
+1. Hook 3 giây đầu giữ chân người xem (visual hook + câu nói giật mình).
+2. Nội dung chính cô đọng (giải quyết 1 vấn đề nhỏ).
+3. Call to Action cuối video.
+4. Đánh giá độ khả thi quay bằng điện thoại (Thấp/Vừa/Cao)."
+
+[Prompt 03] Viết kịch bản Video TikTok kể chuyện (Storytelling):
+"Hãy viết kịch bản chi tiết cho video TikTok 45 giây dạng kể chuyện về sự chuyển hóa: 'Từ một người [TÌNH TRẠNG CŨ - VÍ DỤ: LƯỢNG MÁY TÍNH CHẬM CHẠP] thành người [KẾT QUẢ MỚI - TĂNG GẤP 3 LẦN HIỆU SUẤT NHỜ CÔNG CỤ X]'. 
+Phân chia thành 3 cột: Thời gian (Giây) | Hình ảnh / Góc quay | Lời thoại & Âm thanh nền."
+
+[Prompt 04] Tối ưu hóa bài viết chuẩn SEO Top 1 Google:
+"Hãy phân tích từ khóa chính '[TỪ KHÓA CHÍNH]' và các từ khóa phụ liên quan. Lập dàn ý bài viết chuẩn SEO 1,500 từ gồm: Tiêu đề H1 kích thích click, thẻ Meta Description dưới 155 ký tự, các thẻ H2 và H3 có lồng ghép từ khóa tự nhiên, và phần FAQ trả lời 4 câu hỏi thường gặp nhất của người tìm kiếm."
+
+[Prompt 05] Tạo chuỗi 5 Email Nurturing khách hàng tiềm năng:
+"Viết chuỗi 5 email chăm sóc tự động gửi cho khách hàng sau khi tải tài liệu miễn phí về [CHỦ ĐỀ]:
+- Email 1 (Ngay lập tức): Gửi quà + Giới thiệu ngắn về câu chuyện của tôi.
+- Email 2 (Ngày 2): Chia sẻ một sai lầm phổ biến mà 90% người mới mắc phải.
+- Email 3 (Ngày 4): Case study thành công của một khách hàng thực tế.
+- Email 4 (Ngày 6): Giải đáp thắc mắc lớn nhất về việc áp dụng.
+- Email 5 (Ngày 7): Ưu đãi đặc biệt giới hạn 48 giờ."
+
+--------------------------------------------------------------------------------
+PHẦN 2: BÁN HÀNG & CHĂM SÓC KHÁCH HÀNG (SALES & CUSTOMER SUPPORT)
+--------------------------------------------------------------------------------
+[Prompt 06] Xử lý từ chối 'Giá bên bạn đắt quá':
+"Đóng vai một chuyên gia bán hàng B2B xuất sắc. Khách hàng tiềm năng vừa nhắn: 'Giá bên em cao hơn bên đối thủ 30%, anh thấy không hợp lý'. Hãy cung cấp 3 phương án phản hồi bằng tin nhắn:
+- Phương án 1: Tập trung vào Tổng chi phí sở hữu (TCO) và rủi ro khi chọn bên rẻ.
+- Phương án 2: Tách nhỏ giá trị và cam kết bảo hành/đồng hành.
+- Phương án 3: Đặt câu hỏi thông minh để tìm ra băn khoăn thật sự đằng sau câu nói về giá."
+
+[Prompt 07] Kịch bản Telesales cuộc gọi đầu tiên (Cold Call Script):
+"Soạn kịch bản cuộc gọi lạnh 90 giây gọi cho [CHỨC VỤ KHÁCH HÀNG - VÍ DỤ: TRƯỞNG PHÒNG NHÂN SỰ] để chào dịch vụ [DỊCH VỤ]. Kịch bản phải:
+1. Không bắt đầu bằng lời chào sáo rỗng 'Em làm phiền anh chút được không'.
+2. Đi thẳng vào lý do gọi điện trong 15 giây đầu.
+3. Đặt câu hỏi chẩn đoán để khách hàng tự nói ra vấn đề.
+4. Chốt cuộc hẹn demo 15 phút qua Zoom."
+
+[Prompt 08] Viết kịch bản Bot Chat chăm sóc khách hàng tự động:
+"Hãy thiết kế cây hội thoại cho Chatbot hỗ trợ khách hàng của shop [LOẠI SẢN PHẨM]. Bao gồm: Lời chào đón, phân loại nhu cầu (Mua hàng / Tra cứu đơn / Khiếu nại / Gặp nhân viên tư vấn) và mẫu câu trả lời lịch sự, chuyên nghiệp, giữ chân khách hàng khi quá tải."
+
+--------------------------------------------------------------------------------
+PHẦN 3: LẬP TRÌNH & CÔNG NGHỆ (IT & SOFTWARE DEVELOPMENT)
+--------------------------------------------------------------------------------
+[Prompt 09] Giải thích Code phức tạp cho người không chuyên:
+"Đoạn mã sau đây thực hiện chức năng gì? Hãy giải thích theo 3 cấp độ:
+- Cấp độ 1: Giải thích cho một đứa trẻ 10 tuổi hiểu bằng hình tượng ví von thực tế.
+- Cấp độ 2: Tóm tắt logic nghiệp vụ cho Product Manager (không dùng thuật ngữ code).
+- Cấp độ 3: Phân tích độ phức tạp thời gian/bộ nhớ (Big-O) và điểm nghẽn tiềm ẩn cho Senior Engineer.
+[DÁN CODE VÀO ĐÂY]"
+
+[Prompt 10] Tối ưu hóa truy vấn SQL bị chậm (Slow Query):
+"Tôi có câu truy vấn SQL sau đang mất hơn 10 giây để thực thi trên bảng 5 triệu bản ghi. Hãy:
+1. Phân tích nguyên nhân gây chậm (Full Table Scan, Missing Index, N+1 query).
+2. Viết lại câu truy vấn tối ưu nhất.
+3. Gợi ý lệnh CREATE INDEX cụ thể (B-tree, Composite Index) để tối ưu."
+
+[Prompt 11] Debug lỗi và tìm Edge Cases:
+"Hãy review hàm code sau đây. Tìm ít nhất 5 lỗi tiềm ẩn hoặc edge case có thể làm sập hệ thống (ví dụ: null pointer, race condition, memory leak, số âm, payload quá lớn) và viết lại hàm kèm cơ chế try-catch phòng thủ vững chắc:
+[DÁN HÀM CẦN DEBUG VÀO ĐÂY]"
+
+--------------------------------------------------------------------------------
+PHẦN 4: HỌC TẬP, ĐỌC SÁCH & TỰ ĐỘNG HÓA
+--------------------------------------------------------------------------------
+[Prompt 12] Tóm tắt sách theo phương pháp Feynman:
+"Hãy tóm tắt cuốn sách '[TÊN SÁCH]' của tác giả '[TÁC GIẢ]'. Nêu rõ:
+1. Luận điểm cốt lõi nhất của toàn bộ cuốn sách trong 3 câu.
+2. 5 bài học thực tế có thể áp dụng ngay vào công việc vào sáng thứ Hai.
+3. 3 bài tập hành động cụ thể trong 7 ngày tới."
+
+[Prompt 13] Luyện nói tiếng Anh công sở theo tình huống phản xạ:
+"Bạn là một Tech Lead người Mỹ bản xứ tại Thung lũng Silicon. Tôi là một Software Engineer người Việt mới gia nhập team. Chúng ta sẽ thực hành một buổi họp Standup hàng ngày. Bạn hãy đặt 1 câu hỏi đầu tiên ngắn gọn, đợi tôi trả lời rồi:
+1. Sửa lỗi ngữ pháp và từ vựng của tôi (nếu có) sao cho tự nhiên hơn.
+2. Đưa ra gợi ý câu nói chuẩn 'Tây' hơn.
+3. Hỏi tiếp câu thứ hai. Bắt đầu ngay!"
+
+... (Xem chi tiết trọn bộ hơn 100 prompt thực chiến trong file Ebook Cẩm Nang AI)!
+================================================================================
+Chúc bạn ứng dụng AI thành công và bứt phá sự nghiệp cùng Lucy AI Flow! 🌸

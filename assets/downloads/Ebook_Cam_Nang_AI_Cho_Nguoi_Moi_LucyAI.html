@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cẩm Nang AI Cho Người Mới • Lucy AI Flow</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+    
+    :root {
+      --primary: #EC4899;
+      --primary-dark: #BE185D;
+      --secondary: #8B5CF6;
+      --accent: #06B6D4;
+      --bg: #FDF8FA;
+      --card-bg: #FFFFFF;
+      --text: #1E293B;
+      --text-muted: #64748B;
+      --border: #F1D4E0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      padding: 60px 50px;
+      border-radius: 24px;
+      box-shadow: 0 20px 40px -15px rgba(236, 72, 153, 0.12);
+      border: 1px solid var(--border);
+    }
+
+    /* Print styling */
+    @media print {
+      body { padding: 0; background: #fff; }
+      .container { box-shadow: none; border: none; padding: 20px; max-width: 100%; }
+      .no-print { display: none !important; }
+      h1, h2, h3 { page-break-after: avoid; }
+      .page-break { page-break-before: always; }
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 16px;
+      background: #FCE7F3;
+      color: var(--primary-dark);
+      font-size: 13px;
+      font-weight: 700;
+      border-radius: 999px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    h1 {
+      font-size: 38px;
+      font-weight: 800;
+      line-height: 1.25;
+      background: linear-gradient(135deg, #EC4899, #8B5CF6, #06B6D4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 16px;
+    }
+
+    .subtitle {
+      font-size: 18px;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+      padding-bottom: 25px;
+      border-bottom: 2px dashed var(--border);
+    }
+
+    .toc {
+      background: #FDF2F8;
+      border-radius: 16px;
+      padding: 24px 30px;
+      margin-bottom: 50px;
+      border: 1px solid #FBCFE8;
+    }
+
+    .toc h3 {
+      font-size: 16px;
+      font-weight: 800;
+      color: #9D174D;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+
+    .toc ul { list-style: none; }
+    .toc li { margin-bottom: 8px; font-weight: 600; font-size: 14px; color: #831843; }
+
+    h2 {
+      font-size: 24px;
+      font-weight: 800;
+      color: #0F172A;
+      margin: 45px 0 16px 0;
+      padding-left: 14px;
+      border-left: 5px solid var(--primary);
+    }
+
+    p { margin-bottom: 16px; font-size: 15px; color: #334155; }
+    
+    .tip-box {
+      background: #EFF6FF;
+      border-left: 4px solid #3B82F6;
+      border-radius: 0 12px 12px 0;
+      padding: 16px 20px;
+      margin: 20px 0;
+      font-size: 14px;
+    }
+
+    .code-box {
+      background: #0F172A;
+      color: #F8FAFC;
+      border-radius: 12px;
+      padding: 18px 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13.5px;
+      line-height: 1.6;
+      margin: 18px 0;
+      overflow-x: auto;
+    }
+
+    .print-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #EC4899, #8B5CF6);
+      color: #fff;
+      font-weight: 700;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+      margin-bottom: 30px;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 60px;
+      padding-top: 30px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="no-print" style="text-align: right;">
+      <button onclick="window.print()" class="print-btn">🖨️ Lưu Thành PDF / In Ebook</button>
+    </div>
+
+    <span class="badge">🌸 Quà Tặng Tri Ân Độc Quyền</span>
+    <h1>Cẩm Nang Ứng Dụng AI Thực Chiến Cho Người Mới</h1>
+    <div class="subtitle">Bí quyết làm chủ ChatGPT, Claude & Midjourney để tiết kiệm ít nhất 2 giờ làm việc mỗi ngày • Kênh Lucy AI Flow</div>
+
+    <div class="toc">
+      <h3>📖 MỤC LỤC TÀI LIỆU</h3>
+      <ul>
+        <li>Chương 1: Tư Duy Đúng Khi Tiếp Cận Trí Tuệ Nhân Tạo (AI Mindset)</li>
+        <li>Chương 2: Công Thức Prompting Đỉnh Cao C.L.E.A.R</li>
+        <li>Chương 3: So Sánh Top 3 Mô Hình Lớn: ChatGPT vs Claude vs Gemini</li>
+        <li>Chương 4: Quy Trình 5 Bước Tự Động Hóa Công Việc Hàng Ngày</li>
+        <li>Chương 5: 10 Sai Lầm Khiến 90% Người Mới Dùng AI Thất Vọng & Cách Tránh</li>
+      </ul>
+    </div>
+
+    <h2>Chương 1: Tư Duy Đúng Khi Tiếp Cận AI</h2>
+    <p>Rất nhiều người coi AI như một chiếc máy tìm kiếm Google nâng cao và hỏi những câu chung chung như: <em>"Làm sao để kiếm tiền?"</em> hay <em>"Hãy viết bài bán hàng"</em>. Kết quả nhận về thường sáo rỗng và vô hồn.</p>
+    <div class="tip-box">
+      <strong>💡 Quy tắc vàng:</strong> AI không phải là Google! Hãy xem AI như một <strong>thực tập sinh thiên tài mới tốt nghiệp đại học Harvard</strong>: Siêu thông minh, đọc hết mọi sách vở trên đời nhưng <em>hoàn toàn chưa hiểu bối cảnh cụ thể của bạn</em> nếu bạn không chỉ dẫn rõ ràng.
+    </div>
+
+    <h2>Chương 2: Công Thức Prompting Đỉnh Cao C.L.E.A.R</h2>
+    <p>Để nhận được phản hồi chất lượng 10/10, bạn hãy áp dụng công thức 5 chữ cái C-L-E-A-R:</p>
+    <ul>
+      <li><strong>C - Context (Bối cảnh):</strong> Bạn là ai, khách hàng là ai, sản phẩm là gì?</li>
+      <li><strong>L - Limits (Rào cản/Giới hạn):</strong> Dưới bao nhiêu từ, không dùng từ sáo rỗng nào?</li>
+      <li><strong>E - Examples (Ví dụ mẫu):</strong> Cho AI xem 1-2 mẫu văn phong bạn thích.</li>
+      <li><strong>A - Action (Hành động cụ thể):</strong> Viết kịch bản, lập dàn ý hay phân tích số liệu?</li>
+      <li><strong>R - Role (Vai trò):</strong> Đóng vai Copywriter 10 năm kinh nghiệm hay Chuyên gia dữ liệu?</li>
+    </ul>
+
+    <div class="code-box">
+[Ví dụ Prompt chuẩn CLEAR]
+"Bạn là một Copywriter chuyên nghiệp (Role). Công ty tôi kinh doanh cà phê sạch nguyên chất tại Đà Lạt, khách hàng là dân văn phòng 25-35 tuổi hay căng thẳng (Context).
+Hãy viết 1 bài đăng Facebook 200 từ (Action) giới thiệu gói cà phê phin giấy tiện lợi.
+Giới hạn: Không dùng các từ hoa mỹ như 'tuyệt vời', 'đẳng cấp', hãy dùng giọng văn gần gũi, ấm áp như người bạn (Limits).
+Mẫu mở đầu tham khảo: '7h30 sáng, góc bàn làm việc quen thuộc...' (Examples)."
+    </div>
+
+    <h2>Chương 3: So Sánh Bộ Ba Siêu Trí Tuệ</h2>
+    <p>Mỗi công cụ AI đều có điểm mạnh riêng biệt:</p>
+    <ul>
+      <li><strong>Claude 3.5 Sonnet:</strong> Viết văn tiếng Việt cảm xúc nhất, lập trình giỏi nhất thế giới hiện nay, xử lý văn bản dài không bị ảo giác.</li>
+      <li><strong>ChatGPT (OpenAI o1 / 4o):</strong> Kho plugin khổng lồ, tạo ảnh DALL-E tiện lợi, giọng nói đàm thoại tự nhiên nhất.</li>
+      <li><strong>Google Gemini 1.5 Pro:</strong> Cửa sổ ngữ cảnh 2 triệu token (đọc nguyên cuốn tiểu thuyết hoặc video 1 tiếng), tích hợp sâu với hệ sinh thái Google Workspace.</li>
+    </ul>
+
+    <div class="footer">
+      <p>🌸 Được biên soạn với tất cả tâm huyết bởi <strong>Lucy AI Flow</strong> • Chúc bạn luôn tràn đầy cảm hứng học tập mỗi ngày!</p>
+      <p>Trang chủ: <a href="https://lucy-ai-hub.pages.dev" style="color: #EC4899; text-decoration: none;">lucy-ai-hub.pages.dev</a></p>
+    </div>
+  </div>
+</body>
+</html>

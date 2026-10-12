@@ -19,6 +19,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -561,9 +563,14 @@
 
 
     <!-- TAB 5: QUÀ TẶNG & TÀI LIỆU 0Đ -->
+        <!-- 🎁 TAB 5: QUÀ TẶNG & TÀI LIỆU 0Đ -->
     <section id="tab-content-gift" class="tab-pane hidden space-y-6">
       <div class="glass-card rounded-[32px] p-6 md:p-10 border-2 border-pink-400/40 text-center space-y-6 relative overflow-hidden bg-gradient-to-b from-pink-50/50 via-white to-white dark:from-pink-950/20 dark:via-slate-900 dark:to-slate-900">
-        <div class="w-20 h-20 rounded-3xl p-1 bg-gradient-to-tr from-pink-500 to-purple-600 shadow-xl shadow-pink-500/25 mx-auto flex items-center justify-center text-4xl">
+        <!-- Background subtle glow -->
+        <div class="absolute -top-24 -right-24 w-72 h-72 bg-pink-500/15 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-purple-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="w-20 h-20 rounded-3xl p-1 bg-gradient-to-tr from-pink-500 to-purple-600 shadow-xl shadow-pink-500/25 mx-auto flex items-center justify-center text-4xl animate-bounce">
           🎁
         </div>
 
@@ -577,44 +584,83 @@
           </p>
         </div>
 
-        <!-- Gift Perks Grid: 2 Columns on Laptop -->
+        <!-- Gift Perks Grid: 2 Columns on Laptop with Real Downloads -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 max-w-2xl mx-auto text-left">
-          <div class="p-4 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 space-y-1 shadow-sm">
-            <div class="flex items-center gap-2 text-pink-600 dark:text-pink-400 font-bold text-xs">
-              <span>📘</span>
-              <span>Ebook: Cẩm Nang AI Cho Người Mới</span>
+          <!-- Item 1: Ebook -->
+          <div class="p-4 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 space-y-2.5 shadow-sm hover:border-pink-300 dark:hover:border-pink-500/40 transition">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2 text-pink-600 dark:text-pink-400 font-bold text-xs">
+                <span>📘</span>
+                <span>Ebook: Cẩm Nang AI Cho Người Mới</span>
+              </div>
+              <span class="px-2 py-0.5 rounded-full bg-pink-100 dark:bg-pink-500/20 text-[10px] font-extrabold text-pink-700 dark:text-pink-300">50 Trang</span>
             </div>
-            <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">50 trang PDF trình bày dạng infographic sinh động, dễ hiểu, đọc 30 phút là nắm vững.</p>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">Infographic sinh động, dễ hiểu, đọc 30 phút là nắm vững ChatGPT, Claude & Midjourney.</p>
+            <div class="flex items-center gap-2 pt-1">
+              <button onclick="downloadSingleFile('Ebook_Cam_Nang_AI_Cho_Nguoi_Moi_LucyAI.txt', 'Ebook Cẩm Nang AI')" class="py-1.5 px-3 rounded-xl bg-pink-500 hover:bg-pink-600 text-white font-bold text-[11px] flex items-center gap-1.5 transition shadow-sm active:scale-95">
+                <span>📥 Tải Ebook</span>
+              </button>
+              <a href="assets/downloads/Ebook_Cam_Nang_AI_Cho_Nguoi_Moi_LucyAI.html" target="_blank" class="py-1.5 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold text-[11px] flex items-center gap-1.5 transition">
+                <span>📖 Đọc Online</span>
+              </a>
+            </div>
           </div>
 
-          <div class="p-4 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 space-y-1 shadow-sm">
-            <div class="flex items-center gap-2 text-purple-600 dark:text-purple-400 font-bold text-xs">
-              <span>💎</span>
-              <span>100+ Câu Prompt Mẫu Tuyển Chọn</span>
+          <!-- Item 2: 100+ Prompts -->
+          <div class="p-4 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 space-y-2.5 shadow-sm hover:border-purple-300 dark:hover:border-purple-500/40 transition">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2 text-purple-600 dark:text-purple-400 font-bold text-xs">
+                <span>💎</span>
+                <span>100+ Câu Prompt Mẫu Tuyển Chọn</span>
+              </div>
+              <span class="px-2 py-0.5 rounded-full bg-purple-100 dark:bg-purple-500/20 text-[10px] font-extrabold text-purple-700 dark:text-purple-300">8 Ngành</span>
             </div>
             <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">Chia theo 8 ngành nghề: Marketing, Bán hàng, Nhân sự, IT, Dịch thuật, Học tập...</p>
+            <div class="flex items-center gap-2 pt-1">
+              <button onclick="downloadSingleFile('100_Prompt_Mau_Thuc_Chien_LucyAI.txt', '100+ Prompt Mẫu')" class="py-1.5 px-3 rounded-xl bg-purple-500 hover:bg-purple-600 text-white font-bold text-[11px] flex items-center gap-1.5 transition shadow-sm active:scale-95">
+                <span>📥 Tải 100+ Prompt (.txt)</span>
+              </button>
+            </div>
           </div>
 
-          <div class="p-4 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 space-y-1 shadow-sm">
-            <div class="flex items-center gap-2 text-cyan-600 dark:text-cyan-400 font-bold text-xs">
-              <span>🗺️</span>
-              <span>Mindmap Lộ Trình 30 Ngày</span>
+          <!-- Item 3: Mindmap Roadmap -->
+          <div class="p-4 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 space-y-2.5 shadow-sm hover:border-cyan-300 dark:hover:border-cyan-500/40 transition">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2 text-cyan-600 dark:text-cyan-400 font-bold text-xs">
+                <span>🗺️</span>
+                <span>Mindmap Lộ Trình 30 Ngày</span>
+              </div>
+              <span class="px-2 py-0.5 rounded-full bg-cyan-100 dark:bg-cyan-500/20 text-[10px] font-extrabold text-cyan-700 dark:text-cyan-300">30 Ngày</span>
             </div>
             <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">Sơ đồ tư duy trực quan file ảnh 4K để in ra bàn làm việc nhắc nhở mỗi ngày.</p>
+            <div class="flex items-center gap-2 pt-1">
+              <button onclick="downloadSingleFile('Mindmap_Lo_Trinh_30_Ngay_Hoc_AI_LucyAI.txt', 'Lộ Trình 30 Ngày')" class="py-1.5 px-3 rounded-xl bg-cyan-500 hover:bg-cyan-600 text-white font-bold text-[11px] flex items-center gap-1.5 transition shadow-sm active:scale-95">
+                <span>📥 Tải Lộ Trình (.txt)</span>
+              </button>
+            </div>
           </div>
 
-          <div class="p-4 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 space-y-1 shadow-sm">
-            <div class="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold text-xs">
-              <span>⚡</span>
-              <span>Checklist 10 Tiện Ích Trình Duyệt AI</span>
+          <!-- Item 4: Checklist Extensions -->
+          <div class="p-4 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 space-y-2.5 shadow-sm hover:border-emerald-300 dark:hover:border-emerald-500/40 transition">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold text-xs">
+                <span>⚡</span>
+                <span>Checklist 10 Tiện Ích Trình Duyệt AI</span>
+              </div>
+              <span class="px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-500/20 text-[10px] font-extrabold text-emerald-700 dark:text-emerald-300">Chrome/Edge</span>
             </div>
             <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">Cài vào Chrome để tự động tóm tắt video YouTube, dịch tài liệu, viết email siêu tốc.</p>
+            <div class="flex items-center gap-2 pt-1">
+              <button onclick="downloadSingleFile('Checklist_10_Tien_Ich_Trinh_Duyet_AI_LucyAI.txt', 'Checklist 10 Tiện Ích')" class="py-1.5 px-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-[11px] flex items-center gap-1.5 transition shadow-sm active:scale-95">
+                <span>📥 Tải Checklist (.txt)</span>
+              </button>
+            </div>
           </div>
         </div>
 
         <!-- Big Download Button -->
         <div class="pt-2">
-          <button onclick="downloadGiftPack()" class="py-3.5 px-8 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-600 to-cyan-500 hover:opacity-95 text-white font-extrabold text-sm md:text-base shadow-xl shadow-pink-500/25 transition transform active:scale-95 inline-flex items-center gap-2.5">
+          <button onclick="openGiftModal()" class="py-3.5 px-8 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-600 to-cyan-500 hover:opacity-95 text-white font-extrabold text-sm md:text-base shadow-xl shadow-pink-500/25 transition transform active:scale-95 inline-flex items-center gap-2.5">
             <span>🎁</span>
             <span>Nhận Trọn Bộ Quà Tặng 0Đ (Click Để Tải)</span>
           </button>
@@ -1659,10 +1705,112 @@ Hãy viết cho tôi công thức chính xác nhất để dán vào ô, và gi�
       copyText(window.location.href, 'Đã sao chép Link Bio của Lucy! Hãy chia sẻ cho bạn bè nha! 💖');
     }
 
-    function downloadGiftPack() {
-      copyText('https://tiktok-shadow-studio.pages.dev', 'Đã nhận bộ Ebook & Tài Liệu! Link tài liệu đã sao chép! 🎁');
-      alert('🎉 Cảm ơn bạn! Trọn bộ Ebook & 100+ Prompt đã sẵn sàng. Hãy lưu lại trang này trên trình duyệt để học mỗi ngày nhé!');
+    // --- MODAL & DOWNLOAD HANDLERS (NO SYSTEM ALERTS) ---
+    function openGiftModal() {
+      const modal = document.getElementById('modal-gift-download');
+      if (!modal) return;
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      const card = modal.querySelector('.modal-card');
+      if (card) {
+        card.classList.remove('scale-95');
+        card.classList.add('scale-100');
+      }
     }
+
+    function closeGiftModal() {
+      const modal = document.getElementById('modal-gift-download');
+      if (!modal) return;
+      const card = modal.querySelector('.modal-card');
+      if (card) {
+        card.classList.remove('scale-100');
+        card.classList.add('scale-95');
+      }
+      setTimeout(() => {
+        modal.classList.add('opacity-0', 'pointer-events-none');
+      }, 200);
+    }
+
+    function triggerConfetti() {
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+      }
+    }
+
+    function downloadFullZip() {
+      const a = document.createElement('a');
+      a.href = 'assets/downloads/Tron_Bo_Tai_Lieu_AI_Thuc_Chien_LucyAI.zip';
+      a.download = 'Tron_Bo_Tai_Lieu_AI_Thuc_Chien_LucyAI.zip';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      triggerConfetti();
+      showToast('🎉 Đang tải về trọn bộ ZIP! Kiểm tra mục Downloads nhé!');
+    }
+
+    function downloadSingleFile(filename, label) {
+      const a = document.createElement('a');
+      a.href = 'assets/downloads/' + filename;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      showToast(`📥 Đang tải file: ${label}!`);
+    }
+
+    function openCustomDialog(options = {}) {
+      const { title = 'Thông Báo', message = '', icon = '🌸' } = options;
+      const modal = document.getElementById('modal-custom-dialog');
+      if (!modal) return;
+      const titleEl = document.getElementById('dialog-title');
+      const msgEl = document.getElementById('dialog-message');
+      const iconEl = document.getElementById('dialog-icon');
+      if (titleEl) titleEl.innerText = title;
+      if (msgEl) msgEl.innerText = message;
+      if (iconEl) iconEl.innerText = icon;
+
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      const card = modal.querySelector('.dialog-card');
+      if (card) {
+        card.classList.remove('scale-95');
+        card.classList.add('scale-100');
+      }
+    }
+
+    function closeCustomDialog() {
+      const modal = document.getElementById('modal-custom-dialog');
+      if (!modal) return;
+      const card = modal.querySelector('.dialog-card');
+      if (card) {
+        card.classList.remove('scale-100');
+        card.classList.add('scale-95');
+      }
+      setTimeout(() => {
+        modal.classList.add('opacity-0', 'pointer-events-none');
+      }, 200);
+    }
+
+    // Override native window.alert to always use custom glassmorphic popup
+    window.alert = function(msg) {
+      openCustomDialog({
+        title: 'Thông Báo • Lucy AI Flow',
+        message: msg,
+        icon: '🌸'
+      });
+    };
+
+    // Close modals on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeGiftModal();
+        closeCustomDialog();
+      }
+    });
 
     function escapeJs(str) {
       return str.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '&quot;').replace(/\n/g, '\\n');
@@ -1679,5 +1827,138 @@ Hãy viết cho tôi công thức chính xác nhất để dán vào ô, và gi�
       lucide.createIcons();
     });
   </script>
+
+  <!-- 🎁 MODAL POPUP QUÀ TẶNG EBOOK & PROMPTS ĐỘC QUYỀN -->
+  <div id="modal-gift-download" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-md transition-all duration-300 opacity-0 pointer-events-none" onclick="if(event.target === this) closeGiftModal()">
+    <div class="modal-card relative w-full max-w-lg bg-white dark:bg-slate-900 rounded-[32px] p-6 md:p-8 shadow-2xl border-2 border-pink-400/50 dark:border-pink-500/40 transform scale-95 transition-all duration-300 space-y-5 overflow-hidden">
+      <!-- Glow background circles -->
+      <div class="absolute -top-20 -right-20 w-56 h-56 bg-pink-500/20 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-20 -left-20 w-56 h-56 bg-purple-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+      <!-- Close Button -->
+      <button onclick="closeGiftModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-900 dark:hover:text-white flex items-center justify-center transition hover:scale-110 active:scale-95 shadow-sm">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+
+      <!-- Modal Header -->
+      <div class="text-center space-y-2 pt-1">
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-pink-500 to-purple-600 text-white shadow-lg shadow-pink-500/30 mx-auto flex items-center justify-center text-3xl animate-bounce">
+          🎁
+        </div>
+        <span class="inline-block px-3 py-1 rounded-full bg-pink-100 dark:bg-pink-500/20 text-pink-600 dark:text-pink-300 text-[11px] font-extrabold uppercase tracking-wider border border-pink-200 dark:border-pink-500/30">
+          Quà Tặng Tri Ân 0Đ • Lucy AI Flow
+        </span>
+        <h3 class="text-xl md:text-2xl font-black text-slate-900 dark:text-white leading-tight">
+          Trọn Bộ Ebook & 100+ Prompt Đã Sẵn Sàng!
+        </h3>
+        <p class="text-xs text-slate-500 dark:text-slate-400 max-w-sm mx-auto">
+          Tất cả tài liệu đã được đóng gói hoàn chỉnh. Bấm nút tải trọn bộ ZIP hoặc tải từng file bên dưới nhé:
+        </p>
+      </div>
+
+      <!-- 4 Download Items Grid -->
+      <div class="space-y-2 max-h-[260px] overflow-y-auto pr-1">
+        <!-- Item 1: Ebook HTML/PDF -->
+        <div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 flex items-center justify-between gap-3 hover:border-pink-300 dark:hover:border-pink-500/50 transition">
+          <div class="flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-xl bg-pink-100 dark:bg-pink-500/20 text-pink-600 dark:text-pink-300 flex items-center justify-center text-base font-bold shrink-0">
+              📘
+            </div>
+            <div class="text-left">
+              <div class="text-xs font-bold text-slate-900 dark:text-white">Ebook Cẩm Nang AI Cho Người Mới</div>
+              <div class="text-[10px] text-slate-500 dark:text-slate-400">File HTML đẹp • 50 trang • In PDF</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-1.5 shrink-0">
+            <a href="assets/downloads/Ebook_Cam_Nang_AI_Cho_Nguoi_Moi_LucyAI.html" target="_blank" class="px-2.5 py-1.5 rounded-lg bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 text-[10px] font-bold transition">
+              Đọc
+            </a>
+            <button onclick="downloadSingleFile('Ebook_Cam_Nang_AI_Cho_Nguoi_Moi_LucyAI.txt', 'Ebook Cẩm Nang AI')" class="px-2.5 py-1.5 rounded-lg bg-pink-500 hover:bg-pink-600 text-white text-[10px] font-bold transition shadow-sm">
+              Tải
+            </button>
+          </div>
+        </div>
+
+        <!-- Item 2: 100+ Prompt TXT -->
+        <div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 flex items-center justify-between gap-3 hover:border-purple-300 dark:hover:border-purple-500/50 transition">
+          <div class="flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-xl bg-purple-100 dark:bg-purple-500/20 text-purple-600 dark:text-purple-300 flex items-center justify-center text-base font-bold shrink-0">
+              💎
+            </div>
+            <div class="text-left">
+              <div class="text-xs font-bold text-slate-900 dark:text-white">100+ Câu Prompt Mẫu Tuyển Chọn</div>
+              <div class="text-[10px] text-slate-500 dark:text-slate-400">File .TXT • 8 ngành nghề</div>
+            </div>
+          </div>
+          <button onclick="downloadSingleFile('100_Prompt_Mau_Thuc_Chien_LucyAI.txt', '100+ Prompt Mẫu')" class="px-3 py-1.5 rounded-lg bg-purple-500 hover:bg-purple-600 text-white text-[10px] font-bold transition shadow-sm shrink-0">
+            Tải
+          </button>
+        </div>
+
+        <!-- Item 3: Mindmap TXT -->
+        <div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 flex items-center justify-between gap-3 hover:border-cyan-300 dark:hover:border-cyan-500/50 transition">
+          <div class="flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-xl bg-cyan-100 dark:bg-cyan-500/20 text-cyan-600 dark:text-cyan-300 flex items-center justify-center text-base font-bold shrink-0">
+              🗺️
+            </div>
+            <div class="text-left">
+              <div class="text-xs font-bold text-slate-900 dark:text-white">Mindmap Lộ Trình 30 Ngày Tự Học AI</div>
+              <div class="text-[10px] text-slate-500 dark:text-slate-400">File .TXT • 30 ngày từ số 0</div>
+            </div>
+          </div>
+          <button onclick="downloadSingleFile('Mindmap_Lo_Trinh_30_Ngay_Hoc_AI_LucyAI.txt', 'Lộ Trình 30 Ngày')" class="px-3 py-1.5 rounded-lg bg-cyan-500 hover:bg-cyan-600 text-white text-[10px] font-bold transition shadow-sm shrink-0">
+            Tải
+          </button>
+        </div>
+
+        <!-- Item 4: Checklist TXT -->
+        <div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 flex items-center justify-between gap-3 hover:border-emerald-300 dark:hover:border-emerald-500/50 transition">
+          <div class="flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-xl bg-emerald-100 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 flex items-center justify-center text-base font-bold shrink-0">
+              ⚡
+            </div>
+            <div class="text-left">
+              <div class="text-xs font-bold text-slate-900 dark:text-white">Checklist 10 Tiện Ích Trình Duyệt AI</div>
+              <div class="text-[10px] text-slate-500 dark:text-slate-400">File .TXT • Chrome & Edge</div>
+            </div>
+          </div>
+          <button onclick="downloadSingleFile('Checklist_10_Tien_Ich_Trinh_Duyet_AI_LucyAI.txt', 'Checklist 10 Tiện Ích')" class="px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-white text-[10px] font-bold transition shadow-sm shrink-0">
+            Tải
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Action: Big ZIP Download Button -->
+      <div class="pt-2 space-y-2.5">
+        <button onclick="downloadFullZip()" class="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-600 to-cyan-500 hover:opacity-95 text-white font-extrabold text-sm shadow-xl shadow-pink-500/25 transition transform active:scale-95 flex items-center justify-center gap-2">
+          <span>⚡</span>
+          <span>TẢI TRỌN BỘ TẤT CẢ (FILE .ZIP) NGAY</span>
+        </button>
+        <div class="flex items-center justify-between text-[11px] text-slate-400 dark:text-slate-500 px-2">
+          <span>Tải file ZIP miễn phí 100%</span>
+          <button onclick="copySiteLink()" class="hover:text-pink-500 transition underline">Sao chép link trang</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 💬 MODAL THÔNG BÁO CHUNG (THAY THẾ HOÀN TOÀN ALERT SYSTEM) -->
+  <div id="modal-custom-dialog" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-md transition-all duration-300 opacity-0 pointer-events-none" onclick="if(event.target === this) closeCustomDialog()">
+    <div class="dialog-card relative w-full max-w-sm bg-white dark:bg-slate-900 rounded-[28px] p-6 shadow-2xl border border-pink-400/40 dark:border-pink-500/30 transform scale-95 transition-all duration-300 text-center space-y-4">
+      <div id="dialog-icon" class="w-14 h-14 rounded-2xl bg-pink-100 dark:bg-pink-500/20 text-pink-600 dark:text-pink-300 mx-auto flex items-center justify-center text-2xl font-bold">
+        🌸
+      </div>
+      <div class="space-y-1.5">
+        <h4 id="dialog-title" class="text-lg font-black text-slate-900 dark:text-white">Thông Báo</h4>
+        <p id="dialog-message" class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed"></p>
+      </div>
+      <div class="pt-2">
+        <button onclick="closeCustomDialog()" class="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 hover:opacity-95 text-white font-bold text-xs shadow-md transition active:scale-95">
+          Đã Hiểu
+        </button>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>

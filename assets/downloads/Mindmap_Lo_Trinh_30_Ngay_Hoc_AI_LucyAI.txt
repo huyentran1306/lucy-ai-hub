@@ -1,0 +1,44 @@
+================================================================================
+🗺️ MINDMAP LỘ TRÌNH 30 NGÀY TỰ HỌC AI THỰC CHIẾN TỪ SỐ 0 ĐẾN LÀM CHỦ
+Kênh Lucy AI Flow • Thiết kế đặc biệt cho người đi làm & người sáng tạo nội dung
+================================================================================
+
+TUẦN 1: NỀN TẢNG PROMPTING & THIẾT LẬP WORKFLOW (NGÀY 1 - 7)
+- Ngày 01: Thiết lập tài khoản ChatGPT, Claude 3.5 Sonnet và Google Gemini. Nắm vững giao diện.
+- Ngày 02: Nắm vững công thức Prompting C.L.E.A.R (Context, Limits, Examples, Action, Role).
+- Ngày 03: Kỹ thuật Few-Shot Prompting: Dạy AI bắt chước văn phong cá nhân chuẩn 100%.
+- Ngày 04: Biến ChatGPT thành trợ lý lập kế hoạch tuần và sắp xếp lịch làm việc thông minh.
+- Ngày 05: Sử dụng AI tóm tắt tài liệu PDF 50 trang thành Mindmap 1 trang giấy.
+- Ngày 06: Cài đặt 5 Extension trình duyệt AI giúp duyệt web và đọc báo siêu tốc.
+- Ngày 07: [Thực hành tuần 1] Tự động hóa việc viết 5 email công việc hàng ngày bằng AI.
+
+TUẦN 2: LÀM CHỦ HÌNH ẢNH & THIẾT KẾ ĐỒ HỌA BẰNG AI (NGÀY 8 - 14)
+- Ngày 08: Khám phá Midjourney & Leonardo.ai: Hiểu về Style, Aspect Ratio, Seed và Lighting.
+- Ngày 09: Tạo Avatar hoạt hình Chibi / 3D thương hiệu cá nhân không đụng hàng.
+- Ngày 10: Thiết kế Banner, Thumbnail YouTube và Poster sự kiện với Canva Magic Studio.
+- Ngày 11: Tạo ảnh sản phẩm thương mại chuyên nghiệp không cần thuê studio đắt đỏ.
+- Ngày 12: Kỹ thuật Consistent Character: Giữ nguyên một nhân vật qua nhiều bối cảnh khác nhau.
+- Ngày 13: Xóa phông, phục chế ảnh cũ và mở rộng khung hình ảnh (Outpainting) bằng AI.
+- Ngày 14: [Thực hành tuần 2] Thiết kế trọn bộ bộ nhận diện cá nhân gồm Avatar + Cover + Logo.
+
+TUẦN 3: VIDEO, GIỌNG NÓI & SÁNG TẠO NỘI DUNG TỰ ĐỘNG (NGÀY 15 - 21)
+- Ngày 15: Tạo kịch bản video TikTok 60 giây giữ chân người xem từ ý tưởng thô.
+- Ngày 16: Tạo giọng đọc AI tự nhiên có cảm xúc bằng ElevenLabs & Edge-TTS tiếng Việt.
+- Ngày 17: Tạo nhân vật ảo AI nói chuyện (Talking Avatar) với HeyGen và D-ID.
+- Ngày 18: Tự động tạo phụ đề động (Auto Subtitles) phong cách MrBeast bằng CapCut AI.
+- Ngày 19: Tạo video minh họa dạng B-roll bằng Runway Gen-3 và Luma Dream Machine.
+- Ngày 20: Dựng trọn vẹn 1 video ngắn từ A-Z hoàn toàn bằng công cụ AI trong 15 phút.
+- Ngày 21: [Thực hành tuần 3] Đăng video AI đầu tiên lên TikTok / Reels và phân tích số liệu.
+
+TUẦN 4: TỰ ĐỘNG HÓA KINH DOANH & KIẾM TIỀN TỪ KỸ NĂNG AI (NGÀY 22 - 30)
+- Ngày 22: Kết nối ChatGPT với Google Sheets để xử lý dữ liệu hàng loạt không cần code.
+- Ngày 23: Xây dựng Chatbot trả lời khách hàng 24/7 trên Fanpage bằng ManyChat + AI.
+- Ngày 24: Đóng gói kiến thức thành Ebook số chuyên nghiệp bằng Canva AI và Gamma App.
+- Ngày 25: Xây dựng trang Link-in-Bio cá nhân chuyên nghiệp để chia sẻ tài liệu như trang này.
+- Ngày 26: Cung cấp dịch vụ Prompt Engineering cho doanh nghiệp vừa và nhỏ.
+- Ngày 27: Tạo khóa học ngắn hoặc workshop chia sẻ kỹ năng ứng dụng AI.
+- Ngày 28: Thiết lập hệ thống Backup và bảo mật dữ liệu cá nhân khi dùng AI.
+- Ngày 29: Cập nhật xu hướng AI Agent và công cụ mới nhất của thị trường.
+- Ngày 30: [Tốt nghiệp] Tổng kết chặng đường 30 ngày, đánh giá hiệu suất làm việc tăng x3!
+
+================================================================================

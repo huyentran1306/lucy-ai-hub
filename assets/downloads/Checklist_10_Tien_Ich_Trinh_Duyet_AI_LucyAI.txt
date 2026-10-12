@@ -1,0 +1,49 @@
+================================================================================
+⚡ CHECKLIST 10 TIỆN ÍCH TRÌNH DUYỆT CHROME / EDGE TĂNG NĂNG SUẤT X3 BẰNG AI
+Kênh Lucy AI Flow • Cài 1 lần dùng mãi mãi, tiết kiệm hàng chục giờ lướt web mỗi tháng
+================================================================================
+
+1. Sider.ai - Thanh bên AI All-in-One trên mọi tab
+   - Công dụng: Nhấn Ctrl+P / Cmd+P để mở ChatGPT, Claude 3.5, Gemini ngay cạnh màn hình.
+   - Tính năng nổi bật: Dịch thuật bôi đen, giải thích code, viết email phản hồi tức thì.
+   - Link: https://sider.ai
+
+2. HARPA AI - Tự động hóa trình duyệt & Giám sát giá web
+   - Công dụng: Tự động theo dõi thay đổi trang web, tóm tắt video YouTube, trích xuất dữ liệu.
+   - Tính năng nổi bật: Chạy lệnh tự động hóa không cần API trả phí.
+   - Link: https://harpa.ai
+
+3. Monica - Trợ lý AI cá nhân đa năng
+   - Công dụng: Trò chuyện với mọi trang web, tóm tắt bài báo dài 10 trang trong 10 giây.
+   - Tính năng nổi bật: Tìm kiếm thông minh tổng hợp câu trả lời từ 10 nguồn Google.
+   - Link: https://monica.im
+
+4. AIPRM for ChatGPT - Thư viện 4,000+ Prompt 1-Click
+   - Công dụng: Tích hợp trực tiếp vào ChatGPT giao diện tìm kiếm prompt được cộng đồng bình chọn.
+   - Tính năng nổi bật: 1 click viết bài SEO Top 1, tạo kế hoạch marketing, audit code.
+   - Link: https://aiprm.com
+
+5. SciSpace Copilot - Đọc và giải thích tài liệu nghiên cứu / PDF
+   - Công dụng: Bôi đen công thức toán, biểu đồ phức tạp và hỏi AI giải thích bằng tiếng Việt.
+   - Tính năng nổi bật: Tuyệt vời cho sinh viên, giảng viên và người làm nghiên cứu.
+   - Link: https://typeset.io
+
+6. Compose AI - Tự động hoàn thành câu khi gõ văn bản
+   - Công dụng: Gõ '///' trên Gmail, Notion, Slack để AI tự viết tiếp mạch suy nghĩ của bạn.
+   - Tính năng nổi bật: Tăng tốc độ viết email lên 300%.
+   - Link: https://compose.ai
+
+7. YouTube Summary with ChatGPT & Claude
+   - Công dụng: Hiện toàn bộ transcript và nút tóm tắt 5 ý chính của bất kỳ video YouTube nào.
+   - Tính năng nổi bật: Đọc video 60 phút trong vòng 2 phút, tiết kiệm thời gian tối đa.
+
+8. Merlin - OpenAI ChatGPT Plus Extension
+   - Công dụng: Hoạt động mạnh mẽ trên LinkedIn, Twitter/X để bình luận thông minh mở rộng quan hệ.
+
+9. DeepL Translate - Dịch thuật ngữ cảnh chuẩn xác nhất thế giới
+   - Công dụng: Dịch thuật ngữ văn phong tự nhiên gấp 5 lần Google Dịch thông thường.
+
+10. Save to Notion / Obsidian Web Clipper with AI
+   - Công dụng: Lưu bài viết về kho tri thức cá nhân và tự động gắn thẻ, tóm tắt thông minh.
+
+================================================================================
